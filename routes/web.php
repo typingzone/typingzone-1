@@ -21,6 +21,7 @@ Route::controller(IndexController::class)->group(function () {
     Route::get('dashboard', 'index')->name('dashboard'); 
 });
 
+
 Route::controller(UserController::class)->group(function () {
     Route::get('login', 'showLoginPage')->name('login');
     Route::get('new-password', 'showChangePasswordPage')->name('new-password');
