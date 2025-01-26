@@ -7,7 +7,7 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\CredentialController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\GuideController;
-use App\Http\Controllers\AlertController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\PdfController;
@@ -16,12 +16,19 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ApplicationFlowController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AssetController;
+use App\Http\Controllers\EmailTemplateController;
+use App\Http\Controllers\ReminderController;
 
 
 Route::controller(IndexController::class)->group(function () {
     Route::get('dashboard', 'index')->name('dashboard'); 
 });
 
+Route::controller(ReminderController::class)->group(function () {
+    Route::get('reminders', 'index')->name('reminders'); 
+});
 
 Route::controller(UserController::class)->group(function () {
     Route::get('login', 'showLoginPage')->name('login');
@@ -35,19 +42,26 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/edit-access-level', 'viewEditAccessLevel')->name('edit-access-level');
     Route::post('/update-role-permission', 'updateRolePermission')->name('update-role-permission');
     Route::post('/update-user-role/{id}', 'updateUserRole')->name('update-user-role');
+    Route::get('login-activities', 'loginActivities')->name('login-activities');
 });
 
 Route::controller(TransactionController::class)->group(function () {
-    Route::get('applications/history', 'index')->name('applications.history'); 
+    Route::get('transaction-history', 'showTransactionHistory')->name('transaction-history'); 
     Route::post('applications', 'store')->name('applications.store');
     Route::put('applications/{id}', 'update')->name('applications.update');
     Route::delete('applications/{id}', 'destroy')->name('applications.destroy');
     Route::get('transaction-types', 'showTransactionTypes')->name('transaction-types');
+    Route::get('archived-transactions', 'archivedTransactions')->name('archived-transactions');
+    Route::get('invoices', 'showInvoices')->name('invoices');
 });
 
 Route::controller(CompanyController::class)->group(function () {
     Route::get('general-settings', 'index')->name('general-settings'); 
     Route::post('updated-company-profile', 'update')->name('updated-company-profile');
+});
+
+Route::controller(OrderController::class)->group(function () {
+    Route::get('orders', 'showOrders')->name('orders'); 
 });
 
 Route::controller(ExpenseController::class)->group(function () {
@@ -65,7 +79,8 @@ Route::controller(CredentialController::class)->group(function () {
 });
 
 Route::controller(DocumentController::class)->group(function () {
-    Route::get('documents', 'index')->name('documents.index'); 
+    Route::get('documents', 'showDocuments')->name('documents'); 
+    Route::get('document-names', 'showDocumentNames')->name('document-names'); 
     Route::post('document', 'store')->name('document.store');
     Route::put('document/{id}', 'update')->name('document.update');
     Route::delete('document/{id}', 'destroy')->name('document.destroy');
@@ -74,7 +89,14 @@ Route::controller(DocumentController::class)->group(function () {
 });
 
 Route::controller(GuideController::class)->group(function () {
-    Route::get('guides', 'index')->name('guides.index'); 
+    Route::get('guides', 'index')->name('guides'); 
+    Route::post('guide', 'store')->name('guide.store');
+    Route::put('guide/{id}', 'update')->name('guide.update');
+    Route::delete('guide/{id}', 'destroy')->name('guide.destroy');
+});
+
+Route::controller(EmailTemplateController::class)->group(function () {
+    Route::get('email-templates', 'index')->name('email-templates'); 
     Route::post('guide', 'store')->name('guide.store');
     Route::put('guide/{id}', 'update')->name('guide.update');
     Route::delete('guide/{id}', 'destroy')->name('guide.destroy');
@@ -97,13 +119,17 @@ Route::controller(PdfController::class)->group(function () {
     Route::get('download-applications-pdf', 'downloadApplicationsPdf')->name('download-applications-pdf'); 
 });
 
-Route::controller(AlertController::class)->group(function () {
-    Route::get('alerts', 'index')->name('alerts.index'); 
+Route::controller(NotificationController::class)->group(function () {
+    Route::get('notification-preferences', 'showNotificationPreferences')->name('notification-preferences'); 
     Route::put('update-alert', 'update')->name('update-alert');
 });
 
 Route::controller(CalendarController::class)->group(function () {
     Route::get('calendar', 'index')->name('calendar'); 
+});
+
+Route::controller(AssetController::class)->group(function () {
+    Route::get('assets', 'index')->name('assets'); 
 });
 
 Route::controller(ApplicationFlowController::class)->group(function () {

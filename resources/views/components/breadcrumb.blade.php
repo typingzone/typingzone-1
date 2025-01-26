@@ -119,16 +119,16 @@
                         data-feather="plus-circle" class="me-2"></i> {{ $li_2 }}</a>
             </div>
         @endif
-        @if (Route::is(['suppliers']))
+        @if (Route::is(['transaction-types']))
             <div class="page-btn">
                 <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-units"><i
-                        data-feather="plus-circle" class="me-2"></i>Add New Supplier</a>
+                        data-feather="plus-circle" class="me-2"></i>Add New</a>
             </div>
         @endif
-        @if (Route::is(['sub-categories']))
+        @if (Route::is(['transaction-history']))
             <div class="page-btn">
                 <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-category"><i
-                        data-feather="plus-circle" class="me-2"></i> Add Sub Category</a>
+                        data-feather="plus-circle" class="me-2"></i> Add New</a>
             </div>
         @endif
         @if (Route::is(['store-list']))
@@ -191,7 +191,7 @@
                 </a>
             </div>
         @endif
-        @if (Route::is(['payroll-list']))
+        @if (Route::is(['payroll']))
             <div class="page-btn">
                 <button class="btn btn-primary add-em-payroll" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasRight-add" aria-controls="offcanvasRight-add"><i

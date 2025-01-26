@@ -1,16 +1,15 @@
 <div class="sidebar horizontal-sidebar">
   <div id="sidebar-menu-3" class="sidebar-menu">
     <ul class="nav">
-      <!-- Main Menu Section -->
       <li class="submenu">
-        <a href="{{ url('index') }}" class="{{ Request::is('index', '/', 'sales-dashboard') ? 'active subdrop' : '' }}">
+        <a href="{{ url('dashboard') }}" class="{{ Request::is('dashboard') ? 'active subdrop' : '' }}">
           <i data-feather="grid"></i>
           <span>Main Menu</span>
           <span class="menu-arrow"></span>
         </a>
         <ul>
           <li>
-            <a href="{{ url('index') }}" class="{{ Request::is('index', '/', 'sales-dashboard') ? 'active subdrop' : '' }}">
+            <a href="{{ url('dashboard') }}" class="{{ Request::is('dashboard') ? 'active subdrop' : '' }}">
               <i data-feather="home"></i>
               <span>Dashboard</span>
             </a>
@@ -23,7 +22,6 @@
           </li>
         </ul>
       </li>
-      <!-- Finance & Services Section -->
       <li class="submenu">
         <a href="javascript:void(0);" class="{{ Request::is('finance-services') ? 'active subdrop' : '' }}">
           <i data-feather="smartphone"></i>
@@ -80,14 +78,13 @@
             </ul>
           </li>
           <li class="submenu">
-            <a href="javascript:void(0);" class="{{ Request::is('orders') ? 'active subdrop' : '' }}">
+            <a href="{{ url('orders') }}" class="{{ Request::is('orders') ? 'active subdrop' : '' }}">
               <i data-feather="box"></i>
               <span>Orders</span>
             </a>
           </li>
         </ul>
       </li>
-      <!-- Tools Section -->
       <li class="submenu">
         <a href="javascript:void(0);" class="{{ Request::is('tools') ? 'active subdrop' : '' }}">
           <i data-feather="tool"></i>
@@ -103,7 +100,6 @@
           </li>
         </ul>
       </li>
-      <!-- Administration Section -->
       <li class="submenu">
         <a href="javascript:void(0);" class="{{ Request::is('administration') ? 'active subdrop' : '' }}">
           <i data-feather="users"></i>
@@ -151,7 +147,6 @@
           </li>
         </ul>
       </li>
-      <!-- Extras Section -->
       <li class="submenu">
         <a href="javascript:void(0);" class="{{ Request::is('extras') ? 'active subdrop' : '' }}">
           <i data-feather="star"></i>
@@ -185,7 +180,6 @@
           </li>
         </ul>
       </li>
-      <!-- Activity Section -->
       <li class="submenu">
         <a href="javascript:void(0);" class="{{ Request::is('activity') ? 'active subdrop' : '' }}">
           <i data-feather="activity"></i>

@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Alert;
 
-class AlertController extends Controller
+class NotificationController extends Controller
 {
-    public function index()
+    public function showNotificationPreferences()
     {
-        $alerts = Alert::all();
-        return view('alerts.index', compact('alerts'));
+        // $alerts = Alert::all();
+        // return view('alerts.index', compact('alerts'));
+        return view('pages.notification_preferences.notification_preferences');
     }
 
     public function update(Request $request)

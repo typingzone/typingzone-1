@@ -2,23 +2,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Application; 
+use App\Models\Transactions; 
+use App\Models\TransactionType; 
 
 class TransactionController extends Controller
 {
-    // Display the transaction history page
-    public function index()
+    public function showTransactionHistory()
     {
-        return view('transactions.transaction_histories');
+        return view('pages.transactions.transaction_history');
     }
-
 
     public function showTransactionTypes()
     {
         return view('pages.transactions.transaction_types');
     }
-
     
+    public function archivedTransactions()
+    {
+        return view('pages.transactions.archived_transactions');
+    }
+
+    public function showInvoices()
+    {
+        return view('pages.transactions.invoices');
+    }
+
     // Add a new application
     public function store(Request $request)
     {

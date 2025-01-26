@@ -140,6 +140,11 @@ class UserController extends Controller
         return view('auth.change_password');
     }
 
+    public function loginActivities()
+    {
+        return view('pages.others.login_activities');
+    }
 
+    
 
 }

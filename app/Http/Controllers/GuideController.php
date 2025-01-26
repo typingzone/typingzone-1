@@ -9,8 +9,9 @@ class GuideController extends Controller
 {
     public function index()
     {
-        $guides = Guide::all();
-        return view('guides.index', compact('guides'));
+        // $guides = Guide::all();
+        // return view('guides.index', compact('guides'));
+        return view('pages.guides.guides');
     }
 
     public function store(Request $request)

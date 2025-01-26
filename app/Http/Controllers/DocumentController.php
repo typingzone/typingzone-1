@@ -8,11 +8,20 @@ use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
 {
-    public function index()
+    public function showDocuments()
     {
-        $documents = Document::all();
-        return view('documents.index', compact('documents'));
+        // $documents = Document::all();
+        // return view('documents.index', compact('documents'));
+        return view('pages.documents.documents');
     }
+
+
+    public function showDocumentNames()
+    {
+        return view('pages.documents.documents');
+    }
+
+
 
     public function store(Request $request)
     {

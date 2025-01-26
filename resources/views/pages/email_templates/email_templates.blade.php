@@ -1,14 +1,14 @@
-<?php $page = 'department-grid'; ?>
+<?php $page = 'Login Activities'; ?>
 @extends('layout.mainlayout')
 @section('content')
     <div class="page-wrapper">
         <div class="content">
             @component('components.breadcrumb')
                 @slot('title')
-                    Transaction Types
+                    Email Templates
                 @endslot
                 @slot('li_1')
-                    Manage your transaction types
+                    Manage your login templates
                 @endslot
                 @slot('li_2')
                     Add New Department

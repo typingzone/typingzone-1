@@ -5,10 +5,10 @@
         <div class="content">
             @component('components.breadcrumb')
                 @slot('title')
-                    Transaction Types
+                    Invoices
                 @endslot
                 @slot('li_1')
-                    Manage your transaction types
+                    Manage your invoices
                 @endslot
                 @slot('li_2')
                     Add New Department
