@@ -5,7 +5,7 @@
         <div class="login-wrapper login-new">
             <div class="login-content user-login">
                 <div class="login-logo">
-                    <img src="{{ URL::asset('/build/img/logo.png') }}" alt="img">
+                    <img src="{{ URL::asset('/build/img/logo.jpeg') }}" alt="img">
                     <a href="{{ url('index') }}" class="login-logo logo-white">
                         <img src="{{ URL::asset('/build/img/logo-white.png') }}" alt="">
                     </a>
@@ -19,63 +19,29 @@
                         <div class="form-login">
                             <label>New Password</label>
                             <div class="pass-group">
-                                <input type="password" id="new_password" class="pass-inputa" required>
+                                <input type="password" placeholder="Enter your new password" ="new_password" class="pass-inputa" required>
                             </div>
                         </div>
                         <div class="form-login">
                             <label>Confirm New Password</label>
                             <div class="pass-group">
-                                <input type="password" id="confirm_password" class="pass-inputs" required>
+                                <input type="password" placeholder="Repeat your password" ="confirm_password" class="pass-inputs" required>
                             </div>
                         </div>
                         <div class="form-login">
                             <button type="submit" class="btn btn-login">Change Password</button>
                         </div>
                         <div class="signinform text-center">
-                            <h4>Return to <a href="{{ url('signin-3') }}" class="hover-a">login</a></h4>
+                            <h4>Return to <a href="{{ url('login') }}" class="hover-a">login</a></h4>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="my-4 d-flex justify-content-center align-items-center copyright-text">
-                <p>Copyright &copy; <?php echo date('Y'); ?> TrackLog. All rights reserved</p>
+                <p>Copyright &copy; <?php echo date('Y'); ?> TypingZone. All rights reserved</p>
             </div>
         </div>
     </div>
+    <script src="{{ asset('custom/js/change_password.js') }}"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#changePasswordForm').on('submit', function(e) {
-                e.preventDefault();
-                let newPassword = $('#new_password').val();
-                let confirmPassword = $('#confirm_password').val();
-
-                if (newPassword !== confirmPassword) {
-                    toastr.error('Passwords do not match. Please try again.');
-                    return;
-                }
-
-                $.ajax({
-                    url: '{{ route("change-password") }}', 
-                    type: 'POST',
-                    data: {
-                        new_password: newPassword,
-                        confirm_password: confirmPassword,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        if(response.success) {
-                           toastr.success('Password changed successfully.');
-                            window.location.href = '{{ url("login") }}'; 
-                        } else {
-                            toastr.error('Error: ' + response.message);
-                        }
-                    },
-                    error: function(xhr) {
-                        toastr.error('An error occurred. Please try again.');
-                    }
-                });
-            });
-        });
-    </script>
 @endsection

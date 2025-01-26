@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\CredentialController;
 use App\Http\Controllers\DocumentController;
@@ -15,6 +15,7 @@ use App\Http\Controllers\CronJobController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ApplicationFlowController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CalendarController;
 
 
 Route::controller(IndexController::class)->group(function () {
@@ -28,7 +29,7 @@ Route::controller(UserController::class)->group(function () {
     Route::get('forgot-password', 'showForgotPasswordPage')->name('forgot-password');
     Route::post('login-attempt', 'handleLogin')->name('login-attempt');
     Route::post('change-password', 'handlePasswordChange')->name('password.change.attempt');
-    Route::post('reset-password', 'handlePasswordReset')->name('password.reset.attempt');
+    Route::post('attempt-reset-password', 'handlePasswordReset')->name('attempt-reset-password');
     Route::post('change-user-settings', 'changeUserSettings')->name('change-user-settings');
     Route::post('add-role-permission', 'addRolePermission')->name('add-role-permission');
     Route::get('/edit-access-level', 'viewEditAccessLevel')->name('edit-access-level');
@@ -36,15 +37,16 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/update-user-role/{id}', 'updateUserRole')->name('update-user-role');
 });
 
-Route::controller(ApplicationController::class)->group(function () {
+Route::controller(TransactionController::class)->group(function () {
     Route::get('applications/history', 'index')->name('applications.history'); 
     Route::post('applications', 'store')->name('applications.store');
     Route::put('applications/{id}', 'update')->name('applications.update');
     Route::delete('applications/{id}', 'destroy')->name('applications.destroy');
+    Route::get('transaction-types', 'showTransactionTypes')->name('transaction-types');
 });
 
 Route::controller(CompanyController::class)->group(function () {
-    Route::get('company-profile', 'index')->name('company-profile'); 
+    Route::get('general-settings', 'index')->name('general-settings'); 
     Route::post('updated-company-profile', 'update')->name('updated-company-profile');
 });
 
@@ -100,6 +102,10 @@ Route::controller(AlertController::class)->group(function () {
     Route::put('update-alert', 'update')->name('update-alert');
 });
 
+Route::controller(CalendarController::class)->group(function () {
+    Route::get('calendar', 'index')->name('calendar'); 
+});
+
 Route::controller(ApplicationFlowController::class)->group(function () {
     Route::get('applications-flow', 'index')->name('applications-flow');
     Route::post('applications-parent', 'storeParent')->name('applications-parent.store');
@@ -113,3 +119,5 @@ Route::controller(CronJobController::class)->group(function () {
     Route::put('expiry-document-reminder', 'expiryDocumentReminder')->name('expiry-document-reminder');
     Route::put('application-follow-up-reminder', 'applicationFollowUpReminder')->name('application-follow-up-reminder');
 });
+
+

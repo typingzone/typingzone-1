@@ -1,59 +1,63 @@
- <!-- Bootstrap CSS -->
- <link rel="stylesheet" href="{{ url('build/css/bootstrap.min.css') }}">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="{{ asset('build/css/bootstrap.min.css') }}">
 
- <!-- Datetimepicker CSS -->
- <link rel="stylesheet" href="{{ url('build/plugins/daterangepicker/daterangepicker.css') }}">
- <link rel="stylesheet" href="{{ url('build/css/bootstrap-datetimepicker.min.css') }}">
+<!-- Datetimepicker CSS -->
+<link rel="stylesheet" href="{{ asset('build/plugins/daterangepicker/daterangepicker.css') }}">
+<link rel="stylesheet" href="{{ asset('build/css/bootstrap-datetimepicker.min.css') }}">
 
- <!-- animation CSS -->
- <link rel="stylesheet" href="{{ url('build/css/animate.css') }}">
+<!-- Animation CSS -->
+<link rel="stylesheet" href="{{ asset('build/css/animate.css') }}">
 
- <!-- Select2 CSS -->
- <link rel="stylesheet" href="{{ url('build/plugins/select2/css/select2.min.css') }}">
+<!-- Select2 CSS -->
+<link rel="stylesheet" href="{{ asset('build/plugins/select2/css/select2.min.css') }}">
 
- <!-- Fontawesome CSS -->
- <link rel="stylesheet" href="{{ url('build/plugins/fontawesome/css/fontawesome.min.css') }}">
- <link rel="stylesheet" href="{{ url('build/plugins/fontawesome/css/all.min.css') }}">
+<!-- Fontawesome CSS -->
+<link rel="stylesheet" href="{{ asset('build/plugins/fontawesome/css/fontawesome.min.css') }}">
+<link rel="stylesheet" href="{{ asset('build/plugins/fontawesome/css/all.min.css') }}">
 
- <!-- Feathericon CSS -->
- <link rel="stylesheet" href="{{ url('build/css/feather.css') }}">
+<!-- Feathericon CSS -->
+<link rel="stylesheet" href="{{ asset('build/css/feather.css') }}">
 
- <!-- Fancybox -->
- <link rel="stylesheet" href="{{url('build/plugins/fancybox/jquery.fancybox.min.css')}}">
+<!-- Fancybox -->
+<link rel="stylesheet" href="{{ asset('build/plugins/fancybox/jquery.fancybox.min.css') }}">
 
- <!-- Summernote CSS -->
- <link rel="stylesheet" href="{{ url('build/plugins/summernote/summernote-bs4.min.css') }}">
+<!-- Summernote CSS -->
+<link rel="stylesheet" href="{{ asset('build/plugins/summernote/summernote-bs4.min.css') }}">
 
- <!-- Bootstrap Tagsinput CSS -->
- <link rel="stylesheet" href="{{ url('build/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}">
+<!-- Bootstrap Tagsinput CSS -->
+<link rel="stylesheet" href="{{ asset('build/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}">
 
- <!-- Datatable CSS -->
- <link rel="stylesheet" href="{{ url('build/css/dataTables.bootstrap5.min.css') }}">
+<!-- Datatable CSS -->
+<link rel="stylesheet" href="{{ asset('build/css/dataTables.bootstrap5.min.css') }}">
 
- <!-- Mobile CSS-->
- <link rel="stylesheet" href="{{ url('build/plugins/intltelinput/css/intlTelInput.css') }}">
- <link rel="stylesheet" href="{{ url('build/plugins/intltelinput/css/demo.css') }}">
+<!-- Mobile CSS -->
+<link rel="stylesheet" href="{{ asset('build/plugins/intltelinput/css/intlTelInput.css') }}">
+<link rel="stylesheet" href="{{ asset('build/plugins/intltelinput/css/demo.css') }}">
 
- <link rel="stylesheet" href="{{ url('build/css/plyr.css') }}">
+<link rel="stylesheet" href="{{ asset('build/css/plyr.css') }}">
 
- <!-- Owl Carousel -->
- <link rel="stylesheet" href="{{ url('build/css/owl.carousel.min.css') }}">
+<!-- Owl Carousel -->
+<link rel="stylesheet" href="{{ asset('build/css/owl.carousel.min.css') }}">
 
- @if (Route::is(['sales-dashboard']))
-     <!-- Map CSS -->
-     <link rel="stylesheet" href="{{ url('build/plugins/jvectormap/jquery-jvectormap-2.0.5.css') }}">
- @endif
+@if (Route::is(['sales-dashboard']))
+    <!-- Map CSS -->
+    <link rel="stylesheet" href="{{ asset('build/plugins/jvectormap/jquery-jvectormap-2.0.5.css') }}">
+@endif
 
- @if (Route::is(['calendar']))
-     <!-- Full Calander CSS -->
-     <link rel="stylesheet" href="{{ url('build/plugins/fullcalendar/fullcalendar.min.css') }}">
- @endif
+@if (Route::is(['calendar']))
+    <!-- Full Calendar CSS -->
+    <link rel="stylesheet" href="{{ asset('build/plugins/fullcalendar/fullcalendar.min.css') }}">
+@endif
 
- <!-- Swiper CSS -->
- <link rel="stylesheet" href="{{ url('build/plugins/swiper/swiper.min.css') }}">
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="{{ asset('build/plugins/swiper/swiper.min.css') }}">
 
- <!-- Boxicons CSS -->
- <link rel="stylesheet" href="{{ url('build/plugins/boxicons/css/boxicons.min.css') }}">
+<!-- Boxicons CSS -->
+<link rel="stylesheet" href="{{ asset('build/plugins/boxicons/css/boxicons.min.css') }}">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="{{ URL::asset('/build/js/theme-script.js') }}"></script>
+
+
 
  @if (Route::is(['ui-stickynote', 'ui-timeline']))
      <!-- Sticky CSS -->
@@ -64,10 +68,8 @@
      <link rel="stylesheet" href="{{ url('build/plugins/scrollbar/scroll.min.css') }}">
  @endif
 
- @if (Route::is(['ui-toasts']))
-     <!-- Toatr CSS -->
-     <link rel="stylesheet" href="{{ url('build/plugins/toastr/toatr.css') }}">
- @endif
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
 
  @if (Route::is(['ui-lightbox']))
      <!-- Lightbox CSS -->

@@ -11,7 +11,7 @@ class CompanyController extends Controller
 {
     public function index()
     {
-        return view('company.index', compact('company'));
+        return view('pages.settings.general-settings');
     }
 
     

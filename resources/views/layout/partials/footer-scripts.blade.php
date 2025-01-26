@@ -1,5 +1,4 @@
  <!-- jQuery -->
- <script src="{{ URL::asset('/build/js/jquery-3.7.1.min.js') }}"></script>
 
  <!-- Feather Icon JS -->
  <script src="{{ URL::asset('/build/js/feather.min.js') }}"></script>
@@ -72,7 +71,6 @@
 
  @if (Route::is('calendar'))
      <!-- Full Calendar JS -->
-     <script src="{{ URL::asset('/build/js/jquery-ui.min.js') }}"></script>
      <script src="{{ URL::asset('/build/plugins/fullcalendar/fullcalendar.min.js') }}"></script>
      <script src="{{ URL::asset('/build/plugins/fullcalendar/jquery.fullcalendar.js') }}"></script>
  @endif
@@ -132,11 +130,8 @@
      <script src="{{ URL::asset('/build/plugins/stickynote/sticky.js') }}"></script>
  @endif
 
- @if (Route::is(['ui-toasts']))
-     <!-- Mask JS -->
-     <script src="{{ URL::asset('/build/plugins/toastr/toastr.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/toastr/toastr.js') }}"></script>
- @endif
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
  @if (Route::is(['ui-lightbox']))
      <script src="{{ URL::asset('/build/plugins/lightbox/glightbox.min.js') }}"></script>
@@ -200,5 +195,4 @@
  @endif
 
  <!-- Custom JS -->
- <script src="{{ URL::asset('/build/js/theme-script.js') }}"></script>
  <script src="{{ URL::asset('/build/js/script.js') }}"></script>

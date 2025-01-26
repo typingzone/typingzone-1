@@ -24,13 +24,9 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="settings-wrapper d-flex">
-                        @component('components.settings-sidebar')
-                        @endcomponent
+                     
                         <div class="settings-page-wrap">
                             <form action="{{ url('general-settings') }}">
-                                <div class="setting-title">
-                                    <h4>Profile Settings</h4>
-                                </div>
                                 <div class="card-title-head">
                                     <h6><span><i data-feather="user" class="feather-chevron-up"></i></span>Employee
                                         Information</h6>
