@@ -20,11 +20,12 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\ReminderController;
-
+use App\Http\Middleware\RolePermissionMiddleware;
 
 Route::controller(IndexController::class)->group(function () {
-    Route::get('dashboard', 'index')->name('dashboard'); 
+    Route::get('dashboard', 'index')->name('dashboard')->middleware('permission:admin');
 });
+
 
 Route::controller(ReminderController::class)->group(function () {
     Route::get('reminders', 'index')->name('reminders'); 
@@ -35,14 +36,17 @@ Route::controller(UserController::class)->group(function () {
     Route::get('new-password', 'showChangePasswordPage')->name('new-password');
     Route::get('forgot-password', 'showForgotPasswordPage')->name('forgot-password');
     Route::post('login-attempt', 'handleLogin')->name('login-attempt');
-    Route::post('change-password', 'handlePasswordChange')->name('password.change.attempt');
-    Route::post('attempt-reset-password', 'handlePasswordReset')->name('attempt-reset-password');
+    Route::post('change-password', 'handlePasswordChange')->name('change-password');
     Route::post('change-user-settings', 'changeUserSettings')->name('change-user-settings');
     Route::post('add-role-permission', 'addRolePermission')->name('add-role-permission');
     Route::get('/edit-access-level', 'viewEditAccessLevel')->name('edit-access-level');
     Route::post('/update-role-permission', 'updateRolePermission')->name('update-role-permission');
     Route::post('/update-user-role/{id}', 'updateUserRole')->name('update-user-role');
     Route::get('login-activities', 'loginActivities')->name('login-activities');
+    Route::get('logout', 'logout')->name('logout');
+    Route::get('password/reset/{token}', 'showResetForm')->name('password.reset');
+    Route::post('password/reset', 'handlePasswordReset')->name('password.update'); 
+
 });
 
 Route::controller(TransactionController::class)->group(function () {

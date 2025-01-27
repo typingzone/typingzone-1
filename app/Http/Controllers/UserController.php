@@ -8,6 +8,9 @@ use App\Mail\PasswordResetMail;
 use Illuminate\Http\Request;
 use App\Services\RoleAndPermissionService;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
+
 
 class UserController extends Controller
 {
@@ -51,57 +54,83 @@ class UserController extends Controller
 
     public function handleLogin(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:8',
-        ]);    
-        if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
-            $request->session()->regenerate(); 
-    
-            return redirect()->intended('dashboard'); 
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+
+            if ($user->hasRole('admin')) {
+                return response()->json(['success' => true, 'role' => 'admin']);
+            } elseif ($user->hasRole('user')) {
+                return response()->json(['success' => true, 'role' => 'user']);
+            }
+
+            return response()->json(['success' => true]);
         }
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email'); 
+
+        return response()->json(['success' => false, 'message' => 'Invalid credentials']);
     }
     
 
 
+
     public function handlePasswordChange(Request $request)
     {
+        // Validate the input fields
         $request->validate([
-            'current_password' => 'required',
+            'email' => 'required|email',
+            'token' => 'required',
             'new_password' => 'required|min:8|confirmed',
         ]);
-        $user = auth()->user();
-        if (!Hash::check($request->current_password, $user->password)) {
-            return back()->withErrors([
-                'current_password' => 'Your current password is incorrect.',
-            ]);
-        }    
-        $user->password = Hash::make($request->new_password);
-        $user->save();
-        $request->session()->regenerate();     
-        return redirect()->route('dashboard')->with('status', 'Password successfully changed.');
+    
+        // Attempt to reset the password using the provided token and email
+        $status = Password::reset(
+            $request->only('email', 'token', 'new_password'),
+            function ($user) use ($request) {
+                $user->password = bcrypt($request->new_password);
+                $user->save();
+            }
+        );
+    
+        // Check the result of the password reset attempt
+        if ($status === Password::PASSWORD_RESET) {
+            return response()->json(['success' => true, 'message' => 'Password successfully changed.']);
+        } else {
+            return response()->json(['success' => false, 'message' => __($status)]);
+        }
     }
     
 
     public function handlePasswordReset(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email|exists:users,email',
-        ]);
-        $user = User::where('email', $request->email)->first();
-        $otp = rand(100000, 999999);
-        $user->otp = Hash::make($otp); 
-        $user->otp_created_at = now(); 
-        $user->save();
-        Mail::to($user->email)->send(new PasswordResetMail($otp));
-        return back()->with('status', 'An OTP has been sent to your email. Please use it to reset your password.');
+        $request->validate(['email' => 'required|email|exists:users,email']);
+    
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+    
+        if ($status === Password::RESET_LINK_SENT) {
+            return response()->json(['success' => true, 'message' => 'Password reset link sent to your email.']);
+        } else {
+            return response()->json(['success' => false, 'message' => __($status)]);
+        }
+    }
+
+
+    public function showResetForm(Request $request)
+    {
+        $token = $request->route('token');
+        $email = $request->query('email');
+        return view('auth.change_password', ['token' => $token, 'email' => $email]);
     }
 
 
 
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
+    }
 
 
     public function addRolePermission(Request $request)

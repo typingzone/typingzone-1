@@ -8,6 +8,7 @@
     <meta name="keywords" content="TypingZone, typing center management, document tracking, expense management, application processing, document expiry reminders, workflow management, typing services, business management software">
     <meta name="author" content="TypingZone">
     <meta name="robots" content="noindex, nofollow">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ ucwords(str_replace(['-', '_'], ' ', basename(Request::path()))) }} - TypingZone</title>
 
     <!-- Favicon -->
@@ -42,7 +43,6 @@
     @if(auth()->user())
         @include('layout.partials.header')
     @endif
-    @include('layout.partials.header')
 
 @endif
 @if (!Route::is(['pos', 'under-maintenance', 'coming-soon','error-404','error-500','two-step-verification-3','two-step-verification-2','two-step-verification','email-verification-3','email-verification-2','email-verification','reset-password-3','reset-password-2','reset-password','forgot-password-3','forgot-password-2','forgot-password','register-3','register-2','register','signin-3','signin-2','signin','success','success-2','success-3','lock-screen']))
@@ -51,9 +51,6 @@
         @include('layout.partials.collapsed-sidebar')
         @include('layout.partials.horizontal-sidebar')
     @endif
-    @include('layout.partials.sidebar')
-        @include('layout.partials.collapsed-sidebar')
-        @include('layout.partials.horizontal-sidebar')
 @endif
 @yield('content')
 </div>

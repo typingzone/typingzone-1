@@ -1,26 +1,22 @@
 <?php
-
-namespace App\Mail;
-
-use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
 class PasswordResetMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use SerializesModels;
 
-    public $otp;
+    public $token;
 
-    public function __construct($otp)
+    public function __construct($token)
     {
-        $this->otp = $otp;
+        $this->token = $token;
     }
 
     public function build()
     {
-        return $this->subject('Your Password Reset OTP')
-                    ->view('emails.password_reset_otp')
-                    ->with(['otp' => $this->otp]);
+        return $this->subject('Reset Your Password')
+                    ->view('emails.password_reset_link')
+                    ->with(['token' => $this->token]);
     }
 }

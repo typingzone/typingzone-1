@@ -22,7 +22,7 @@ $(document).ready(function() {
                 }
             },
             error: function(xhr) {
-                toastr.error('An error occurred. Please try again.');
+                toastr.error(xhr.responseText+'An error occurred. Please try again.');
             }
         });
     });

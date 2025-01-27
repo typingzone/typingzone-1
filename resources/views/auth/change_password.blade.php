@@ -19,13 +19,13 @@
                         <div class="form-login">
                             <label>New Password</label>
                             <div class="pass-group">
-                                <input type="password" placeholder="Enter your new password" ="new_password" class="pass-inputa" required>
+                            <input type="password" placeholder="Enter your new password" id="new_password" name="new_password" class="pass-inputa" required>
                             </div>
                         </div>
                         <div class="form-login">
                             <label>Confirm New Password</label>
                             <div class="pass-group">
-                                <input type="password" placeholder="Repeat your password" ="confirm_password" class="pass-inputs" required>
+                            <input type="password" placeholder="Repeat your password" id="confirm_password" name="confirm_password" class="pass-inputs" required>
                             </div>
                         </div>
                         <div class="form-login">
