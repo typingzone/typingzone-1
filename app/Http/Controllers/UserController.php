@@ -23,7 +23,7 @@ class UserController extends Controller
 
     public function changeUserSettings(Request $request)
     {
-        $user = auth()->user();
+        $user = Auth::user();
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
