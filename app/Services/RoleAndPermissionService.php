@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 class RoleAndPermissionService
 {
     public function addRolePermission(Request $request) {
-        $roleName = "Admin ".$request->input('roleName');
+        $roleName = $request->input('roleName');
         $permissions = $request->input('permissions', []);
     
         $existingRole = Role::where('name', $roleName)->where('guard_name', 'web')->first();
@@ -157,4 +157,33 @@ class RoleAndPermissionService
         return response()->json(['success' => false, 'message' => 'User not found'], 404);
     }
 
+
+    public function getRolesPermissions(){
+        $roles = Role::all();
+        $permissions = Permission::all();
+        return view('auth.role_permission', compact('roles', 'permissions'));
+    }
+
+        public function storeUser($validated)
+        {
+            $randomName = rand(40, 5999) . '.' . $validated['profile_image']->getClientOriginalExtension();
+
+            // Store the file in the public directory using the 'public' disk
+            $imagePath = Storage::disk('public')->put('profile_images/' . $randomName, file_get_contents($validated['profile_image']));
+        
+            // Create the user
+            $user = User::create([
+                'name' => $validated['username'],
+                'email' => $validated['email'],
+                'password' => bcrypt($validated['password']),
+                'profile_image' => $imagePath,
+            ]);
+        
+            // Assign the role to the user
+            $role = Role::find($validated['role_id']);
+            $user->assignRole($role);
+        
+            return $user;
+        }
+        
 }

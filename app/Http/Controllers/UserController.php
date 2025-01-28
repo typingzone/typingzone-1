@@ -174,6 +174,33 @@ class UserController extends Controller
         return view('pages.others.login_activities');
     }
 
+    public function showManageUsers()
+    {
+        $users = User::with('roles')->get();
+        return view('auth.manage_users', compact('users'));
+    }
+
+    public function showRolePermission()
+    {
+        return $this->roleAndPermissionService->getRolesPermissions();
+    }
+    
+    
+
+    public function storeUser(Request $request)
+    {
+        $validated = $request->validate([
+            'profile_image' => 'required|image|max:2048', 
+            'username' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'role_id' => 'required|exists:roles,id',
+        ]);
+
+
+        // Pass the validated data to the service
+        return $this->roleAndPermissionService->storeUser($validated);
+    }
     
 
 }

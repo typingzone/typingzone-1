@@ -64,8 +64,8 @@
                         <li class="submenu">
                             <a href="javascript:void(0);"><i data-feather="users"></i><span>Users</span><span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="chat.html">Manage Users</a></li>
-                                <li><a href="calendar.html">Roles & Permissions</a></li>
+                                <li><a href="{{ route('manage-users') }}">Manage Users</a></li>
+                                <li><a href="{{ route('role-permission') }}">Roles & Permissions</a></li>
                             </ul>
                         </li>
 

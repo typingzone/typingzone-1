@@ -39,6 +39,7 @@ Route::controller(UserController::class)->group(function () {
     Route::post('change-password', 'handlePasswordChange')->name('change-password');
     Route::post('change-user-settings', 'changeUserSettings')->name('change-user-settings');
     Route::post('add-role-permission', 'addRolePermission')->name('add-role-permission');
+    Route::get('role-permission', 'showRolePermission')->name('role-permission');
     Route::get('/edit-access-level', 'viewEditAccessLevel')->name('edit-access-level');
     Route::post('/update-role-permission', 'updateRolePermission')->name('update-role-permission');
     Route::post('/update-user-role/{id}', 'updateUserRole')->name('update-user-role');
@@ -46,7 +47,9 @@ Route::controller(UserController::class)->group(function () {
     Route::get('logout', 'logout')->name('logout');
     Route::get('password/reset/{token}', 'showResetForm')->name('password.reset');
     Route::post('password/reset', 'handlePasswordReset')->name('password.update'); 
-
+    Route::get('manage-users', 'showManageUsers')->name('manage-users'); 
+    Route::post('store-user', 'storeUser')->name('store-user'); 
+    
 });
 
 Route::controller(TransactionController::class)->group(function () {
