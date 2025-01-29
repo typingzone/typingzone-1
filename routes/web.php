@@ -23,7 +23,7 @@ use App\Http\Controllers\ReminderController;
 use App\Http\Middleware\RolePermissionMiddleware;
 
 Route::controller(IndexController::class)->group(function () {
-    Route::get('dashboard', 'index')->name('dashboard')->middleware('permission:admin');
+    Route::get('dashboard', 'index')->name('dashboard')->middleware('permission:Manager');
 });
 
 
@@ -41,7 +41,6 @@ Route::controller(UserController::class)->group(function () {
     Route::post('add-role-permission', 'addRolePermission')->name('add-role-permission');
     Route::get('role-permission', 'showRolePermission')->name('role-permission');
     Route::get('/edit-access-level', 'viewEditAccessLevel')->name('edit-access-level');
-    Route::post('/update-role-permission', 'updateRolePermission')->name('update-role-permission');
     Route::post('/update-user-role/{id}', 'updateUserRole')->name('update-user-role');
     Route::get('login-activities', 'loginActivities')->name('login-activities');
     Route::get('logout', 'logout')->name('logout');
@@ -49,8 +48,12 @@ Route::controller(UserController::class)->group(function () {
     Route::post('password/reset', 'handlePasswordReset')->name('password.update'); 
     Route::get('manage-users', 'showManageUsers')->name('manage-users'); 
     Route::post('store-user', 'storeUser')->name('store-user'); 
-    
+    Route::delete('delete-role-permission/{role}', 'deleteRolePermission')->name('delete-role-permission');
+    Route::put('update-role-permissions/{roleId}', 'updateRolePermissions')->name('update-role-permissions');
+    Route::get('/get-role-permissions/{role}', 'getRolePermissions')->name('get-role-permissions');
+
 });
+// Route::put('/update-role-permissions/{role}', 'UserController@updateRolePermissions')->name('update-role-permissions');
 
 Route::controller(TransactionController::class)->group(function () {
     Route::get('transaction-history', 'showTransactionHistory')->name('transaction-history'); 

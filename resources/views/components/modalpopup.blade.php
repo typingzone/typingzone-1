@@ -355,7 +355,7 @@
                 </th>
               </tr>
             </thead>
-            <tbody> @foreach (['Admin Users List', 'Admin Under Maintenance', 'Admin Email Templates', 'Admin Document Name', 'Admin Salary Certificate', 'Admin Designation Types', 'Admin Top Up', 'Admin Transaction History', 'Admin Expenses History', 'Admin Users', 'Admin Companies', 'Admin Employees', 'Admin Completed Profile', 'Admin Missing Profile', 'Admin In Process', 'Admin Dues Invoices', 'Admin Service Path', 'Admin Requests', 'Admin Global Services', 'Admin Expired Documents', 'Admin Companies Documents', 'Admin Employees Documents', 'Admin Credentials', 'Admin In Process', 'Admin Completed Request', 'Admin Cancelled Employees', 'Admin Calendar', 'Admin Login Activities'] as $page) <tr>
+            <tbody> @foreach (['Expiry Documents', 'Calendar', 'Transaction Types', 'Transaction History', 'Archived Transactions', 'Invoices', 'Documents', 'Document Names', 'Orders', 'Tools', 'Color Picker', 'Invoice Templates', 'Manage Users', 'Roles & Permissions', 'General Settings', 'Notification Preferences', 'Guide', 'Email Template', 'Reminders', 'Office Assets', 'Login Activities'] as $page) <tr>
                 <td>
                   <input type="checkbox" class="page-select" data-page="{{ $page }}"> {{ $page }}
                 </td>
@@ -387,6 +387,55 @@
   </div>
 </div> 
 @endif
+
+
+
+@if(Route::is(['role-permission']))
+<div class="modal fade" id="edit-role-permission-modal" tabindex="-1" aria-labelledby="edit-role-permission-modal" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="edit-role-permission-modal">Edit Role & Permissions</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+	  	<form id="edit-role-permission-form" action="{{ route('update-role-permissions', ['roleId' => '1']) }}" method="POST">
+		  @csrf 
+          @method('PUT')
+          <input type="hidden" name="roleId" id="editRoleId">
+          <div class="mb-4">
+            <label for="editRoleName" class="form-label">Role Name</label>
+            <input type="text" class="form-control" maxlength="35" name="roleName" id="editRoleName" required>
+          </div>
+
+          <table class="table table-striped table-hover table-sm">
+            <thead>
+              <tr>
+                <th><input type="checkbox" id="edit-select-all"> Select All</th>
+                <th>View</th>
+                <th>Add</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                <th>Download</th>
+              </tr>
+            </thead>
+            <tbody id="edit-permissions-body">
+              <!-- Permissions checkboxes will be dynamically inserted here -->
+            </tbody>
+          </table>
+
+          <div class="d-grid gap-2">
+            <button type="submit" id="updateRolePermission" class="btn btn-primary btn-lg">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endif
+
+
+
 
 
 

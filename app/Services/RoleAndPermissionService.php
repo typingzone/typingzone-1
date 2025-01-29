@@ -15,18 +15,14 @@ class RoleAndPermissionService
     public function addRolePermission(Request $request) {
         $roleName = $request->input('roleName');
         $permissions = $request->input('permissions', []);
-    
         $existingRole = Role::where('name', $roleName)->where('guard_name', 'web')->first();
-
         if ($existingRole) {
             return redirect()->back()->with('error', 'Role already exists. Create new with different name');
         }
-
         $role = Role::create([
             'name' => $roleName,
             'guard_name' => 'web',
         ]);
-
         foreach ($permissions as $module => $actions) {
             foreach ($actions as $action) {
                 $permissionName = $action;
@@ -57,7 +53,6 @@ class RoleAndPermissionService
             Storage::disk('s3')->put($filePath, file_get_contents($uploadedFile), 'public');
         }
     
-        // Create the SuperAdmin user
         $user = User::create([
             'name' => $request->input('userName'),
             'email' => $request->input('userEmail'),
@@ -66,13 +61,10 @@ class RoleAndPermissionService
             'profile_photo' => $fileName,
             'status' => 1,
         ]);
-    
-        // Assign the role to the user
         $role = Role::find($request->input('userRole'));
         if ($role) {
             $user->assignRole($role->name);
         }
-    
         if ($request->has('directPermissions')) {
             foreach ($request->input('directPermissions') as $permissionName) {
                 $permission = Permission::firstOrCreate([
@@ -82,7 +74,6 @@ class RoleAndPermissionService
                 $user->givePermissionTo($permission);
             }
         }
-    
         return redirect()->back()->with('success', 'User created, role and permissions assigned successfully.');
     }
     
@@ -118,7 +109,6 @@ class RoleAndPermissionService
         $permissionsToUpdate = [];
         if ($request->has('permissions')) {
             $permissions = $request->input('permissions');
-
             foreach ($permissions as $page => $actions) {
                 foreach ($actions as $action) {
                     $permissionName = $action;
@@ -164,26 +154,31 @@ class RoleAndPermissionService
         return view('auth.role_permission', compact('roles', 'permissions'));
     }
 
-        public function storeUser($validated)
+
+
+    public function storeUser($validated)
         {
             $randomName = rand(40, 5999) . '.' . $validated['profile_image']->getClientOriginalExtension();
-
-            // Store the file in the public directory using the 'public' disk
             $imagePath = Storage::disk('public')->put('profile_images/' . $randomName, file_get_contents($validated['profile_image']));
-        
-            // Create the user
             $user = User::create([
                 'name' => $validated['username'],
                 'email' => $validated['email'],
                 'password' => bcrypt($validated['password']),
                 'profile_image' => $imagePath,
             ]);
-        
-            // Assign the role to the user
             $role = Role::find($validated['role_id']);
             $user->assignRole($role);
-        
             return $user;
+        }
+
+
+
+
+        public function deleteRolePermission($roleId)
+        {
+            $role = Role::findOrFail($roleId);
+            $role->permissions()->detach();
+            $role->delete();
         }
         
 }
