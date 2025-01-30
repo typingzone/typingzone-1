@@ -40,6 +40,10 @@
                             <a href="{{ route('orders') }}"><i data-feather="box"></i><span>Orders</span></a>
                         </li>
 
+                        <li class="{{ Request::routeIs('tickets') ? 'active' : '' }}">
+                            <a href="{{ route('tickets') }}"><i class="fa fa-ticket"></i><span style="padding-left: 7px">Tickets</span></a>
+                        </li>
+
                         <li class="submenu">
                             <a href="javascript:void(0);"><i data-feather="tool"></i><span>Tools</span><span class="menu-arrow"></span></a>
                             <ul>

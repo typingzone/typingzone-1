@@ -20,10 +20,11 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\ReminderController;
+use App\Http\Controllers\TicketController;
 use App\Http\Middleware\RolePermissionMiddleware;
 
 Route::controller(IndexController::class)->group(function () {
-    Route::get('dashboard', 'index')->name('dashboard')->middleware('permission:Manager');
+    Route::get('dashboard', 'index')->name('dashboard');
 });
 
 
@@ -69,6 +70,17 @@ Route::controller(CompanyController::class)->group(function () {
     Route::get('general-settings', 'index')->name('general-settings'); 
     Route::post('updated-company-profile', 'update')->name('updated-company-profile');
 });
+
+
+Route::controller(TicketController::class)->group(function () {
+    Route::get('tickets', 'index')->name('tickets'); 
+    Route::post('add-tickets', 'addTicket')->name('add-ticket'); 
+    Route::get('tickets/{id}/edit', 'edit')->name('edit-ticket'); 
+    Route::post('update-ticket', 'updateTicket')->name('update-ticket'); 
+    Route::delete('tickets/{id}', 'destroy')->name('delete-ticket'); 
+    Route::get('show-tickets/{id}', 'showTicket')->name('show-tickets'); 
+});
+
 
 Route::controller(OrderController::class)->group(function () {
     Route::get('orders', 'showOrders')->name('orders'); 

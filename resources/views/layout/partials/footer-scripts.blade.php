@@ -1,4 +1,30 @@
- <!-- jQuery -->
+
+<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if (session('success'))
+    <script>
+        toastr.success("{{ session('success') }}");
+    </script>
+@endif
+
+@if (session('info'))
+    <script>
+        toastr.info("{{ session('info') }}");
+    </script>
+@endif
+
+@if (session('warning'))
+    <script>
+        toastr.warning("{{ session('warning') }}");
+    </script>
+@endif
+
+@if (session('error'))
+    <script>
+        toastr.error("{{ session('error') }}");
+    </script>
+@endif
 
  <!-- Feather Icon JS -->
  <script src="{{ URL::asset('/build/js/feather.min.js') }}"></script>
@@ -12,10 +38,6 @@
  <!-- Chart JS -->
  <script src="{{ URL::asset('/build/plugins/apexchart/apexcharts.min.js') }}"></script>
  <script src="{{ URL::asset('/build/plugins/apexchart/chart-data.js') }}"></script>
-
- <!-- Sweetalert 2 -->
- <script src="{{ URL::asset('/build/plugins/sweetalert/sweetalert2.all.min.js') }}"></script>
- <script src="{{ URL::asset('/build/plugins/sweetalert/sweetalerts.min.js') }}"></script>
 
  <!-- Swiper JS -->
  <script src="{{ URL::asset('/build/plugins/swiper/swiper.min.js') }}"></script>

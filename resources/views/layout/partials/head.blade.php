@@ -1,3 +1,5 @@
+<link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
+
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="{{ asset('build/css/bootstrap.min.css') }}">
 
