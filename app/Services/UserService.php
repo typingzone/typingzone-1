@@ -12,6 +12,8 @@ use App\Services\RoleAndPermissionService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
+use Jenssegers\Agent\Agent;
+use App\Models\LoginActivity;
 
 class UserService
 {
@@ -39,10 +41,21 @@ class UserService
 
 
 
-    public function login($credentials)
+    public function login($credentials, Request $request)
     {
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+            $agent = new Agent();
+    
+            // Store login activity
+            $loginActivity = new LoginActivity();
+            $loginActivity->user_id = $user->id;
+            $loginActivity->ip_address = $request->ip();
+            $loginActivity->device = $agent->device();
+            $loginActivity->browser = $agent->browser();
+            $loginActivity->login_time = now();
+            $loginActivity->save();
+    
             if ($user->hasRole('admin')) {
                 return ['success' => true, 'role' => 'admin'];
             } elseif ($user->hasRole('user')) {

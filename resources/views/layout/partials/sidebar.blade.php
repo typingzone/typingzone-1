@@ -6,8 +6,8 @@
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">Main Menu</h6>
                     <ul>
-                        <li class="{{ Request::routeIs('product-list', 'product-details') ? 'active' : '' }}">
-                            <a href="{{ url('product-list') }}"><i data-feather="grid"></i><span>Dashboard</span></a>
+                        <li class="{{ Request::routeIs('dashboard') ? 'active' : '' }}">
+                            <a href="{{ url('dashboard') }}"><i data-feather="grid"></i><span>Dashboard</span></a>
                         </li>
                         <li class="{{ Request::routeIs('calendar') ? 'active' : '' }}">
                             <a href="{{ route('calendar') }}"><i data-feather="calendar"></i><span>Calendar</span></a>

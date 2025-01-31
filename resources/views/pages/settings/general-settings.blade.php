@@ -24,107 +24,66 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="settings-wrapper d-flex">
-                     
                         <div class="settings-page-wrap">
-                            <form action="{{ url('general-settings') }}">
+                            <form id="generalSettingsForm" enctype="multipart/form-data">
                                 <div class="card-title-head">
-                                    <h6><span><i data-feather="user" class="feather-chevron-up"></i></span>Employee
+                                    <h6><span><i data-feather="user" class="feather-chevron-up"></i></span>Company
                                         Information</h6>
                                 </div>
-                                <div class="profile-pic-upload">
-                                    <div class="profile-pic">
-                                        <span><i data-feather="plus-circle" class="plus-down-add"></i> Profile Photo</span>
-                                    </div>
-                                    <div class="new-employee-field">
-                                        <div class="mb-0">
-                                            <div class="image-upload mb-0">
-                                                <input type="file">
-                                                <div class="image-uploads">
-                                                    <h4>Change Image</h4>
-                                                </div>
-                                            </div>
-                                            <span>For better preview recommended size is 450px x 450px. Max size 5MB.</span>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label class="form-label">First Name</label>
-                                            <input type="text" class="form-control">
-                                        </div>
+                                            <label class="form-label">Company Icon</label>
+                                                <input type="file" class="form-control" id="company_icon" value="{{ old('company_icon', $company->company_icon ?? '') }}">
+                                            </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label class="form-label">Last Name</label>
-                                            <input type="text" class="form-control">
-                                        </div>
+                                            <label class="form-label">Company Logo</label>
+                                                <input type="file" class="form-control" id="company_logo" value="{{ old('company_logo', $company->company_logo ?? '') }}">
+                                            </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label class="form-label">User Name</label>
-                                            <input type="text" class="form-control">
-                                        </div>
+                                            <label class="form-label">Company Name</label>
+                                                <input type="text" class="form-control" id="company_name" placeholder="Enter company name" value="{{ old('company_name', $company->company_name ?? '') }}">
+                                            </div>
                                     </div>
+
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label">Address</label>
+                                                <input type="text" class="form-control" id="company_address" placeholder="Enter address" value="{{ old('company_address', $company->address ?? '') }}">
+                                            </div>
+                                    </div>
+
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label class="form-label">Phone Number</label>
-                                            <input type="text" class="form-control">
-                                        </div>
+                                                <input type="text" class="form-control" id="company_phone" placeholder="Enter phone number" value="{{ old('company_phone', $company->phone ?? '') }}">
+                                            </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label class="form-label">Email</label>
-                                            <input type="email" class="form-control">
-                                        </div>
+                                            <label class="form-label">Email Address</label>
+                                                <input type="email" class="form-control" id="company_email" placeholder="Enter email address" value="{{ old('company_email', $company->email ?? '') }}">
+                                            </div>
                                     </div>
                                 </div>
-                                <div class="card-title-head">
-                                    <h6><span><i data-feather="map-pin" class="feather-chevron-up"></i></span>Our Address
-                                    </h6>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Address</label>
-                                            <input type="email" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-3">
-                                        <div class="mb-3">
-                                            <label class="form-label">Country</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-3">
-                                        <div class="mb-3">
-                                            <label class="form-label">State / Province</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-3">
-                                        <div class="mb-3">
-                                            <label class="form-label">City</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-3">
-                                        <div class="mb-3">
-                                            <label class="form-label">Postal Code</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="text-end settings-bottom-btn">
                                     <button type="button" class="btn btn-cancel me-2">Cancel</button>
-                                    <button type="submit" class="btn btn-submit">Save Changes</button>
+                                    <button type="button" class="btn btn-submit" id="saveSettings">Save Changes</button>
                                 </div>
                             </form>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('custom/js/general-settings.js') }}"></script>
+
 @endsection

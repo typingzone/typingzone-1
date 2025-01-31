@@ -52,6 +52,7 @@ Route::controller(UserController::class)->group(function () {
     Route::delete('delete-role-permission/{role}', 'deleteRolePermission')->name('delete-role-permission');
     Route::put('update-role-permissions/{roleId}', 'updateRolePermissions')->name('update-role-permissions');
     Route::get('/get-role-permissions/{role}', 'getRolePermissions')->name('get-role-permissions');
+    Route::delete('login-activity/{id}', 'deleteLoginActivity')->name('login-activity/{id}');
 
 });
 // Route::put('/update-role-permissions/{role}', 'UserController@updateRolePermissions')->name('update-role-permissions');

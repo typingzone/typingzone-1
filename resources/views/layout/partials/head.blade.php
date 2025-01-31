@@ -1,17 +1,17 @@
-<link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
+
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="{{ asset('build/css/bootstrap.min.css') }}">
 
 <!-- Datetimepicker CSS -->
-<link rel="stylesheet" href="{{ asset('build/plugins/daterangepicker/daterangepicker.css') }}">
-<link rel="stylesheet" href="{{ asset('build/css/bootstrap-datetimepicker.min.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('build/plugins/daterangepicker/daterangepicker.css') }}">
+<link rel="stylesheet" href="{{ asset('build/css/bootstrap-datetimepicker.min.css') }}"> -->
 
 <!-- Animation CSS -->
-<link rel="stylesheet" href="{{ asset('build/css/animate.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('build/css/animate.css') }}"> -->
 
 <!-- Select2 CSS -->
-<link rel="stylesheet" href="{{ asset('build/plugins/select2/css/select2.min.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('build/plugins/select2/css/select2.min.css') }}"> -->
 
 <!-- Fontawesome CSS -->
 <link rel="stylesheet" href="{{ asset('build/plugins/fontawesome/css/fontawesome.min.css') }}">
@@ -21,25 +21,25 @@
 <link rel="stylesheet" href="{{ asset('build/css/feather.css') }}">
 
 <!-- Fancybox -->
-<link rel="stylesheet" href="{{ asset('build/plugins/fancybox/jquery.fancybox.min.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('build/plugins/fancybox/jquery.fancybox.min.css') }}"> -->
 
 <!-- Summernote CSS -->
-<link rel="stylesheet" href="{{ asset('build/plugins/summernote/summernote-bs4.min.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('build/plugins/summernote/summernote-bs4.min.css') }}"> -->
 
 <!-- Bootstrap Tagsinput CSS -->
-<link rel="stylesheet" href="{{ asset('build/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('build/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}"> -->
 
 <!-- Datatable CSS -->
 <link rel="stylesheet" href="{{ asset('build/css/dataTables.bootstrap5.min.css') }}">
 
 <!-- Mobile CSS -->
-<link rel="stylesheet" href="{{ asset('build/plugins/intltelinput/css/intlTelInput.css') }}">
-<link rel="stylesheet" href="{{ asset('build/plugins/intltelinput/css/demo.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('build/plugins/intltelinput/css/intlTelInput.css') }}"> -->
+<!-- <link rel="stylesheet" href="{{ asset('build/plugins/intltelinput/css/demo.css') }}"> -->
 
-<link rel="stylesheet" href="{{ asset('build/css/plyr.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('build/css/plyr.css') }}"> -->
 
 <!-- Owl Carousel -->
-<link rel="stylesheet" href="{{ asset('build/css/owl.carousel.min.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('build/css/owl.carousel.min.css') }}"> -->
 
 @if (Route::is(['sales-dashboard']))
     <!-- Map CSS -->
@@ -52,11 +52,10 @@
 @endif
 
 <!-- Swiper CSS -->
-<link rel="stylesheet" href="{{ asset('build/plugins/swiper/swiper.min.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('build/plugins/swiper/swiper.min.css') }}"> -->
 
 <!-- Boxicons CSS -->
-<link rel="stylesheet" href="{{ asset('build/plugins/boxicons/css/boxicons.min.css') }}">
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<!-- <link rel="stylesheet" href="{{ asset('build/plugins/boxicons/css/boxicons.min.css') }}"> -->
 <script src="{{ URL::asset('/build/js/theme-script.js') }}"></script>
 
 
@@ -70,7 +69,6 @@
      <link rel="stylesheet" href="{{ url('build/plugins/scrollbar/scroll.min.css') }}">
  @endif
 
- <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 
 
  @if (Route::is(['ui-lightbox']))

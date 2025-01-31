@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use Spatie\Permission\Models\Permission;
+use App\Models\LoginActivity;
 
 
 class UserController extends Controller
@@ -52,7 +53,7 @@ class UserController extends Controller
     {
         try {
             $credentials = $request->only('email', 'password');
-            $result = $this->userService->login($credentials);
+            $result = $this->userService->login($credentials, $request);
             return response()->json($result);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => 'Something went wrong']);
@@ -60,6 +61,16 @@ class UserController extends Controller
     }
     
 
+    public function deleteLoginActivity($id)
+    {
+        $activity = LoginActivity::find($id);
+        if ($activity) {
+            $activity->delete();
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false]);
+    }
+    
 
     public function handlePasswordChange(Request $request)
     {
@@ -154,8 +165,10 @@ class UserController extends Controller
 
     public function loginActivities()
     {
-        return view('pages.others.login_activities');
+        $loginActivities = LoginActivity::with('user.roles')->get();
+        return view('pages.others.login_activities', compact('loginActivities'));
     }
+    
 
     public function showManageUsers()
     {

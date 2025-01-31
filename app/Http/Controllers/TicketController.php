@@ -20,7 +20,7 @@ class TicketController extends Controller
     public function index()
     {
         $tickets = Ticket::get();
-        return view('tickets.tickets', compact('tickets'));
+        return view('pages.tickets.tickets', compact('tickets'));
     }
 
 

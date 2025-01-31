@@ -1,5 +1,4 @@
 
-<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @if (session('success'))
@@ -36,22 +35,22 @@
  <script src="{{ URL::asset('/build/js/bootstrap.bundle.min.js') }}"></script>
 
  <!-- Chart JS -->
- <script src="{{ URL::asset('/build/plugins/apexchart/apexcharts.min.js') }}"></script>
- <script src="{{ URL::asset('/build/plugins/apexchart/chart-data.js') }}"></script>
+ <!-- <script src="{{ URL::asset('/build/plugins/apexchart/apexcharts.min.js') }}"></script>
+ <script src="{{ URL::asset('/build/plugins/apexchart/chart-data.js') }}"></script> -->
 
  <!-- Swiper JS -->
- <script src="{{ URL::asset('/build/plugins/swiper/swiper.min.js') }}"></script>
+ <!-- <script src="{{ URL::asset('/build/plugins/swiper/swiper.min.js') }}"></script>
 
  <!-- FancyBox JS -->
- <script src="{{ URL::asset('/build/plugins/fancybox/jquery.fancybox.min.js') }}"></script>
+ <!-- <script src="{{ URL::asset('/build/plugins/fancybox/jquery.fancybox.min.js') }}"></script>
 
  <!-- Select2 JS -->
- <script src="{{ URL::asset('/build/plugins/select2/js/select2.min.js') }}"></script>
+ <!-- <script src="{{ URL::asset('/build/plugins/select2/js/select2.min.js') }}"></script> --> --> -->
 
  <!-- Datetimepicker JS -->
- <script src="{{ URL::asset('/build/js/moment.min.js') }}"></script>
+ <!-- <script src="{{ URL::asset('/build/js/moment.min.js') }}"></script>
  <script src="{{ URL::asset('/build/js/bootstrap-datetimepicker.min.js') }}"></script>
- <script src="{{ URL::asset('/build/plugins/daterangepicker/daterangepicker.js') }}"></script>
+ <script src="{{ URL::asset('/build/plugins/daterangepicker/daterangepicker.js') }}"></script> -->
 
  @if (Route::is(['todo']))
      <!-- Datetimepicker CSS -->
@@ -59,22 +58,22 @@
  @endif
 
  <!-- Bootstrap Tagsinput JS -->
- <script src="{{ URL::asset('/build/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js') }}"></script>
+ <!-- <script src="{{ URL::asset('/build/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js') }}"></script> -->
 
  <!-- Datatable JS -->
  <script src="{{ URL::asset('/build/js/jquery.dataTables.min.js') }}"></script>
  <script src="{{ URL::asset('/build/js/dataTables.bootstrap5.min.js') }}"></script>
 
  <!-- Summernote JS -->
- <script src="{{ URL::asset('/build/plugins/summernote/summernote-bs4.min.js') }}"></script>
+ <!-- <script src="{{ URL::asset('/build/plugins/summernote/summernote-bs4.min.js') }}"></script> -->
 
  <!-- Mobile Input -->
- <script src="{{ URL::asset('/build/plugins/intltelinput/js/intlTelInput.js') }}"></script>
+ <!-- <script src="{{ URL::asset('/build/plugins/intltelinput/js/intlTelInput.js') }}"></script>
 
- <script src="{{ URL::asset('/build/js/plyr-js.js') }}"></script>
+ <script src="{{ URL::asset('/build/js/plyr-js.js') }}"></script> -->
 
  <!-- Owl Carousel -->
- <script src="{{ URL::asset('/build/js/owl.carousel.min.js') }}"></script>
+ <!-- <script src="{{ URL::asset('/build/js/owl.carousel.min.js') }}"></script> -->
 
  <!-- Sticky-sidebar -->
  <script src="{{ URL::asset('/build/plugins/theia-sticky-sidebar/ResizeSensor.js') }}"></script>
@@ -153,7 +152,6 @@
  @endif
 
 
- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
  @if (Route::is(['ui-lightbox']))
      <script src="{{ URL::asset('/build/plugins/lightbox/glightbox.min.js') }}"></script>
