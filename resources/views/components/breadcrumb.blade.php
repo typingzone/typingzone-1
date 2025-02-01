@@ -78,6 +78,20 @@
             </a>
         </div>
         @endif
+        @if (Route::is(['guides']))
+        <div class="page-btn">
+            <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-guide-modal">
+                <i data-feather="plus-circle" class="me-2"></i> Guide
+            </a>
+        </div>
+        @endif
+        @if (Route::is(['document-names']))
+        <div class="page-btn">
+            <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-document-name-modal">
+                <i data-feather="plus-circle" class="me-2"></i> Name
+            </a>
+        </div>
+        @endif
         @if (Route::is(['notes']))
         <div class="page-btn">
             <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-note-modal">

@@ -13,10 +13,9 @@ return new class extends Migration
             $table->string('title')->nullable(); 
             $table->text('note')->nullable(); 
             $table->date('reminder_date')->nullable(); 
-            $table->unsignedBigInteger('user_id'); // Add the user_id column
+            $table->unsignedBigInteger('user_id'); 
             $table->timestamps(); 
-            
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Add foreign key constraint
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); 
         });
     }
 

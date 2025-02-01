@@ -88,7 +88,7 @@
             <img src="{{ $company && $company->company_icon ? asset('storage/' . $company->company_icon) :asset('/build/img/store/store-01.png') }}" alt="Store Logo" class="img-fluid">
           </span>
           <span class="user-detail">
-            <span class="user-name">{{ $company && $company->company_name ?? 'Company Name' }}</span>
+            <span class="user-name">{{ ($company && $company->company_name) ? $company->company_name : 'Company Name' }}</span>
           </span>
         </span>
       </a>
@@ -185,8 +185,8 @@
       <div class="dropdown-menu menu-drop-user">
         <div class="profilename">
           <div class="profileset">
-            <span class="user-img">{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('build/img/profiles/avator1.jpg') }}
-            <img src="" alt="">
+            <span class="user-img">
+            <img src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('build/img/profiles/avator1.jpg') }}" alt="">
               <span class="status online"></span>
             </span>
             <div class="profilesets">

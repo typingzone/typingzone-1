@@ -73,7 +73,6 @@
                                 </div>
 
                                 <div class="text-end settings-bottom-btn">
-                                    <button type="button" class="btn btn-cancel me-2">Cancel</button>
                                     <button type="button" class="btn btn-submit" id="saveSettings">Save Changes</button>
                                 </div>
                             </form>

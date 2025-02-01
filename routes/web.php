@@ -21,6 +21,7 @@ use App\Http\Controllers\AssetController;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\DocumentNameController;
 use App\Http\Middleware\RolePermissionMiddleware;
 
 Route::controller(IndexController::class)->group(function () {
@@ -100,22 +101,15 @@ Route::controller(CredentialController::class)->group(function () {
     Route::delete('credentials/{id}', 'destroy')->name('credentials.destroy');
 });
 
-Route::controller(DocumentController::class)->group(function () {
-    Route::get('documents', 'showDocuments')->name('documents'); 
-    Route::get('document-names', 'showDocumentNames')->name('document-names'); 
-    Route::post('document', 'store')->name('document.store');
-    Route::put('document/{id}', 'update')->name('document.update');
-    Route::delete('document/{id}', 'destroy')->name('document.destroy');
-    Route::get('download-company-document', 'downloadCompanyDocument')->name('download-company-document');
-    Route::get('download-customer-document', 'downloadCustomerDocument')->name('employee-customer-document');
-});
 
 Route::controller(GuideController::class)->group(function () {
-    Route::get('guides', 'index')->name('guides'); 
-    Route::post('guide', 'store')->name('guide.store');
-    Route::put('guide/{id}', 'update')->name('guide.update');
-    Route::delete('guide/{id}', 'destroy')->name('guide.destroy');
+    Route::get('guides', 'index')->name('guides');
+    Route::get('guides/{id}', 'show')->name('guides.show');
+    Route::post('guides', 'store')->name('guides.store');
+    Route::put('guides/{id}', 'update')->name('guides.update');
+    Route::delete('guides/{id}', 'destroy')->name('guides.destroy');
 });
+
 
 Route::controller(EmailTemplateController::class)->group(function () {
     Route::get('email-templates', 'index')->name('email-templates'); 
@@ -148,6 +142,17 @@ Route::controller(NotesController::class)->group(function () {
     Route::put('notes/{id}', 'update');
     Route::delete('notes/{id}', 'destroy');
 });
+
+
+Route::controller(DocumentNameController::class)->group(function () {
+    Route::get('document-names', 'index')->name('document-names');
+    Route::post('document-name', 'store')->name('document-name.store');
+    Route::put('document-name/toggle/{id}', 'toggle')->name('document-name.toggle');
+    Route::get('document-name/{id}/edit', 'edit')->name('document-name.edit');
+    Route::put('document-name/{id}', 'update')->name('document-name.update');
+    Route::delete('document-name/{id}', 'destroy')->name('document-name.destroy');
+});
+
 
 
 Route::controller(CalendarController::class)->group(function () {

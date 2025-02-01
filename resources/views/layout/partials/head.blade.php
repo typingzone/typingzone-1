@@ -47,8 +47,7 @@
 @endif
 
 @if (Route::is(['calendar']))
-    <!-- Full Calendar CSS -->
-    <link rel="stylesheet" href="{{ asset('build/plugins/fullcalendar/fullcalendar.min.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
 @endif
 
 <!-- Swiper CSS -->

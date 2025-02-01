@@ -28,10 +28,10 @@
                             </ul>
                         </li>
 
-                        <li class="submenu {{ Request::routeIs('documents', 'document-names') ? 'active' : '' }}">
+                        <li class="submenu {{ Request::routeIs('documents') ? 'active' : '' }}">
                             <a href="javascript:void(0);"><i data-feather="file-text"></i><span>Documents</span><span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="{{ route('documents') }}">Documents</a></li>
+                                <li><a href="">Documents</a></li>
                                 <li><a href="{{ route('document-names') }}">Document Names</a></li>
                             </ul>
                         </li>

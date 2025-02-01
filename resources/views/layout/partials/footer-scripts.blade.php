@@ -45,7 +45,7 @@
  <!-- <script src="{{ URL::asset('/build/plugins/fancybox/jquery.fancybox.min.js') }}"></script>
 
  <!-- Select2 JS -->
- <!-- <script src="{{ URL::asset('/build/plugins/select2/js/select2.min.js') }}"></script> --> --> -->
+ <!-- <script src="{{ URL::asset('/build/plugins/select2/js/select2.min.js') }}"></script> -->
 
  <!-- Datetimepicker JS -->
  <!-- <script src="{{ URL::asset('/build/js/moment.min.js') }}"></script>
@@ -91,9 +91,8 @@
  @endif
 
  @if (Route::is('calendar'))
-     <!-- Full Calendar JS -->
-     <script src="{{ URL::asset('/build/plugins/fullcalendar/fullcalendar.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/fullcalendar/jquery.fullcalendar.js') }}"></script>
+ <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.min.js"></script>
  @endif
 
  @if (Route::is(['ui-clipboard']))

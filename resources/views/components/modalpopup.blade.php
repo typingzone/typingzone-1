@@ -670,3 +670,124 @@
     </div>
 </div>
 @endif
+
+@if(Route::is(['guides']))
+<!-- Add Guide Modal -->
+<div class="modal fade" id="add-guide-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Guide</h5>
+                <button type="button" class="close" data-bs-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <form id="add-guide-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" name="title" class="form-control" placeholder="Enter the title of the guide" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="description" class="form-control" placeholder="Enter the description of the guide" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Guide Modal -->
+<div class="modal fade" id="edit-guide-modal" tabindex="-1" aria-labelledby="edit-guide-modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-guide-modalLabel">Edit Guide</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-guide-form">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Enter the new title of the guide" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" name="description" id="description" placeholder="Enter the new description of the guide" required></textarea>
+                    </div>
+                    <input type="hidden" name="id" id="guide-id">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
+
+@if(Route::is(['document-names']))
+<!-- Add Document Name Modal -->
+<div class="modal fade" id="add-document-name-modal" tabindex="-1" role="dialog" aria-labelledby="add-document-name-modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="add-document-name-modalLabel">Add Document Name</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <form id="add-document-name-form">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Document Name</label>
+                            <input type="text" name="document_name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Expiry Reminder</label>
+                            <select name="expiry_reminder" class="form-control">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Document Name Modal -->
+<div class="modal fade" id="edit-document-name-modal" tabindex="-1" role="dialog" aria-labelledby="edit-document-name-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-document-name-modal-label">Edit Document Name</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-document-name-form">
+                    @csrf
+                    <input type="hidden" name="id" value="">
+                    <div class="form-group">
+                        <label for="document_name">Document Name</label>
+                        <input type="text" class="form-control" id="document_name" name="document_name" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endif
