@@ -12,9 +12,10 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     
     <title>{{ ucwords(str_replace(['-', '_'], ' ', basename(Request::path()))) }} - TypingZone</title>
+    @php $company = \App\Models\Company::first(); @endphp
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ URL::asset('/build/img/logo-small.jpeg')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ $company->company_icon ? asset('storage/' . $company->company_icon) : asset('/build/img/logo-small.jpeg') }}">
 
     @include('layout.partials.head')
 </head>

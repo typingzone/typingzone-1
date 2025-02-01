@@ -27,7 +27,6 @@ Route::controller(IndexController::class)->group(function () {
     Route::get('dashboard', 'index')->name('dashboard');
 });
 
-
 Route::controller(ReminderController::class)->group(function () {
     Route::get('reminders', 'index')->name('reminders'); 
 });
@@ -57,7 +56,6 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/users/{id}', 'update')->name('users.update');
     Route::delete('/users/{id}', 'destroy')->name('users.destroy');
 });
-// Route::put('/update-role-permissions/{role}', 'UserController@updateRolePermissions')->name('update-role-permissions');
 
 Route::controller(TransactionController::class)->group(function () {
     Route::get('transaction-history', 'showTransactionHistory')->name('transaction-history'); 
@@ -74,7 +72,6 @@ Route::controller(CompanyController::class)->group(function () {
     Route::post('updated-company-profile', 'updateCompanyProfile')->name('updated-company-profile');
 });
 
-
 Route::controller(TicketController::class)->group(function () {
     Route::get('tickets', 'index')->name('tickets'); 
     Route::post('add-tickets', 'addTicket')->name('add-ticket'); 
@@ -83,7 +80,6 @@ Route::controller(TicketController::class)->group(function () {
     Route::delete('tickets/{id}', 'destroy')->name('delete-ticket'); 
     Route::get('show-tickets/{id}', 'showTicket')->name('show-tickets'); 
 });
-
 
 Route::controller(OrderController::class)->group(function () {
     Route::get('orders', 'showOrders')->name('orders'); 

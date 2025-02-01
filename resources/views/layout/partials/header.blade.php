@@ -1,7 +1,6 @@
 <!-- Header -->
 <div class="header">
   <!-- Logo -->
-  @php $company = \App\Models\Company::first(); @endphp
   <div class="header-left active">
     <a href="{{ url('dashboard') }}" class="logo logo-normal">
       <img src="{{ $company->company_logo ? asset('storage/' . $company->company_logo) : asset('/build/img/logo.jpeg') }}" alt="Company Logo">
@@ -175,7 +174,7 @@
       <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
         <span class="user-info">
           <span class="user-letter">
-            <img src="{{ Auth::user()->profile_image ? asset(Auth::user()->profile_image) : asset('build/img/profiles/avator1.jpg') }}" alt="" class="img-fluid">
+            <img src="{{ Auth::user()->profile_photo ? asset('storage/'.Auth::user()->profile_photo) : asset('build/img/profiles/avator1.jpg') }}" alt="" class="img-fluid">
           </span>
           <span class="user-detail">
             <span class="user-name">{{ Auth::user()->name }}</span>
@@ -186,8 +185,8 @@
       <div class="dropdown-menu menu-drop-user">
         <div class="profilename">
           <div class="profileset">
-            <span class="user-img">
-              <img src="{{ Auth::user()->profile_image ? asset(Auth::user()->profile_image) : asset('build/img/profiles/avator1.jpg') }}" alt="">
+            <span class="user-img">{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('build/img/profiles/avator1.jpg') }}
+            <img src="" alt="">
               <span class="status online"></span>
             </span>
             <div class="profilesets">
