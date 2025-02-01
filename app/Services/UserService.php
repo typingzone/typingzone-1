@@ -34,6 +34,7 @@ class UserService
             $fileName = $data['profile_photo']->store('profile_photos', 'public');
             $user->profile_photo = $fileName;
         }
+        /** @var \App\Models\User $user */
         $user->save();
     }
 
@@ -55,12 +56,6 @@ class UserService
             $loginActivity->browser = $agent->browser();
             $loginActivity->login_time = now();
             $loginActivity->save();
-    
-            if ($user->hasRole('admin')) {
-                return ['success' => true, 'role' => 'admin'];
-            } elseif ($user->hasRole('user')) {
-                return ['success' => true, 'role' => 'user'];
-            }
             return ['success' => true];
         }
         return ['success' => false, 'message' => 'Invalid credentials'];
@@ -97,4 +92,34 @@ class UserService
     }
 
 
+
+    public function getUserById($id)
+    {
+        return User::with('roles')->findOrFail($id); // Eager load roles
+    }
+
+
+    public function updateUser($id, $data)
+    {
+        $user = User::findOrFail($id);
+        $user->name = $data['username'];
+        $user->email = $data['email'];
+        if (isset($data['profile_photo'])) {
+            $path = $data['profile_photo']->store('profile_photos', 'public');
+            $user->profile_photo = $path;
+        }
+        $user->save();
+        $user->roles()->sync([$data['role_id']]); 
+        return true;
+    }
+
+
+    public function deleteUser($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return response()->json(['success' => true]);
+    }
+
+    
 }

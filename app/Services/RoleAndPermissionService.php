@@ -157,19 +157,24 @@ class RoleAndPermissionService
 
 
     public function storeUser($validated)
-        {
-            $randomName = rand(40, 5999) . '.' . $validated['profile_image']->getClientOriginalExtension();
-            $imagePath = Storage::disk('public')->put('profile_images/' . $randomName, file_get_contents($validated['profile_image']));
+    {
+        try {
+            $randomName = rand(40, 5999) . '.' . $validated['profile_photo']->getClientOriginalExtension();
+            $imagePath = $validated['profile_photo']->storeAs('profile_photos', $randomName, 'public');
             $user = User::create([
-                'name' => $validated['username'],
+                'name' => $validated['name'],
                 'email' => $validated['email'],
                 'password' => bcrypt($validated['password']),
-                'profile_image' => $imagePath,
+                'profile_photo' => $imagePath,
             ]);
             $role = Role::find($validated['role_id']);
-            $user->assignRole($role);
-            return $user;
+            $user->assignRole($role);   
+            return back()->with('success', 'User created successfully.');      
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
         }
+    }
+    
 
 
 

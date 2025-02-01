@@ -18,14 +18,14 @@ class CompanyController extends Controller
 
     public function index()
     {
-        $settings = Company::first();
-        return view('pages.settings.general-settings', compact('settings'));
+        $company = Company::first();
+        return view('pages.settings.general-settings', compact('company'));
     }
 
-    public function update(Request $request)
+    public function updateCompanyProfile(Request $request)
     {
         try {
-            $this->companyService->updateCompanySettings($request);
+            $this->companyService->updateCompanyProfile($request);
             return response()->json(['success' => true]);
 
         } catch (\Exception $e) {

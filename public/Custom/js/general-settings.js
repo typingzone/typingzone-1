@@ -1,9 +1,11 @@
 $(document).ready(function() {
     $('#saveSettings').click(function() {
         var formData = new FormData($('#generalSettingsForm')[0]);
+        
         for (var pair of formData.entries()) {
-            console.log(pair[0]+ ': ' + pair[1]);
+            console.log(pair[0] + ': ' + pair[1]);
         }
+
         $.ajax({
             url: '/updated-company-profile',
             type: 'POST',

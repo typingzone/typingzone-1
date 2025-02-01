@@ -53,7 +53,9 @@ Route::controller(UserController::class)->group(function () {
     Route::put('update-role-permissions/{roleId}', 'updateRolePermissions')->name('update-role-permissions');
     Route::get('/get-role-permissions/{role}', 'getRolePermissions')->name('get-role-permissions');
     Route::delete('login-activity/{id}', 'deleteLoginActivity')->name('login-activity/{id}');
-
+    Route::get('/users/{id}/edit','edit')->name('users.edit');
+    Route::post('/users/{id}', 'update')->name('users.update');
+    Route::delete('/users/{id}', 'destroy')->name('users.destroy');
 });
 // Route::put('/update-role-permissions/{role}', 'UserController@updateRolePermissions')->name('update-role-permissions');
 
@@ -69,7 +71,7 @@ Route::controller(TransactionController::class)->group(function () {
 
 Route::controller(CompanyController::class)->group(function () {
     Route::get('general-settings', 'index')->name('general-settings'); 
-    Route::post('updated-company-profile', 'update')->name('updated-company-profile');
+    Route::post('updated-company-profile', 'updateCompanyProfile')->name('updated-company-profile');
 });
 
 

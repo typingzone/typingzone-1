@@ -35,39 +35,39 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label class="form-label">Company Icon</label>
-                                                <input type="file" class="form-control" id="company_icon" value="{{ old('company_icon', $company->company_icon ?? '') }}">
+                                                <input type="file" class="form-control" id="company_icon" name="company_icon" value="{{ old('company_icon', $company->company_icon ?? '') }}">
                                             </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label class="form-label">Company Logo</label>
-                                                <input type="file" class="form-control" id="company_logo" value="{{ old('company_logo', $company->company_logo ?? '') }}">
+                                                <input type="file" class="form-control" id="company_logo" name="company_logo" value="{{ old('company_logo', $company->company_logo ?? '') }}">
                                             </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label class="form-label">Company Name</label>
-                                                <input type="text" class="form-control" id="company_name" placeholder="Enter company name" value="{{ old('company_name', $company->company_name ?? '') }}">
+                                                <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Enter company name" value="{{ old('company_name', $company->company_name ?? '') }}">
                                             </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label class="form-label">Address</label>
-                                                <input type="text" class="form-control" id="company_address" placeholder="Enter address" value="{{ old('company_address', $company->address ?? '') }}">
+                                                <input type="text" class="form-control" id="company_address" name="company_address" placeholder="Enter address" value="{{ old('company_address', $company->address ?? '') }}">
                                             </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label class="form-label">Phone Number</label>
-                                                <input type="text" class="form-control" id="company_phone" placeholder="Enter phone number" value="{{ old('company_phone', $company->phone ?? '') }}">
+                                                <input type="text" class="form-control" id="company_phone" name="company_phone" placeholder="Enter phone number" value="{{ old('company_phone', $company->phone ?? '') }}">
                                             </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label class="form-label">Email Address</label>
-                                                <input type="email" class="form-control" id="company_email" placeholder="Enter email address" value="{{ old('company_email', $company->email ?? '') }}">
+                                                <input type="email" class="form-control" id="company_email" name="company_email" placeholder="Enter email address" value="{{ old('company_email', $company->email ?? '') }}">
                                             </div>
                                     </div>
                                 </div>

@@ -138,3 +138,5 @@
 
  <!-- Main CSS -->
  <link rel="stylesheet" href="{{ url('build/css/style.css') }}">
+ <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
+ <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>

@@ -451,12 +451,12 @@
                 <form action="{{ route('store-user') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <label for="profileImage" class="form-label">Profile Image</label>
-                        <input type="file" class="form-control" id="profileImage" name="profile_image" required>
+                        <label for="profileImage" class="form-label">Profile Photo</label>
+                        <input type="file" class="form-control" id="profileImage" name="profile_photo" required>
                     </div>
                     <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" required>
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
@@ -487,8 +487,53 @@
         </div>
     </div>
 </div>
-@endif
 
+
+<div class="modal fade" id="edit-user-modal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-user-form" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="user_id" id="edit-user-id">
+                    <div class="mb-3">
+                        <label for="editProfileImage" class="form-label">Profile Photo</label>
+                        <input type="file" class="form-control" id="editProfileImage" name="profile_photo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editUsername" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="editUsername" name="username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="editEmail" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editRole" class="form-label">Select Role</label>
+                        <select class="form-select" id="editRole" name="role_id" required>
+                            <option value="">Select Role</option>
+                            @php 
+                                $roles = DB::table('roles')->get();
+                            @endphp
+                            @foreach($roles as $role)
+                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 
 
 

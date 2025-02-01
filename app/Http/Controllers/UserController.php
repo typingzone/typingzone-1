@@ -172,7 +172,7 @@ class UserController extends Controller
 
     public function showManageUsers()
     {
-        $users = User::with('roles')->get();
+        $users = User::with('roles')->orderBy('id', 'desc')->get();
         return view('auth.manage_users', compact('users'));
     }
 
@@ -184,16 +184,18 @@ class UserController extends Controller
     
     public function storeUser(Request $request)
     {
-        $validated = $request->validate([
-            'profile_image' => 'required|image|max:2048', 
-            'username' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
-            'role_id' => 'required|exists:roles,id',
-        ]);
-
-        // Pass the validated data to the service
-        return $this->roleAndPermissionService->storeUser($validated);
+        try {
+            $validated = $request->validate([
+                'profile_photo' => 'required|image|max:2048', 
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|min:6',
+                'role_id' => 'required|exists:roles,id',
+            ]);
+            return $this->roleAndPermissionService->storeUser($validated);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
     
 
@@ -202,7 +204,6 @@ class UserController extends Controller
     {
         try {
             $role = Role::with('permissions')->findOrFail($role);
-            
             $permissions = [];
             foreach (['Expiry Documents', 'Calendar', 'Transaction Types', 'Transaction History', 'Archived Transactions', 'Invoices', 'Documents', 'Document Names', 'Orders', 'Tools', 'Color Picker', 'Invoice Templates', 'Manage Users', 'Roles & Permissions', 'General Settings', 'Notification Preferences', 'Guide', 'Email Template', 'Reminders', 'Office Assets', 'Login Activities'] as $page) {
                 $actions = $role->permissions()->where('name', 'LIKE', "$page %")->pluck('name')->toArray();
@@ -211,7 +212,6 @@ class UserController extends Controller
                 }, $actions);
                 $permissions[] = ['page' => $page, 'actions' => $actions];
             }
-
             return response()->json(['role' => $role, 'permissions' => $permissions]);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Role not found.'.$role], 404);
@@ -224,26 +224,16 @@ class UserController extends Controller
     public function updateRolePermissions(Request $request, $roleId)
     {
         try {
-            // Fetch the role by ID
             $role = Role::findOrFail($roleId);
-            
-            // Update the role name
             $role->name = $request->roleName;
             $role->save();
-    
-            // Detach existing permissions
             $role->permissions()->detach();
-    
-            // Attach new permissions based on the input
             foreach ($request->permissions as $page => $actions) {
                 foreach ($actions as $action) {
-                    // Create or find the permission
                     $permission = Permission::firstOrCreate(['name' => "$page $action"]);
-                    // Attach the permission to the role
                     $role->permissions()->attach($permission);
                 }
-            }
-    
+            }    
             return redirect()->route('role-permission')->with('success', 'Role and permissions updated successfully.');
         } catch (\Exception $e) {
             return redirect()->route('role-permission')->with('error', 'Failed to update role.');
@@ -251,6 +241,23 @@ class UserController extends Controller
     }
     
 
+    public function edit($id)
+    {
+        $user = $this->userService->getUserById($id);
+        return response()->json($user);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $updated = $this->userService->updateUser($id, $request->all());
+        return response()->json(['success' => $updated]);
+    }
+
+    public function destroy($id)
+    {
+        $deleted = $this->userService->deleteUser($id);
+        return response()->json(['success' => $deleted]);
+    }
 
 
 }
