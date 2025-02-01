@@ -15,7 +15,7 @@
     @php $company = \App\Models\Company::first(); @endphp
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ $company->company_icon ? asset('storage/' . $company->company_icon) : asset('/build/img/logo-small.jpeg') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ $company && $company->company_icon ? asset('storage/' . $company->company_icon) : asset('/build/img/logo-small.jpeg') }}">
 
     @include('layout.partials.head')
 </head>

@@ -7,7 +7,7 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\CredentialController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\GuideController;
-use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\NotesController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\PdfController;
@@ -29,6 +29,7 @@ Route::controller(IndexController::class)->group(function () {
 
 Route::controller(ReminderController::class)->group(function () {
     Route::get('reminders', 'index')->name('reminders'); 
+    Route::post('update-reminders', 'updateReminders')->name('update-reminders'); 
 });
 
 Route::controller(UserController::class)->group(function () {
@@ -140,10 +141,14 @@ Route::controller(PdfController::class)->group(function () {
     Route::get('download-applications-pdf', 'downloadApplicationsPdf')->name('download-applications-pdf'); 
 });
 
-Route::controller(NotificationController::class)->group(function () {
-    Route::get('notification-preferences', 'showNotificationPreferences')->name('notification-preferences'); 
-    Route::put('update-alert', 'update')->name('update-alert');
+Route::controller(NotesController::class)->group(function () {
+    Route::get('notes', 'index')->name('notes');
+    Route::post('note', 'store')->name('add-note');
+    Route::get('notes/{id}/edit', 'edit');
+    Route::put('notes/{id}', 'update');
+    Route::delete('notes/{id}', 'destroy');
 });
+
 
 Route::controller(CalendarController::class)->group(function () {
     Route::get('calendar', 'index')->name('calendar'); 

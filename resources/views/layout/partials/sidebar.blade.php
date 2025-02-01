@@ -73,11 +73,11 @@
                             </ul>
                         </li>
 
-                        <li class="submenu {{ Request::routeIs('general-settings', 'notification-preferences') ? 'active' : '' }}">
+                        <li class="submenu {{ Request::routeIs('general-settings', 'notes') ? 'active' : '' }}">
                             <a href="javascript:void(0);"><i data-feather="settings"></i><span>Settings</span><span class="menu-arrow"></span></a>
                             <ul>
                                 <li><a href="{{ route('general-settings') }}">General Settings</a></li>
-                                <li><a href="{{ route('notification-preferences') }}">Notification Preferences</a></li>
+                                <li><a href="{{ route('notes') }}">Notes</a></li>
                             </ul>
                         </li>
 

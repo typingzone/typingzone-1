@@ -601,8 +601,72 @@
         </div>
     </div>
 </div>
-
-
-
 @endif
 
+@if(Route::is(['notes']))
+<div class="modal fade" id="add-note-modal" tabindex="-1" aria-labelledby="add-note-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="add-note-modal">Add New Note</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('add-note') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Note Title</label>
+                        <input type="text" name="title" id="title" class="form-control" placeholder="Enter title for your note">
+                    </div>
+                    <div class="mb-3">
+                        <label for="note" class="form-label">Note Description</label>
+                        <textarea name="note" id="note" class="form-control" rows="3" placeholder="Enter the content of your note"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reminder_date" class="form-label">Reminder Date</label>
+                        <input type="date" name="reminder_date" id="reminder_date" class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="edit-note-modal" tabindex="-1" aria-labelledby="edit-note-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-note-modal-label">Edit Note</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-note-form">
+                    @csrf
+                    <input type="hidden" id="edit-note-id">
+                    <div class="mb-3">
+                        <label for="edit-title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="edit-title" name="editTitle" placeholder="Enter title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-note-body" class="form-label">Note Body</label>
+                        <textarea class="form-control" id="edit-note-body" rows="3" name="editNote" placeholder="Enter your note"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-reminder-date" class="form-label">Reminder Date</label>
+                        <input type="date" class="form-control" name="editReminder_date" id="edit-reminder-date">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
