@@ -9,4 +9,6 @@ class DocumentName extends Model
 {
     use SoftDeletes; 
     protected $fillable = ['document_name', 'expiry_reminder'];
+
+
 }

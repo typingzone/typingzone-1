@@ -99,6 +99,13 @@
             </a>
         </div>
         @endif
+        @if (Route::is(['documents']))
+        <div class="page-btn">
+            <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-document-modal">
+                <i data-feather="plus-circle" class="me-2"></i> Document
+            </a>
+        </div>
+        @endif
         @if (Route::is(['transaction-types']))
             <div class="page-btn">
                 <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-units"><i

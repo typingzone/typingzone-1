@@ -5,7 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\CredentialController;
-use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\NotesController;
 use App\Http\Controllers\TaskController;
@@ -153,6 +153,11 @@ Route::controller(DocumentNameController::class)->group(function () {
     Route::delete('document-name/{id}', 'destroy')->name('document-name.destroy');
 });
 
+Route::controller(DocumentsController::class)->group(function () {
+    Route::get('documents', 'index')->name('documents');
+    Route::post('documents/store', 'store')->name('documents.store');
+    Route::delete('documents/{id}', 'destroy')->name('documents.destroy');
+});
 
 
 Route::controller(CalendarController::class)->group(function () {
