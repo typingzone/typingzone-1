@@ -22,7 +22,7 @@ class DocumentsController extends Controller
     public function store(Request $request)
     {
         try {
-            $filePath = $request->file('file')->store('documents');
+            $filePath = $request->file('file')->store('documents', 's3');
             Document::create([
                 'user_id' => Auth::id(),
                 'document_name_id' => $request->document_name_id,
@@ -35,13 +35,13 @@ class DocumentsController extends Controller
             return response()->json(['success' => false, 'message' => 'Document upload failed'], 500);
         }
     }
-
+    
 
     public function destroy($id)
     {
         try {
             $document = Document::findOrFail($id);
-            Storage::delete($document->file);
+            Storage::disk('s3')->delete($document->file);
             $document->delete();
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
@@ -49,8 +49,6 @@ class DocumentsController extends Controller
             return response()->json(['success' => false, 'message' => 'Document deletion failed'], 500);
         }
     }
-
-
 
 
 
