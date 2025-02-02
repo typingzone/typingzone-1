@@ -22,8 +22,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(LoginActivity::class);
     }
+
     public function notes()
     {
         return $this->hasMany(Note::class);
+    }
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
     }
 }

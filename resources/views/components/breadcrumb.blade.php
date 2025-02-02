@@ -106,6 +106,13 @@
             </a>
         </div>
         @endif
+        @if (Route::is(['expenses']))
+        <div class="page-btn">
+            <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-expense-modal">
+                <i data-feather="plus-circle" class="me-2"></i> Expense
+            </a>
+        </div>
+        @endif
         @if (Route::is(['transaction-types']))
             <div class="page-btn">
                 <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-units"><i

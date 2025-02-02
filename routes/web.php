@@ -88,11 +88,12 @@ Route::controller(OrderController::class)->group(function () {
 });
 
 Route::controller(ExpenseController::class)->group(function () {
-    Route::get('expenses/history', 'index')->name('expenses.history'); 
-    Route::post('expenses', 'store')->name('expenses.store'); 
-    Route::put('expenses/{id}', 'update')->name('expenses.update'); 
-    Route::delete('expenses/{id}', 'destroy')->name('expenses.destroy');
+    Route::get('expenses', 'index')->name('expenses');
+    Route::post('expenses/store', 'store')->name('expenses.store');
+    Route::delete('expenses/{expense}', 'destroy')->name('expenses.destroy');
+    Route::get('expenses/{expense}/download', 'downloadFile')->name('expenses.download');
 });
+
 
 Route::controller(CredentialController::class)->group(function () {
     Route::get('credentials', 'index')->name('credentials.index'); 

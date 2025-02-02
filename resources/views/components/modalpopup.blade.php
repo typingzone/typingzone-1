@@ -525,5 +525,69 @@
         </div>
     </div>
 </div>
+@endif
 
+
+
+
+
+
+
+
+@if(Route::is(['expenses']))
+<div class="modal fade" id="add-expense-modal" tabindex="-1" role="dialog" aria-labelledby="add-expense-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="add-expense-modal-label">Add Expense</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="add-expense-modal-form">
+                    @csrf
+                    <input type="hidden" name="id" value="">
+
+                    <div class="form-group mb-3">
+                        <label for="name">Expense Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter expense name" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="vat">VAT</label>
+                        <select class="form-control" id="vat" name="vat" required>
+                            <option value="0">Not Applicable</option>
+                            <option value="5">5%</option>
+                            <option value="10">10%</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="amount">Amount</label>
+                        <input type="number" class="form-control" id="amount" name="amount" step="0.01" placeholder="Enter amount" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="file">File</label>
+                        <input type="file" class="form-control" id="file" name="file" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="date">Date</label>
+                        <input type="date" class="form-control" id="date" name="date" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter description" required></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endif
