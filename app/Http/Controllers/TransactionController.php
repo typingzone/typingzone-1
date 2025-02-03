@@ -11,11 +11,6 @@ class TransactionController extends Controller
     {
         return view('pages.transactions.transaction_history');
     }
-
-    public function showTransactionTypes()
-    {
-        return view('pages.transactions.transaction_types');
-    }
     
     public function archivedTransactions()
     {

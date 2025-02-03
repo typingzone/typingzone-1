@@ -10,9 +10,7 @@
                 @slot('li_1')
                     Manage your orders
                 @endslot
-                @slot('li_2')
-                    Add New Department
-                @endslot
+               
             @endcomponent
 
            

@@ -22,11 +22,21 @@ use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\DocumentNameController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Middleware\RolePermissionMiddleware;
 
 Route::controller(IndexController::class)->group(function () {
     Route::get('dashboard', 'index')->name('dashboard');
 });
+
+Route::controller(ServiceController::class)->group(function () {
+    Route::get('services', 'index')->name('services'); 
+    Route::post('service-store', 'store')->name('service-store');
+    Route::delete('services/{id}', 'destroy')->name('services.destroy');
+    Route::put('services/{id}', 'update')->name('services.update');
+    Route::get('services/{id}/edit', 'edit')->name('services.edit');
+});
+
 
 Route::controller(ReminderController::class)->group(function () {
     Route::get('reminders', 'index')->name('reminders'); 
@@ -64,7 +74,6 @@ Route::controller(TransactionController::class)->group(function () {
     Route::post('applications', 'store')->name('applications.store');
     Route::put('applications/{id}', 'update')->name('applications.update');
     Route::delete('applications/{id}', 'destroy')->name('applications.destroy');
-    Route::get('transaction-types', 'showTransactionTypes')->name('transaction-types');
     Route::get('archived-transactions', 'archivedTransactions')->name('archived-transactions');
     Route::get('invoices', 'showInvoices')->name('invoices');
 });

@@ -21,7 +21,6 @@
                         <li class="submenu {{ Request::routeIs('transaction-types', 'transaction-history', 'archived-transactions', 'invoices') ? 'active' : '' }}">
                             <a href="javascript:void(0);"><i data-feather="smartphone"></i><span>Transactions</span><span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="{{ route('transaction-types') }}">Transaction Types</a></li>
                                 <li><a href="{{ route('transaction-history') }}">Transaction History</a></li>
                                 <li><a href="{{ route('archived-transactions') }}">Archived Transactions</a></li>
                                 <li><a href="{{ route('invoices') }}">Invoices</a></li>
@@ -40,6 +39,10 @@
                             <a href="{{ route('orders') }}"><i data-feather="box"></i><span>Orders</span></a>
                         </li>
 
+                        <li class="{{ Request::routeIs('services') ? 'active' : '' }}">
+                            <a href="{{ route('services') }}"><i data-feather="briefcase"></i><span>Services</span></a>
+                        </li>
+                        
                         <li class="{{ Request::routeIs('tickets') ? 'active' : '' }}">
                             <a href="{{ route('tickets') }}"><i class="fa fa-ticket"></i><span style="padding-left: 7px">Tickets</span></a>
                         </li>

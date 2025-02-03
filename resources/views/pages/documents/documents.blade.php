@@ -31,8 +31,8 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $document->documentName->document_name ?? 'N/A' }}</td>
                                     <td>{{ $document->expiry_date}}</td>
-                                    <td>{{ $document->user->name ?? 'N/A' }}</td> 
-                                    <td>{{ $document->created_at->format('Y-m-d') }}</td>
+                                    <td><span class="badge badge-linesuccess">{{ $document->user->name ?? 'Default' }}</span></td> 
+                                    <td>{{ $document->created_at->diffForHumans() }}</td>
                                     <td class="action-table-data">
                                         <div class="edit-delete-action d-flex justify-content-start">
                                             <a class="me-2 p-2" href="javascript:void(0);" data-id="{{ $document->id }}">

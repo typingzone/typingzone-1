@@ -528,12 +528,6 @@
 @endif
 
 
-
-
-
-
-
-
 @if(Route::is(['expenses']))
 <div class="modal fade" id="add-expense-modal" tabindex="-1" role="dialog" aria-labelledby="add-expense-modal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -591,3 +585,91 @@
     </div>
 </div>
 @endif
+
+
+@if(Route::is(['services']))
+<div class="modal fade" id="add-service-modal" tabindex="-1" role="dialog" aria-labelledby="add-service-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="add-service-modal-label">Add Service</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="add-service-modal-form">
+                    @csrf
+                    <input type="hidden" name="id" value="">
+
+                    <div class="form-group mb-3">
+                        <label for="service_name">Service Name</label>
+                        <input type="text" class="form-control" id="service_name" name="service_name" placeholder="Enter service name" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="govt_cost">Govt Cost</label>
+                        <input type="number" class="form-control" id="govt_cost" name="govt_cost" step="0.01" placeholder="Enter amount" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="service_cost">Service Cost</label>
+                        <input type="number" class="form-control" id="service_cost" name="service_cost" step="0.01" placeholder="Enter service cost" required>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="edit-service-modal" tabindex="-1" role="dialog" aria-labelledby="edit-service-modal-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edit-service-modal-label">Edit Service</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-service-modal-form">
+                        @csrf
+                        <input type="hidden" name="id" id="edit-service-id">
+
+                        <div class="form-group mb-3">
+                            <label for="edit-service-name">Service Name</label>
+                            <input type="text" class="form-control" id="edit-service-name" name="service_name" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="edit-govt-cost">Govt Cost</label>
+                            <input type="number" class="form-control" id="edit-govt-cost" name="govt_cost" step="0.01" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="edit-service-cost">Service Fee</label>
+                            <input type="number" class="form-control" id="edit-service-cost" name="service_cost" step="0.01" required>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endif
+
+
+
+
+
+

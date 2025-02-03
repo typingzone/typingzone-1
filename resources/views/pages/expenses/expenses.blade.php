@@ -33,7 +33,7 @@
                                 <td>{{ $expense->name }}</td>
                                 <td>{{ $expense->vat }}</td>
                                 <td>{{ $expense->amount }}</td>
-                                <td>{{ $expense->user->name }}</td>
+                                <td><span class="badge badge-linesuccess">{{ $expense->user->name ?? 'Default' }}</span></td> 
                                 <td>{{ $expense->created_at->diffForHumans() }}</td>
                                 <td class="action-table-data">
                                     <div class="edit-delete-action">

@@ -113,6 +113,13 @@
             </a>
         </div>
         @endif
+        @if (Route::is(['services']))
+        <div class="page-btn">
+            <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-service-modal">
+                <i data-feather="plus-circle" class="me-2"></i> Service
+            </a>
+        </div>
+        @endif
         @if (Route::is(['transaction-types']))
             <div class="page-btn">
                 <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-units"><i
