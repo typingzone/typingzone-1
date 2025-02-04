@@ -22,4 +22,14 @@ class Order extends Model
         'services' => 'array',
         'files' => 'array'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function assignedTo()
+    {
+        return $this->belongsTo(User::class, 'assign_to');
+    }
 }

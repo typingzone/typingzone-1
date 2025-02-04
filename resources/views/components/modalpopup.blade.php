@@ -671,5 +671,83 @@
 
 
 
+@if(Route::is(['orders']))
+<div class="modal fade" id="add-order-modal" tabindex="-1" role="dialog" aria-labelledby="add-order-modal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="add-order-modal-label">Add New Order</h5>
+                <button type="button" class="close text-white" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="add-order-modal-form">
+                    @csrf
+                    <input type="hidden" name="id" value="">
 
+                    <div class="form-group mb-3">
+                        <label for="customer_name" class="form-label">Customer Name</label>
+                        <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Enter customer name" required>
+                    </div>
 
+                    <div class="form-group mb-3">
+                        <label for="phone_number" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Enter phone number" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="services" class="form-label">Services</label>
+                        <select class="form-select" id="services" name="services[]" multiple required>
+                            <option value="service1">Service 1</option>
+                            <option value="service2">Service 2</option>
+                            <option value="service3">Service 3</option>
+                            <option value="service4">Service 4</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="files" class="form-label">Attachments</label>
+                        <input type="file" class="form-control" id="files" name="files[]" multiple>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter description"></textarea>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="assign_to" class="form-label">Assign To</label>
+                        <select class="form-select" id="assign_to" name="assign_to" required>
+                            @php $users = \App\Models\User::all(); @endphp
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" id="status" name="status" required>
+                            <option value="pending">Pending</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                            <option value="canceled">Canceled</option>
+                        </select>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Order</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
