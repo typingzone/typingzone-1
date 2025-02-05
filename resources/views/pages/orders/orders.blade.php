@@ -20,7 +20,6 @@
                                 <th>Customer Name</th>
                                 <th>Phone Number/Email</th>
                                 <th>Services</th>
-                                <th>Attachments</th>
                                 <th>Description</th>
                                 <th>Assign To</th>
                                 <th>Status</th>
@@ -34,14 +33,27 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $order->customer_name }}</td>
                                 <td>{{ $order->phone_number }} / {{ $order->email }}</td>
-                                <td>{{ implode(', ', $order->services) }}</td>
-                                <td>{{ implode(', ', $order->files) }}</td>
+                                <td>
+                                    <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-html="true" title="<ul>
+                                        @php
+                                            $services = is_string($order->services) ? explode(',', $order->services) : json_decode($order->services, true);
+                                        @endphp
+                                        @foreach($services as $service)
+                                            <li>{{ trim($service) }}</li>
+                                        @endforeach
+                                    </ul>">
+                                        <i class="fa fa-info-circle"></i>
+                                    </a>
+                                </td>
                                 <td>{{ $order->description }}</td>
-                                <td>{{ $order->assignedTo->name }}</td> <!-- Display assigned user's name -->
-                                <td>{{ $order->status }}</td>
+                                <td><span class="badge badge-linesuccess">{{ $order->assignedTo->name }}</span></td> 
+                                <td><span class="badge badge-success">{{ $order->status }}</span></td> 
                                 <td>{{ $order->created_at->diffForHumans() }}</td>
                                 <td class="action-table-data">
                                     <div class="edit-delete-action">
+                                        <a class="me-2 p-2" href="{{ route('orders.download', $order->id) }}">
+                                            <i class="fa fa-download"></i>
+                                        </a>
                                         <a class="me-2 edit-order p-2" href="javascript:void(0);" data-id="{{ $order->id }}">
                                             <i class="fa fa-edit"></i>
                                         </a>
@@ -58,5 +70,10 @@
             </div>
         </div>
     </div>
+    <script>
+        var storeOrderUrl = "{{ route('orders.store') }}";
+        var deleteOrderUrl = "{{ route('orders.destroy', ':id') }}"; 
+    </script>
+
     <script src="{{ asset('custom/js/orders.js') }}"></script>
 @endsection

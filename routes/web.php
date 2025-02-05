@@ -93,8 +93,12 @@ Route::controller(TicketController::class)->group(function () {
 });
 
 Route::controller(OrderController::class)->group(function () {
-    Route::get('orders', 'showOrders')->name('orders'); 
+    Route::get('orders', 'showOrders')->name('orders');
+    Route::post('orders/store', 'storeOrder')->name('orders.store'); 
+    Route::delete('/orders/{id}', 'destroy')->name('orders.destroy');
+    Route::get('/orders/{id}/download', 'downloadFiles')->name('orders.download');
 });
+
 
 Route::controller(ExpenseController::class)->group(function () {
     Route::get('expenses', 'index')->name('expenses');

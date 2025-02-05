@@ -44,8 +44,6 @@
  <!-- FancyBox JS -->
  <!-- <script src="{{ URL::asset('/build/plugins/fancybox/jquery.fancybox.min.js') }}"></script>
 
- <!-- Select2 JS -->
- <!-- <script src="{{ URL::asset('/build/plugins/select2/js/select2.min.js') }}"></script> -->
 
  <!-- Datetimepicker JS -->
  <!-- <script src="{{ URL::asset('/build/js/moment.min.js') }}"></script>
@@ -197,9 +195,7 @@
      <script src="{{ URL::asset('/build/plugins/peity/chart-data.js') }}"></script>
  @endif
 
- @if (Route::is(['form-select2']))
-     <script src="{{ URL::asset('/build/js/custom-select2.js') }}"></script>
- @endif
+ <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
  @if (Route::is(['form-fileupload']))
      <!-- Fileupload JS -->
