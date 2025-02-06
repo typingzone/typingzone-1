@@ -35,9 +35,7 @@
                                 <td>{{ $order->phone_number }} / {{ $order->email }}</td>
                                 <td>
                                     <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-html="true" title="<ul>
-                                        @php
-                                            $services = is_string($order->services) ? explode(',', $order->services) : json_decode($order->services, true);
-                                        @endphp
+                                        @php $services = is_string($order->services) ? explode(',', $order->services) : json_decode($order->services, true); @endphp
                                         @foreach($services as $service)
                                             <li>{{ trim($service) }}</li>
                                         @endforeach

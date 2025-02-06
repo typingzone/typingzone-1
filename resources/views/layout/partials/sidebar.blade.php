@@ -18,10 +18,10 @@
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">FINANCE & SERVICES</h6>
                     <ul>
-                        <li class="submenu {{ Request::routeIs('transaction-types', 'transaction-history', 'archived-transactions', 'invoices') ? 'active' : '' }}">
+                        <li class="submenu {{ Request::routeIs('transaction-types', 'transactions', 'archived-transactions', 'invoices') ? 'active' : '' }}">
                             <a href="javascript:void(0);"><i data-feather="smartphone"></i><span>Transactions</span><span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="{{ route('transaction-history') }}">Transaction History</a></li>
+                                <li><a href="{{ route('transactions') }}">Transactions</a></li>
                                 <li><a href="{{ route('archived-transactions') }}">Archived Transactions</a></li>
                                 <li><a href="{{ route('invoices') }}">Invoices</a></li>
                             </ul>
@@ -44,10 +44,10 @@
                         </li>
                         
                         <li class="{{ Request::routeIs('tickets') ? 'active' : '' }}">
-                            <a href="{{ route('tickets') }}"><i class="fa fa-ticket"></i><span style="padding-left: 7px">Tickets</span></a>
+                            <a href="{{ route('tickets') }}"><i data-feather="check-square"></i><span>Tickets</span></a>
                         </li>
                         <li class="{{ Request::routeIs('expenses') ? 'active' : '' }}">
-                            <a href="{{ route('expenses') }}"><i class="fa fa-dollar"></i><span style="padding-left: 7px">Expenses</span></a>
+                            <a href="{{ route('expenses') }}"><i data-feather="dollar-sign"></i><span>Expenses</span></a>
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"><i data-feather="tool"></i><span>Tools</span><span class="menu-arrow"></span></a>

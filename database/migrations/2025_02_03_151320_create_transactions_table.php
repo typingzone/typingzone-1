@@ -18,9 +18,12 @@ return new class extends Migration
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
             $table->decimal('govt_cost', 10, 2);
             $table->decimal('service_cost', 10, 2);
+            $table->string('application_no');
             $table->string('status');
             $table->string('paid_by');
             $table->string('pay_status');
+            $table->string('description');
+            $table->string('receipt');
             $table->timestamps();
         });
     }

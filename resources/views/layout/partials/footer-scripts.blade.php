@@ -34,9 +34,6 @@
  <!-- Bootstrap Core JS -->
  <script src="{{ URL::asset('/build/js/bootstrap.bundle.min.js') }}"></script>
 
- <!-- Chart JS -->
- <!-- <script src="{{ URL::asset('/build/plugins/apexchart/apexcharts.min.js') }}"></script>
- <script src="{{ URL::asset('/build/plugins/apexchart/chart-data.js') }}"></script> -->
 
  <!-- Swiper JS -->
  <!-- <script src="{{ URL::asset('/build/plugins/swiper/swiper.min.js') }}"></script>
@@ -148,52 +145,6 @@
      <script src="{{ URL::asset('/build/plugins/stickynote/sticky.js') }}"></script>
  @endif
 
-
-
- @if (Route::is(['ui-lightbox']))
-     <script src="{{ URL::asset('/build/plugins/lightbox/glightbox.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/lightbox/lightbox.js') }}"></script>
- @endif
-
- @if (Route::is(['chart-c3']))
-     <!-- Chart JS -->
-     <script src="{{ URL::asset('/build/plugins/c3-chart/d3.v5.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/c3-chart/c3.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/c3-chart/chart-data.js') }}"></script>
- @endif
-
- @if (Route::is(['chart-flot']))
-     <!-- Chart JS -->
-     <script src="{{ URL::asset('/build/plugins/flot/jquery.flot.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/flot/jquery.flot.fillbetween.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/flot/jquery.flot.pie.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/flot/chart-data.js') }}"></script>
- @endif
-
- @if (Route::is(['lightbox']))
-     <!-- lightbox JS -->
-     <script src="{{ URL::asset('/build/plugins/lightbox/glightbox.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/lightbox/lightbox.js') }}"></script>
- @endif
-
- @if (Route::is(['chart-js']))
-     <!-- Chart JS -->
-     <script src="{{ URL::asset('/build/plugins/chartjs/chart.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/chartjs/chart-data.js') }}"></script>
- @endif
-
- @if (Route::is(['chart-morris']))
-     <!-- Chart JS -->
-     <script src="{{ URL::asset('/build/plugins/morris/raphael-min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/morris/morris.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/morris/chart-data.js') }}"></script>
- @endif
-
- @if (Route::is(['chart-peity']))
-     <!-- Chart JS -->
-     <script src="{{ URL::asset('/build/plugins/peity/jquery.peity.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/peity/chart-data.js') }}"></script>
- @endif
 
  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 

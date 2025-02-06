@@ -10,7 +10,7 @@
                             <span><img src="{{ URL::asset('/build/img/icons/dash1.svg') }}" alt="img"></span>
                         </div>
                         <div class="dash-widgetcontent">
-                            <h5>$<span class="counters" data-count="307144.00">$307,144.00</span></h5>
+                            <h5>AED <span class="counters" data-count="{{ $totalExpenses }}">0</span></h5>
                             <h6>Total Expenses</h6>
                         </div>
                     </div>
@@ -85,8 +85,8 @@
                 <div class="col-xl-3 col-sm-6 col-12 d-flex">
                     <div class="dash-count das3">
                         <div class="dash-counts">
-                            <h4>170</h4>
-                            <h5>Completed Applications</h5>
+                            <h4>{{ $expiredDocumentsCount }}</h4>
+                            <h5>Expired Documents</h5>
                         </div>
                         <div class="dash-imgs">
                             <i data-feather="file"></i>
@@ -100,7 +100,7 @@
                 <div class="col-xl-7 col-sm-12 col-12 d-flex">
                     <div class="card flex-fill">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="card-title mb-0">Documents Expiry</h5>
+                            <h5 class="card-title mb-0">Sales Chart</h5>
                             <div class="graph-sets">
                                 <ul class="mb-0">
                                     <li>
@@ -129,49 +129,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div id="sales_charts"></div>
-                        </div>
+                       @include('pages.dashboard.sales-chart')
                     </div>
                 </div>
                 <div class="col-xl-5 col-sm-12 col-12 d-flex">
                     <div class="card flex-fill default-cover mb-4">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h4 class="card-title mb-0">Recent Products</h4>
+                            <h4 class="card-title mb-0">Pending Tasks</h4>
                             <div class="view-all-link">
-                                <a href="javascript:void(0);" class="view-all d-flex align-items-center">
+                                <a href="{{ route('orders') }}" class="view-all d-flex align-items-center">
                                     View All<span class="ps-2 d-flex align-items-center"><i data-feather="arrow-right"
                                             class="feather-16"></i></span>
                                 </a>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="table-responsive dataview">
-                                <table class="table dashboard-recent-products">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Products</th>
-                                            <th>Price</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td class="productimgname">
-                                                <a href="{{ url('product-list') }}" class="product-img">
-                                                    <img src="{{ URL::asset('/build/img/products/stock-img-01.png') }}"
-                                                        alt="product">
-                                                </a>
-                                                <a href="{{ url('product-list') }}">Lenevo 3rd Generation</a>
-                                            </td>
-                                            <td>$12500</td>
-                                        </tr>
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        @include('pages.dashboard.dashboard-pending-tasks')
                     </div>
                 </div>
             </div>
@@ -179,60 +151,7 @@
                 <div class="card-header">
                     <h4 class="card-title">Expired Products</h4>
                 </div>
-                <div class="card-body">
-                    <div class="table-responsive dataview">
-                        <table class="table dashboard-expired-products">
-                            <thead>
-                                <tr>
-                                    <th class="no-sort">
-                                        <label class="checkboxs">
-                                            <input type="checkbox" id="select-all">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </th>
-                                    <th>Product</th>
-                                    <th>SKU</th>
-                                    <th>Manufactured Date</th>
-                                    <th>Expired Date</th>
-                                    <th class="no-sort">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <div class="productimgname">
-                                            <a href="javascript:void(0);" class="product-img stock-img">
-                                                <img src="{{ URL::asset('/build/img/products/expire-product-01.png') }}"
-                                                    alt="product">
-                                            </a>
-                                            <a href="javascript:void(0);">Red Premium Handy </a>
-                                        </div>
-                                    </td>
-                                    <td><a href="javascript:void(0);">PT006</a></td>
-                                    <td>17 Jan 2023</td>
-                                    <td>29 Mar 2023</td>
-                                    <td class="action-table-data">
-                                        <div class="edit-delete-action">
-                                            <a class="me-2 p-2" href="#">
-                                                <i data-feather="edit" class="feather-edit"></i>
-                                            </a>
-                                            <a class=" confirm-text p-2" href="javascript:void(0);">
-                                                <i data-feather="trash-2" class="feather-trash-2"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                              
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                @include('pages.dashboard.expired-dcouments')
             </div>
         </div>
     </div>

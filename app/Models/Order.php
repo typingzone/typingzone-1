@@ -23,13 +23,21 @@ class Order extends Model
         'files' => 'array'
     ];
 
+    // Order belongs to a User
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    // Order belongs to an assigned User
     public function assignedTo()
     {
         return $this->belongsTo(User::class, 'assign_to');
+    }
+
+    // Order has many Transactions
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
     }
 }

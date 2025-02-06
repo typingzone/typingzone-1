@@ -127,15 +127,10 @@
             </a>
         </div>
         @endif
-        @if (Route::is(['transaction-types']))
+       
+        @if (Route::is(['transactions']))
             <div class="page-btn">
-                <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-units"><i
-                        data-feather="plus-circle" class="me-2"></i>Add New</a>
-            </div>
-        @endif
-        @if (Route::is(['transaction-history']))
-            <div class="page-btn">
-                <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-category"><i
+                <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-transaction-modal"><i
                         data-feather="plus-circle" class="me-2"></i> Add New</a>
             </div>
         @endif

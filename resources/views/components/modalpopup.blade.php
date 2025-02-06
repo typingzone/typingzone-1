@@ -19,7 +19,7 @@
 
                 <div class="mb-3">
                     <label for="documentName">Document Name</label>
-                    <select class="form-select" id="documentName" name="documentName">
+                    <select class="mySelect2 form-control" id="documentName" name="documentName">
                         @php $documentNames = \App\Models\DocumentName::all(); @endphp
                         @foreach($documentNames as $documentName)
                             <option value="{{ $documentName->id }}">{{ $documentName->document_name }}</option>
@@ -192,19 +192,19 @@
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <input type="text" class="form-control" placeholder="Enter full name" id="name" name="name" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <input type="email" class="form-control" placeholder="Enter email address" id="email" name="email" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <input type="password" class="form-control" placeholder="Enter password" id="password" name="password" required>
                     </div>
                     <div class="mb-3">
                         <label for="role" class="form-label">Select Role</label>
-                        <select class="form-select" id="role" name="role_id" required>
+                        <select class="mySelect2 form-control" id="role" name="role_id" required>
                             <option value="">Select Role</option>
                             @php 
                                 $roles = DB::table('roles')->get();
@@ -743,6 +743,110 @@
 
                     <div class="row">
                         <div class="col-md-12">
+                            <div class="form-group mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Order</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
+
+
+
+
+
+
+@if(Route::is(['transactions']))
+<div class="modal fade" id="add-transaction-modal" tabindex="-1" role="dialog" aria-labelledby="add-transaction-modal" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="add-transaction-modal-label">Add New Transaction</h5>
+                <button type="button" class="close text-white" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="add-transaction-modal-form" action="" method="POST">
+                    @csrf
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="order_id" class="form-label">Select Customer <span class="text-danger">*</span></label>
+                                <select class="mySelect2 form-control" id="order_id" name="order_id" required>
+                                    @php  $orders = \App\Models\Order::where('assign_to', \Illuminate\Support\Facades\Auth::id())->where('status', 'pending')->get(); @endphp
+                                    @foreach($orders as $order)
+                                        <option value="{{ $order->id }}">{{ $order->customer_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="service_id" class="form-label">Select Service <span class="text-danger">*</span></label>
+                                <select class="mySelect3 form-control" id="service_id" name="service_id" required>
+                                    <!-- Services options will be populated here -->
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="application_no" class="form-label">Application Number <span class="text-danger">*</span></label>
+                               <input type="text" class="form-control" id="application_no" name="application_no" placeholder="Enter application number" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="govt_cost" class="form-label">Govt Cost <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="govt_cost" name="govt_cost" placeholder="Enter govt cost" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="service_cost" class="form-label">Service Cost <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="service_cost" name="service_cost" placeholder="Enter service cost" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="receipt" class="form-label">Receipt <span class="text-danger">*</span></label>
+                                <input type="file" class="form-control" id="receipt" name="receipt" required>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="paid_by" class="form-label">Paid By <span class="text-danger">*</span></label>   
+                                <select class="mySelect4 form-control" id="paid_by" name="paid_by" required>
+                                    <option value="Card">Card</option>
+                                    <option value="Bank Transfer">Bank Transfer</option>
+                                    <option value="Customer">Customer</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
                             <div class="form-group mb-3">
                                 <label for="description" class="form-label">Description</label>
                                 <textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter description"></textarea>

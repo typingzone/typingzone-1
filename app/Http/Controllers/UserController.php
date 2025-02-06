@@ -150,6 +150,9 @@ class UserController extends Controller
     
     public function showLoginPage()
     {
+        if(Auth::check()) {
+            return redirect()->route('dashboard');
+        }
         return view('auth.login');
     }
 

@@ -13,7 +13,6 @@ use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\CronJobController;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\ApplicationFlowController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\OrderController;
@@ -70,7 +69,7 @@ Route::controller(UserController::class)->group(function () {
 });
 
 Route::controller(TransactionController::class)->group(function () {
-    Route::get('transaction-history', 'showTransactionHistory')->name('transaction-history'); 
+    Route::get('transactions', 'index')->name('transactions'); 
     Route::post('applications', 'store')->name('applications.store');
     Route::put('applications/{id}', 'update')->name('applications.update');
     Route::delete('applications/{id}', 'destroy')->name('applications.destroy');
@@ -182,14 +181,7 @@ Route::controller(AssetController::class)->group(function () {
     Route::get('assets', 'index')->name('assets'); 
 });
 
-Route::controller(ApplicationFlowController::class)->group(function () {
-    Route::get('applications-flow', 'index')->name('applications-flow');
-    Route::post('applications-parent', 'storeParent')->name('applications-parent.store');
-    Route::post('applications-child', 'storeChild')->name('applications-child.store');
-    Route::put('applications-parent/{id}', 'updateParent')->name('applications-parent.update');
-    Route::put('applications-child/{id}', 'updateChild')->name('applications-child.update');
-    Route::delete('applications-child/{id}', 'destroyChild')->name('applications-child.destroy');
-});
+
 
 Route::controller(CronJobController::class)->group(function () {
     Route::put('expiry-document-reminder', 'expiryDocumentReminder')->name('expiry-document-reminder');

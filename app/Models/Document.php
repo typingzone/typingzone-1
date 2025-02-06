@@ -15,7 +15,7 @@ class Document extends Model
 
     public function documentName()
     {
-        return $this->belongsTo(DocumentName::class, 'document_name_id'); // Use the correct foreign key
+        return $this->belongsTo(DocumentName::class, 'document_name_id');
     }
     
 

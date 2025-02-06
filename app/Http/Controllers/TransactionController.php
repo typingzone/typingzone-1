@@ -2,15 +2,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Transactions; 
+use App\Models\Transaction; 
 use App\Models\TransactionType; 
 
 class TransactionController extends Controller
 {
-    public function showTransactionHistory()
+    public function index()
     {
-        return view('pages.transactions.transaction_history');
+        $transactions = Transaction::with('order', 'user')->get();        
+        return view('pages.transactions.transactions', compact('transactions'));
     }
+    
     
     public function archivedTransactions()
     {
