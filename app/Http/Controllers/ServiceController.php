@@ -52,4 +52,15 @@ class ServiceController extends Controller
         return response()->json(['message' => 'Service updated successfully']);
     }
 
+
+    public function getServiceCosts($serviceId)
+    {
+        $service = Service::findOrFail($serviceId);
+        return response()->json([
+            'govt_cost' => $service->govt_cost,
+            'service_cost' => $service->service_cost
+        ]);
+    }
+
+
 }

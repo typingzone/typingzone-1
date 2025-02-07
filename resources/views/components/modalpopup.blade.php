@@ -778,7 +778,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="add-transaction-modal-form" action="" method="POST">
+                <form id="add-transaction-modal-form" method="POST">
                     @csrf
 
                     <div class="row">

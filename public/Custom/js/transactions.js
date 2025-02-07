@@ -42,7 +42,153 @@ $(document).ready(function() {
         dropdownParent: $('#add-transaction-modal')
     })
 
-
 });
 
 
+
+$(document).ready(function() {
+    $('#order_id').change(function() {
+        var orderId = $(this).val();
+        var serviceSelect = $('#service_id');
+        serviceSelect.empty();
+        $.ajax({
+            url: '/orders/' + orderId + '/services',
+            type: 'GET',
+            success: function(data) {
+                serviceSelect.append('<option value="">Select Service</option>');
+                $.each(data, function(index, service) {
+                    serviceSelect.append('<option value="' + service.id + '">' + service.service_name + '</option>');
+                });
+            }
+        });
+    });
+    // When a service is selected, fetch the costs
+    $('#service_id').change(function() {
+        var serviceId = $(this).val();
+        if (serviceId) {
+            $.ajax({
+                url: '/services/' + serviceId + '/costs',
+                type: 'GET',
+                success: function(data) {
+                    $('#govt_cost').val(data.govt_cost);
+                    $('#service_cost').val(data.service_cost);
+                }
+            });
+        } else {
+            $('#govt_cost').val('');
+            $('#service_cost').val('');
+        }
+    });
+});
+
+
+
+$(document).ready(function() {
+    $('#add-transaction-modal-form').on('submit', function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+
+        Swal.fire({
+            title: 'Processing...',
+            text: 'Adding your transaction',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        $.ajax({
+            url: transactionsStore,
+            type: 'POST',
+            data: formData,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                Swal.close();
+                if (response.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: response.message,
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                    $('#add-transaction-modal').modal('hide');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000);
+                }
+            },
+            error: function(xhr) {
+                Swal.close(); 
+                var errors = xhr.responseJSON.errors;
+                var errorMessage = '';
+                $.each(errors, function(key, value) {
+                    errorMessage += value[0] + '\n';
+                });
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: errorMessage
+                });
+            }
+        });
+    });
+});
+
+
+
+
+
+
+
+$(document).on('click', '.delete-transaction', function() {
+    var transactionId = $(this).data('id');
+    
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You won\'t be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Deleting...',
+                text: 'Please wait while we delete the transaction.',
+                icon: 'info',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            $.ajax({
+                url: '/transactions/' + transactionId,
+                type: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    Swal.close();
+                    if (response.success) {
+                        toastr.success(response.message);
+                        $('#transaction-row-' + transactionId).remove();
+                    } else {
+                        toastr.error('Error deleting transaction.');
+                    }
+                },
+                error: function(xhr) {
+                    Swal.close();
+                    toastr.error('Failed to delete transaction.');
+                }
+            });
+        }
+    });
+});

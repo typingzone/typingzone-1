@@ -3,10 +3,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaction; 
-use App\Models\TransactionType; 
+use App\Services\TransactionService;
+use Illuminate\Support\Facades\Log;
 
 class TransactionController extends Controller
 {
+
+    protected $transactionService;
+
+    public function __construct(TransactionService $transactionService)
+    {
+        $this->transactionService = $transactionService;
+    }
+
+
     public function index()
     {
         $transactions = Transaction::with('order', 'user')->get();        
@@ -24,42 +34,55 @@ class TransactionController extends Controller
         return view('pages.transactions.invoices');
     }
 
-    // Add a new application
     public function store(Request $request)
     {
-        $request->validate([
-            'application_name' => 'required|string|max:255',
-            'application_data' => 'required',
-        ]);
-        Application::create([
-            'name' => $request->application_name,
-            'data' => $request->application_data,
-        ]);
-        return redirect()->route('application-history')->with('status', 'Application added successfully.');
+        try {
+            $request->validate([
+                'order_id' => 'required',
+                'service_id' => 'required',
+                'application_no' => 'required|string',
+                'govt_cost' => 'required|numeric',
+                'service_cost' => 'required|numeric',
+                'paid_by' => 'required|string',
+                'receipt' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            ]);
+            $this->transactionService->store($request);
+            return response()->json(['success' => true, 'message' => 'Transaction created successfully.']);
+        } catch (\Exception $e) {
+            Log::error('Transaction Creation Error: ' . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Failed to create transaction.'], 500);
+        }
     }
+    
+   
 
-
-    // Update an existing application
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'application_name' => 'required|string|max:255',
-            'application_data' => 'required',
-        ]);
-        $application = Application::findOrFail($id);
-        $application->update([
-            'name' => $request->application_name,
-            'data' => $request->application_data,
-        ]);
-        return redirect()->route('application-history')->with('status', 'Application updated successfully.');
-    }
-
-
-    // Delete an application
     public function destroy($id)
     {
-        $application = Application::findOrFail($id);
-        $application->delete();
-        return redirect()->route('application-history')->with('status', 'Application deleted successfully.');
+        try {
+            $response = $this->transactionService->deleteTransaction($id);
+            return response()->json($response);
+        } catch (\Exception $e) {
+            Log::error('Transaction deletion error: '.$e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Error deleting transaction.'], 500);
+        }
     }
+    
+    
+    
+
+    public function downloadReceipt($id)
+    {
+        try {
+            $result = $this->transactionService->downloadReceipt($id);
+            if ($result['success']) {
+                return $result['response'];
+            }
+            return back()->withErrors($result['message']);
+        } catch (\Exception $e) {
+            Log::error('Receipt download error: '.$e->getMessage());
+            return back()->withErrors('Error downloading receipt.');
+        }
+    }
+    
+
 }

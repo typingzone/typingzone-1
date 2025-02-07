@@ -34,6 +34,7 @@ Route::controller(ServiceController::class)->group(function () {
     Route::delete('services/{id}', 'destroy')->name('services.destroy');
     Route::put('services/{id}', 'update')->name('services.update');
     Route::get('services/{id}/edit', 'edit')->name('services.edit');
+    Route::get('/services/{serviceId}/costs', 'getServiceCosts')->name('services.costs');
 });
 
 
@@ -70,9 +71,9 @@ Route::controller(UserController::class)->group(function () {
 
 Route::controller(TransactionController::class)->group(function () {
     Route::get('transactions', 'index')->name('transactions'); 
-    Route::post('applications', 'store')->name('applications.store');
-    Route::put('applications/{id}', 'update')->name('applications.update');
-    Route::delete('applications/{id}', 'destroy')->name('applications.destroy');
+    Route::post('/transactions/store', 'store')->name('transactions.store');
+    Route::delete('/transactions/{id}', 'destroy')->name('transactions.destroy');
+    Route::get('/transaction/receipt/{id}', 'downloadReceipt')->name('transaction.receipt');
     Route::get('archived-transactions', 'archivedTransactions')->name('archived-transactions');
     Route::get('invoices', 'showInvoices')->name('invoices');
 });
@@ -96,6 +97,7 @@ Route::controller(OrderController::class)->group(function () {
     Route::post('orders/store', 'storeOrder')->name('orders.store'); 
     Route::delete('/orders/{id}', 'destroy')->name('orders.destroy');
     Route::get('/orders/{id}/download', 'downloadFiles')->name('orders.download');
+    Route::get('/orders/{orderId}/services', 'getOrderServices')->name('orders.services');
 });
 
 

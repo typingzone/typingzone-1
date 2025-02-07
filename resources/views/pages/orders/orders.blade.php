@@ -35,9 +35,8 @@
                                 <td>{{ $order->phone_number }} / {{ $order->email }}</td>
                                 <td>
                                     <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-html="true" title="<ul>
-                                        @php $services = is_string($order->services) ? explode(',', $order->services) : json_decode($order->services, true); @endphp
-                                        @foreach($services as $service)
-                                            <li>{{ trim($service) }}</li>
+                                        @foreach($order->service_names as $service)
+                                            <li>{{ $service }}</li>
                                         @endforeach
                                     </ul>">
                                         <i class="fa fa-info-circle"></i>
@@ -72,6 +71,5 @@
         var storeOrderUrl = "{{ route('orders.store') }}";
         var deleteOrderUrl = "{{ route('orders.destroy', ':id') }}"; 
     </script>
-
     <script src="{{ asset('custom/js/orders.js') }}"></script>
 @endsection

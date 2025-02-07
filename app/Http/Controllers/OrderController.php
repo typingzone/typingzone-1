@@ -15,8 +15,13 @@ class OrderController extends Controller
     public function showOrders()
     {
         $orders = Order::with(['user', 'assignedTo'])->get();
+        foreach ($orders as $order) {
+            $serviceIds = is_string($order->services) ? explode(',', $order->services) : json_decode($order->services, true);
+            $order->service_names = Service::whereIn('id', $serviceIds)->pluck('service_name')->toArray();
+        }        
         return view('pages.orders.orders', compact('orders'));
     }
+
 
 
 
@@ -42,15 +47,12 @@ class OrderController extends Controller
             }
         }
     
-        $services = Service::whereIn('id', $request->services)->pluck('service_name')->toArray();
-        $serviceNames = implode(', ', $services);
-    
         Order::create([
             'user_id' => Auth::id(),
             'customer_name' => $request->customer_name,
             'phone_number' => $request->phone_number,
             'email' => $request->email,
-            'services' => $serviceNames,
+            'services' => implode(', ', $request->services),
             'files' => implode(', ', $files),
             'description' => $request->description,
             'assign_to' => $request->assign_to,
@@ -95,6 +97,17 @@ class OrderController extends Controller
         }
 
         return response()->json(['error' => 'Failed to create ZIP file'], 500);
+    }
+
+
+
+
+    public function getOrderServices($orderId)
+    {
+        $order = Order::findOrFail($orderId);
+        $serviceIds = is_string($order->services) ? explode(',', $order->services) : json_decode($order->services, true);
+        $services = Service::whereIn('id', $serviceIds)->get(['id', 'service_name']);
+        return response()->json($services);
     }
 
 }

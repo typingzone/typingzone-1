@@ -22,21 +22,21 @@
                                 <th>Application No</th>
                                 <th>Govt Cost</th>
                                 <th>Service Cost</th>
-                                <th>Total Amount</th>
+                                <th>Total Cost</th>
                                 <th>Vat Amount</th>
                                 <th>Paid By</th>
                                 <th>Added By</th>
                                 <th>Pay Status</th>
-                                <th>Created at</th>
+                                <th>Created At</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($transactions as $index => $transaction)
-                                <tr>
+                                <tr id="transaction-row-{{ $transaction->id }}">
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $transaction->order->customer_name }}</td>
-                                    <td>{{ $transaction->service->name }}</td>
+                                    <td>{{ $transaction->service_id }}</td>
                                     <td>{{ $transaction->application_no }}</td>
                                     <td>{{ $transaction->govt_cost }}</td>
                                     <td>{{ $transaction->service_cost }}</td>
@@ -46,8 +46,18 @@
                                     <td>{{ $transaction->user->name }}</td>
                                     <td>{{ $transaction->pay_status }}</td>
                                     <td>{{ $transaction->created_at }}</td>
-                                    <td>
-                                        <!-- Add action buttons (edit, delete, etc.) -->
+                                    <td class="action-table-data">
+                                        <div class="edit-delete-action">
+                                            <a class="me-2 p-2" href="{{ route('transaction.receipt', $transaction->id) }}">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                            <a class="me-2 edit-transaction p-2" href="javascript:void(0);" data-id="{{ $transaction->id }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="p-2 delete-transaction" href="javascript:void(0);" data-id="{{ $transaction->id }}">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -57,5 +67,8 @@
             </div>
         </div>
     </div>
+    <script>
+        var transactionsStore = "{{ route('transactions.store') }}";
+    </script>
     <script src="{{ asset('custom/js/transactions.js') }}"></script>
 @endsection
