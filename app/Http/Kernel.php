@@ -31,7 +31,7 @@ class Kernel extends HttpKernel
 
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
-        'permission' => \App\Http\Middleware\RolePermissionMiddleware::class,  // Ensure this is correctly registered here
-        // Other middlewares
+        'permission' => \App\Http\Middleware\RolePermissionMiddleware::class,  
+        'check.auth' => \App\Http\Middleware\CheckAuth::class,
     ];
 }
