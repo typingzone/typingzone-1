@@ -141,10 +141,6 @@ $(document).ready(function() {
 
 
 
-
-
-
-
 $(document).on('click', '.delete-transaction', function() {
     var transactionId = $(this).data('id');
     
@@ -191,4 +187,66 @@ $(document).on('click', '.delete-transaction', function() {
             });
         }
     });
+});
+
+
+$(document).ready(function () {
+    $('[data-bs-toggle="tooltip"]').tooltip(); // Initialize tooltips globally
+    $('body').on('click', '.status-icon', function () {
+        var transactionId = $(this).data('id');
+        var currentStatus = $(this).data('status');
+        Swal.fire({
+            title: 'Choose status',
+            text: 'You can change the status of this transaction.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Approved',
+            cancelButtonText: 'Rejected',
+            showDenyButton: true,
+            denyButtonText: 'Pending',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                updateStatus(transactionId, 'approved', $(this));
+            } else if (result.isDenied) {
+                updateStatus(transactionId, 'pending', $(this));
+            } else if (result.isDismissed) {
+                updateStatus(transactionId, 'rejected', $(this));
+            }
+        });
+    });
+
+    function updateStatus(transactionId, status, element) {
+        $.ajax({
+            url: '/transaction/update-status/' + transactionId, 
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                status: status
+            },
+            success: function (response) {
+                var icon;
+                var title;
+                if (status == 'approved') {
+                    icon = 'fa-check-circle text-success';
+                    title = 'Approved';
+                } else if (status == 'rejected') {
+                    icon = 'fa-times-circle text-danger';
+                    title = 'Rejected';
+                } else if (status == 'pending') {
+                    icon = 'fa-clock text-warning';
+                    title = 'Pending';
+                }
+                element.attr('class', 'fa ' + icon); // Update icon class
+                element.attr('data-bs-toggle', 'tooltip'); // Ensure tooltip functionality
+                element.attr('title', title); // Update title for tooltip
+                $(element).tooltip('dispose').tooltip(); // Dispose the old tooltip and initialize new one
+                toastr.success('Status ' + response.status); // Show success message
+            },
+            error: function () {
+                Swal.fire('Error', 'Failed to update status.', 'error');
+            }
+        });
+    }
 });

@@ -3,21 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Expense;
-use App\Models\Application;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\ExpensesExport;
-use App\Exports\ApplicationsExport;
+use App\Exports\TransactionExport;
 
 class ExcelController extends Controller
 {
-    public function downloadExpensesExcel()
+    public function downloadTransactions()
     {
-        return Excel::download(new ExpensesExport, 'expenses.xlsx');
-    }
-
-    public function downloadApplicationsExcel()
-    {
-        return Excel::download(new ApplicationsExport, 'applications.xlsx');
+        return Excel::download(new TransactionExport, 'Transactions.xlsx');
     }
 }

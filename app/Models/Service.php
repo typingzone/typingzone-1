@@ -16,6 +16,7 @@ class Service extends Model
         'service_cost'
     ];
 
+    // Service belongs to a User
     public function user()
     {
         return $this->belongsTo(User::class);

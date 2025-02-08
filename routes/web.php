@@ -76,6 +76,7 @@ Route::controller(TransactionController::class)->group(function () {
     Route::get('/transaction/receipt/{id}', 'downloadReceipt')->name('transaction.receipt');
     Route::get('archived-transactions', 'archivedTransactions')->name('archived-transactions');
     Route::get('invoices', 'showInvoices')->name('invoices');
+    Route::post('/transaction/update-status/{id}', 'updateStatus')->name('transaction.updateStatus');
 });
 
 Route::controller(CompanyController::class)->group(function () {
@@ -141,8 +142,7 @@ Route::controller(TaskController::class)->group(function () {
 });
 
 Route::controller(ExcelController::class)->group(function () {
-    Route::get('download-expenses-excel', 'downloadExpensesExcel')->name('download-expenses-excel'); 
-    Route::get('download-applications-excel', 'downloadApplicationsExcel')->name('download-applications-excel'); 
+    Route::get('transactions/download', 'downloadTransactions')->name('transactions.download'); 
 });
 
 Route::controller(PdfController::class)->group(function () {

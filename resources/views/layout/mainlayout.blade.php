@@ -10,7 +10,6 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    
     <title>{{ ucwords(str_replace(['-', '_'], ' ', basename(Request::path()))) }} - TypingZone</title>
     @php $company = \App\Models\Company::first(); @endphp
 
@@ -19,7 +18,16 @@
 
     @include('layout.partials.head')
 </head>
-
+<style>
+    .custom-badge {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 20px;
+    text-align: center;
+}
+</style>
 
 @if (!Route::is(['chat', 'under-maintenance', 'coming-soon', 'error-404', 'error-500','two-step-verification-3','two-step-verification-2','two-step-verification','email-verification-3','email-verification-2','email-verification','reset-password-3','reset-password-2','reset-password','forgot-password-3','forgot-password-2','forgot-password','register-3','register-2','register','signin-3','signin-2','signin','success','success-2','success-3']))
 

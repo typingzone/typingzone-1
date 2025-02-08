@@ -677,7 +677,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="add-order-modal-label">Add New Order</h5>
-                <button type="button" class="close text-white" data-bs-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -773,7 +773,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="add-transaction-modal-label">Add New Transaction</h5>
-                <button type="button" class="close text-white" data-bs-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

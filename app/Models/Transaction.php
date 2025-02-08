@@ -33,4 +33,10 @@ class Transaction extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    // Transaction belongs to a Service (add this relationship)
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'service_id');
+    }
 }

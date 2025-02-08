@@ -19,7 +19,7 @@ class TransactionController extends Controller
 
     public function index()
     {
-        $transactions = Transaction::with('order', 'user')->get();        
+        $transactions = Transaction::with('order', 'user')->orderBy('created_at', 'desc')->get();
         return view('pages.transactions.transactions', compact('transactions'));
     }
     
@@ -84,5 +84,15 @@ class TransactionController extends Controller
         }
     }
     
+
+
+    public function updateStatus(Request $request, $id)
+    {
+        $transaction = Transaction::findOrFail($id);
+        $transaction->status = $request->status;
+        $transaction->save();
+        return response()->json(['status' => $request->status]);
+    }
+
 
 }

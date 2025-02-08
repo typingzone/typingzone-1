@@ -21,8 +21,8 @@
                                 <th>Phone Number/Email</th>
                                 <th>Services</th>
                                 <th>Description</th>
-                                <th>Assign To</th>
                                 <th>Status</th>
+                                <th>Assign To</th>
                                 <th>Created at</th>
                                 <th>Action</th>
                             </tr>
@@ -43,8 +43,8 @@
                                     </a>
                                 </td>
                                 <td>{{ $order->description }}</td>
-                                <td><span class="badge badge-linesuccess">{{ $order->assignedTo->name }}</span></td> 
-                                <td><span class="badge badge-success">{{ $order->status }}</span></td> 
+                                <td><span class="badge badge-success custom-badge">{{ $order->status }}</span></td> 
+                                <td><span class="badge badge-dark custom-badge">{{ $order->assignedTo->name }}</span></td> 
                                 <td>{{ $order->created_at->diffForHumans() }}</td>
                                 <td class="action-table-data">
                                     <div class="edit-delete-action">
