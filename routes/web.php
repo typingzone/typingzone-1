@@ -16,7 +16,6 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\AssetController;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\TicketController;
@@ -24,8 +23,90 @@ use App\Http\Controllers\DocumentNameController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Middleware\RolePermissionMiddleware;
 
+
+Route::middleware(['check.auth'])->controller(CalendarController::class)->group(function () {
+    Route::get('calendar', 'index')->name('calendar'); 
+});
+
+Route::middleware(['check.auth'])->controller(CompanyController::class)->group(function () {
+    Route::get('general-settings', 'index')->name('general-settings'); 
+    Route::post('updated-company-profile', 'updateCompanyProfile')->name('updated-company-profile');
+});
+
+Route::middleware(['check.auth'])->controller(CredentialController::class)->group(function () {
+    Route::get('credentials', 'index')->name('credentials.index'); 
+    Route::post('credentials', 'store')->name('credentials.store');
+    Route::put('credentials/{id}', 'update')->name('credentials.update');
+    Route::delete('credentials/{id}', 'destroy')->name('credentials.destroy');
+});
+
+Route::middleware(['check.auth'])->controller(CronJobController::class)->group(function () {
+    Route::put('expiry-document-reminder', 'expiryDocumentReminder')->name('expiry-document-reminder');
+    Route::put('application-follow-up-reminder', 'applicationFollowUpReminder')->name('application-follow-up-reminder');
+});
+
+Route::middleware(['check.auth'])->controller(DocumentNameController::class)->group(function () {
+    Route::get('document-names', 'index')->name('document-names');
+    Route::post('document-name', 'store')->name('document-name.store');
+    Route::put('document-name/toggle/{id}', 'toggle')->name('document-name.toggle');
+    Route::get('document-name/{id}/edit', 'edit')->name('document-name.edit');
+    Route::put('document-name/{id}', 'update')->name('document-name.update');
+    Route::delete('document-name/{id}', 'destroy')->name('document-name.destroy');
+});
+
+Route::middleware(['check.auth'])->controller(DocumentsController::class)->group(function () {
+    Route::get('documents', 'index')->name('documents');
+    Route::post('documents/store', 'store')->name('documents.store');
+    Route::delete('documents/{id}', 'destroy')->name('documents.destroy');
+});
+
+Route::middleware(['check.auth'])->controller(EmailTemplateController::class)->group(function () {
+    Route::get('email-templates', 'index')->name('email-templates'); 
+    Route::post('/email-templates/store', 'store')->name('email-templates/store');
+    Route::delete('/email-templates/{id}', 'destroy')->name('email-templates.destroy');
+    Route::put('/email-templates/{id}', 'update')->name('email-templates.update');
+    Route::get('/email-templates/{id}/edit', 'edit')->name('email-templates.edit');
+});
+
+Route::middleware(['check.auth'])->controller(ExpenseController::class)->group(function () {
+    Route::get('expenses', 'index')->name('expenses');
+    Route::post('expenses/store', 'store')->name('expenses.store');
+    Route::delete('expenses/{expense}', 'destroy')->name('expenses.destroy');
+    Route::get('expenses/{expense}/download', 'downloadFile')->name('expenses.download');
+});
+
+Route::middleware(['check.auth'])->controller(ExcelController::class)->group(function () {
+    Route::get('transactions/download', 'downloadTransactions')->name('transactions.download'); 
+});
+
+Route::middleware(['check.auth'])->controller(GuideController::class)->group(function () {
+    Route::get('guides', 'index')->name('guides');
+    Route::get('guides/{id}', 'show')->name('guides.show');
+    Route::post('guides', 'store')->name('guides.store');
+    Route::put('guides/{id}', 'update')->name('guides.update');
+    Route::delete('guides/{id}', 'destroy')->name('guides.destroy');
+});
+
 Route::middleware(['check.auth'])->controller(IndexController::class)->group(function () {
     Route::get('dashboard', 'index')->name('dashboard');
+});
+
+Route::middleware(['check.auth'])->controller(OrderController::class)->group(function () {
+    Route::get('orders', 'showOrders')->name('orders');
+    Route::post('orders/store', 'storeOrder')->name('orders.store'); 
+    Route::delete('/orders/{id}', 'destroy')->name('orders.destroy');
+    Route::get('/orders/{id}/download', 'downloadFiles')->name('orders.download');
+    Route::get('/orders/{orderId}/services', 'getOrderServices')->name('orders.services');
+});
+
+Route::middleware(['check.auth'])->controller(PdfController::class)->group(function () {
+    Route::get('download-expenses-pdf', 'downloadExpensesPdf')->name('download-expenses-pdf'); 
+    Route::get('download-applications-pdf', 'downloadApplicationsPdf')->name('download-applications-pdf'); 
+});
+
+Route::middleware(['check.auth'])->controller(ReminderController::class)->group(function () {
+    Route::get('reminders', 'index')->name('reminders'); 
+    Route::post('update-reminders', 'updateReminders')->name('update-reminders'); 
 });
 
 Route::middleware(['check.auth'])->controller(ServiceController::class)->group(function () {
@@ -37,10 +118,30 @@ Route::middleware(['check.auth'])->controller(ServiceController::class)->group(f
     Route::get('/services/{serviceId}/costs', 'getServiceCosts')->name('services.costs');
 });
 
+Route::middleware(['check.auth'])->controller(TaskController::class)->group(function () {
+    Route::get('tasks', 'index')->name('tasks.index'); 
+    Route::post('task', 'store')->name('task.store');
+    Route::put('task/{id}', 'update')->name('task.update');
+    Route::delete('task/{id}', 'destroy')->name('task.destroy');
+});
 
-Route::middleware(['check.auth'])->controller(ReminderController::class)->group(function () {
-    Route::get('reminders', 'index')->name('reminders'); 
-    Route::post('update-reminders', 'updateReminders')->name('update-reminders'); 
+Route::middleware(['check.auth'])->controller(TicketController::class)->group(function () {
+    Route::get('tickets', 'index')->name('tickets'); 
+    Route::post('add-tickets', 'addTicket')->name('add-ticket'); 
+    Route::get('tickets/{id}/edit', 'edit')->name('edit-ticket'); 
+    Route::post('update-ticket', 'updateTicket')->name('update-ticket'); 
+    Route::delete('tickets/{id}', 'destroy')->name('delete-ticket'); 
+    Route::get('show-tickets/{id}', 'showTicket')->name('show-tickets'); 
+});
+
+Route::middleware(['check.auth'])->controller(TransactionController::class)->group(function () {
+    Route::get('transactions', 'index')->name('transactions'); 
+    Route::post('/transactions/store', 'store')->name('transactions.store');
+    Route::delete('/transactions/{id}', 'destroy')->name('transactions.destroy');
+    Route::get('/transaction/receipt/{id}', 'downloadReceipt')->name('transaction.receipt');
+    Route::get('archived-transactions', 'archivedTransactions')->name('archived-transactions');
+    Route::get('invoices', 'showInvoices')->name('invoices');
+    Route::post('/transaction/update-status/{id}', 'updateStatus')->name('transaction.updateStatus');
 });
 
 Route::controller(UserController::class)->group(function () {
@@ -69,87 +170,6 @@ Route::controller(UserController::class)->group(function () {
     Route::delete('/users/{id}', 'destroy')->name('users.destroy');
 });
 
-Route::middleware(['check.auth'])->controller(TransactionController::class)->group(function () {
-    Route::get('transactions', 'index')->name('transactions'); 
-    Route::post('/transactions/store', 'store')->name('transactions.store');
-    Route::delete('/transactions/{id}', 'destroy')->name('transactions.destroy');
-    Route::get('/transaction/receipt/{id}', 'downloadReceipt')->name('transaction.receipt');
-    Route::get('archived-transactions', 'archivedTransactions')->name('archived-transactions');
-    Route::get('invoices', 'showInvoices')->name('invoices');
-    Route::post('/transaction/update-status/{id}', 'updateStatus')->name('transaction.updateStatus');
-});
-
-Route::middleware(['check.auth'])->controller(CompanyController::class)->group(function () {
-    Route::get('general-settings', 'index')->name('general-settings'); 
-    Route::post('updated-company-profile', 'updateCompanyProfile')->name('updated-company-profile');
-});
-
-Route::middleware(['check.auth'])->controller(TicketController::class)->group(function () {
-    Route::get('tickets', 'index')->name('tickets'); 
-    Route::post('add-tickets', 'addTicket')->name('add-ticket'); 
-    Route::get('tickets/{id}/edit', 'edit')->name('edit-ticket'); 
-    Route::post('update-ticket', 'updateTicket')->name('update-ticket'); 
-    Route::delete('tickets/{id}', 'destroy')->name('delete-ticket'); 
-    Route::get('show-tickets/{id}', 'showTicket')->name('show-tickets'); 
-});
-
-Route::middleware(['check.auth'])->controller(OrderController::class)->group(function () {
-    Route::get('orders', 'showOrders')->name('orders');
-    Route::post('orders/store', 'storeOrder')->name('orders.store'); 
-    Route::delete('/orders/{id}', 'destroy')->name('orders.destroy');
-    Route::get('/orders/{id}/download', 'downloadFiles')->name('orders.download');
-    Route::get('/orders/{orderId}/services', 'getOrderServices')->name('orders.services');
-});
-
-
-Route::middleware(['check.auth'])->controller(ExpenseController::class)->group(function () {
-    Route::get('expenses', 'index')->name('expenses');
-    Route::post('expenses/store', 'store')->name('expenses.store');
-    Route::delete('expenses/{expense}', 'destroy')->name('expenses.destroy');
-    Route::get('expenses/{expense}/download', 'downloadFile')->name('expenses.download');
-});
-
-
-Route::middleware(['check.auth'])->controller(CredentialController::class)->group(function () {
-    Route::get('credentials', 'index')->name('credentials.index'); 
-    Route::post('credentials', 'store')->name('credentials.store');
-    Route::put('credentials/{id}', 'update')->name('credentials.update');
-    Route::delete('credentials/{id}', 'destroy')->name('credentials.destroy');
-});
-
-
-Route::middleware(['check.auth'])->controller(GuideController::class)->group(function () {
-    Route::get('guides', 'index')->name('guides');
-    Route::get('guides/{id}', 'show')->name('guides.show');
-    Route::post('guides', 'store')->name('guides.store');
-    Route::put('guides/{id}', 'update')->name('guides.update');
-    Route::delete('guides/{id}', 'destroy')->name('guides.destroy');
-});
-
-
-Route::middleware(['check.auth'])->controller(EmailTemplateController::class)->group(function () {
-    Route::get('email-templates', 'index')->name('email-templates'); 
-    Route::post('guide', 'store')->name('guide.store');
-    Route::put('guide/{id}', 'update')->name('guide.update');
-    Route::delete('guide/{id}', 'destroy')->name('guide.destroy');
-});
-
-Route::middleware(['check.auth'])->controller(TaskController::class)->group(function () {
-    Route::get('tasks', 'index')->name('tasks.index'); 
-    Route::post('task', 'store')->name('task.store');
-    Route::put('task/{id}', 'update')->name('task.update');
-    Route::delete('task/{id}', 'destroy')->name('task.destroy');
-});
-
-Route::middleware(['check.auth'])->controller(ExcelController::class)->group(function () {
-    Route::get('transactions/download', 'downloadTransactions')->name('transactions.download'); 
-});
-
-Route::middleware(['check.auth'])->controller(PdfController::class)->group(function () {
-    Route::get('download-expenses-pdf', 'downloadExpensesPdf')->name('download-expenses-pdf'); 
-    Route::get('download-applications-pdf', 'downloadApplicationsPdf')->name('download-applications-pdf'); 
-});
-
 Route::middleware(['check.auth'])->controller(NotesController::class)->group(function () {
     Route::get('notes', 'index')->name('notes');
     Route::post('note', 'store')->name('add-note');
@@ -157,37 +177,3 @@ Route::middleware(['check.auth'])->controller(NotesController::class)->group(fun
     Route::put('notes/{id}', 'update');
     Route::delete('notes/{id}', 'destroy');
 });
-
-
-Route::middleware(['check.auth'])->controller(DocumentNameController::class)->group(function () {
-    Route::get('document-names', 'index')->name('document-names');
-    Route::post('document-name', 'store')->name('document-name.store');
-    Route::put('document-name/toggle/{id}', 'toggle')->name('document-name.toggle');
-    Route::get('document-name/{id}/edit', 'edit')->name('document-name.edit');
-    Route::put('document-name/{id}', 'update')->name('document-name.update');
-    Route::delete('document-name/{id}', 'destroy')->name('document-name.destroy');
-});
-
-Route::middleware(['check.auth'])->controller(DocumentsController::class)->group(function () {
-    Route::get('documents', 'index')->name('documents');
-    Route::post('documents/store', 'store')->name('documents.store');
-    Route::delete('documents/{id}', 'destroy')->name('documents.destroy');
-});
-
-
-Route::middleware(['check.auth'])->controller(CalendarController::class)->group(function () {
-    Route::get('calendar', 'index')->name('calendar'); 
-});
-
-Route::middleware(['check.auth'])->controller(AssetController::class)->group(function () {
-    Route::get('assets', 'index')->name('assets'); 
-});
-
-
-
-Route::middleware(['check.auth'])->controller(CronJobController::class)->group(function () {
-    Route::put('expiry-document-reminder', 'expiryDocumentReminder')->name('expiry-document-reminder');
-    Route::put('application-follow-up-reminder', 'applicationFollowUpReminder')->name('application-follow-up-reminder');
-});
-
-

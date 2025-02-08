@@ -3,13 +3,6 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="{{ asset('build/css/bootstrap.min.css') }}">
 
-<!-- Datetimepicker CSS -->
-<!-- <link rel="stylesheet" href="{{ asset('build/plugins/daterangepicker/daterangepicker.css') }}">
-<link rel="stylesheet" href="{{ asset('build/css/bootstrap-datetimepicker.min.css') }}"> -->
-
-<!-- Animation CSS -->
-<!-- <link rel="stylesheet" href="{{ asset('build/css/animate.css') }}"> -->
-
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 <!-- Fontawesome CSS -->
@@ -19,26 +12,8 @@
 <!-- Feathericon CSS -->
 <link rel="stylesheet" href="{{ asset('build/css/feather.css') }}">
 
-<!-- Fancybox -->
-<!-- <link rel="stylesheet" href="{{ asset('build/plugins/fancybox/jquery.fancybox.min.css') }}"> -->
-
-<!-- Summernote CSS -->
-<!-- <link rel="stylesheet" href="{{ asset('build/plugins/summernote/summernote-bs4.min.css') }}"> -->
-
-<!-- Bootstrap Tagsinput CSS -->
-<!-- <link rel="stylesheet" href="{{ asset('build/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}"> -->
-
 <!-- Datatable CSS -->
 <link rel="stylesheet" href="{{ asset('build/css/dataTables.bootstrap5.min.css') }}">
-
-<!-- Mobile CSS -->
-<!-- <link rel="stylesheet" href="{{ asset('build/plugins/intltelinput/css/intlTelInput.css') }}"> -->
-<!-- <link rel="stylesheet" href="{{ asset('build/plugins/intltelinput/css/demo.css') }}"> -->
-
-<!-- <link rel="stylesheet" href="{{ asset('build/css/plyr.css') }}"> -->
-
-<!-- Owl Carousel -->
-<!-- <link rel="stylesheet" href="{{ asset('build/css/owl.carousel.min.css') }}"> -->
 
 @if (Route::is(['sales-dashboard']))
     <!-- Map CSS -->
@@ -49,92 +24,19 @@
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
 @endif
 
-<!-- Swiper CSS -->
-<!-- <link rel="stylesheet" href="{{ asset('build/plugins/swiper/swiper.min.css') }}"> -->
-
-<!-- Boxicons CSS -->
-<!-- <link rel="stylesheet" href="{{ asset('build/plugins/boxicons/css/boxicons.min.css') }}"> -->
 <script src="{{ URL::asset('/build/js/theme-script.js') }}"></script>
-
-
-
- @if (Route::is(['ui-stickynote', 'ui-timeline']))
-     <!-- Sticky CSS -->
-     <link rel="stylesheet" href="{{ url('build/plugins/stickynote/sticky.css') }}">
- @endif
-
- @if (Route::is(['ui-scrollbar']))
-     <link rel="stylesheet" href="{{ url('build/plugins/scrollbar/scroll.min.css') }}">
- @endif
-
-
-
- @if (Route::is(['ui-lightbox']))
-     <!-- Lightbox CSS -->
-     <link rel="stylesheet" href="{{ url('build/plugins/lightbox/glightbox.min.css') }}">
- @endif
-
- @if (Route::is(['ui-clipboard', 'ui-drag-drop']))
-     <!-- Dragula CSS -->
-     <link rel="stylesheet" href="{{ url('build/plugins/dragula/css/dragula.min.css') }}">
- @endif
-
- @if (Route::is(['icon-feather']))
-     <!-- Feather CSS -->
-     <link rel="stylesheet" href="{{ url('build/plugins/icons/feather/feather.css') }}">
- @endif
-
- @if (Route::is(['icon-flag']))
-     <!-- Pe7 CSS -->
-     <link rel="stylesheet" href="{{ url('build/plugins/icons/flags/flags.css') }}">
- @endif
-
- @if (Route::is(['icon-ionic']))
-     <!-- Ionic CSS -->
-     <link rel="stylesheet" href="{{ url('build/plugins/icons/ionic/ionicons.css') }}">
- @endif
-
- @if (Route::is(['icon-material']))
-     <!-- Material CSS -->
-     <link rel="stylesheet" href="{{ url('build/plugins/material/materialdesignicons.css') }}">
- @endif
-
- @if (Route::is(['icon-pe7']))
-     <!-- Pe7 CSS -->
-     <link rel="stylesheet" href="{{ url('build/plugins/icons/pe7/pe-icon-7.css') }}">
- @endif
-
- @if (Route::is(['icon-simpleline']))
-     <!-- Simpleline CSS -->
-     <link rel="stylesheet" href="{{ url('build/plugins/simpleline/simple-line-icons.css') }}">
- @endif
-
- @if (Route::is(['icon-themify']))
-     <!-- Themify CSS -->
-     <link rel="stylesheet" href="{{ url('build/plugins/icons/themify/themify.css') }}">
- @endif
-
- @if (Route::is(['icon-typicon']))
-     <!-- Pe7 CSS -->
-     <link rel="stylesheet" href="{{ url('build/plugins/icons/typicons/typicons.css') }}">
- @endif
-
- @if (Route::is(['icon-weather']))
-     <!-- Pe7 CSS -->
-     <link rel="stylesheet" href="{{ url('build/plugins/icons/weather/weathericons.css') }}">
- @endif
 
  @if (Route::is(['ui-rangeslider']))
      <!-- Rangeslider CSS -->
      <link rel="stylesheet" href="{{ url('build/plugins/ion-rangeslider/css/ion.rangeSlider.min.css') }}">
  @endif
 
- @if (Route::is(['form-wizard']))
-     <!-- Wizard CSS -->
-     <link rel="stylesheet" href="{{ url('build/plugins/twitter-bootstrap-wizard/form-wizard.css') }}">
- @endif
-
  <!-- Main CSS -->
  <link rel="stylesheet" href="{{ url('build/css/style.css') }}">
  <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
  <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+
+ @if (Route::is(['email-templates']))
+ <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+ <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+ @endif

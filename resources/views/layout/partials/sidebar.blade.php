@@ -4,7 +4,7 @@
             <ul>
 
                 <li class="submenu-open">
-                    <h6 class="submenu-hdr">Main Menu</h6>
+                    <h6 class="submenu-hdr">MAIN MENU</h6>
                     <ul>
                         <li class="{{ Request::routeIs('dashboard') ? 'active' : '' }}">
                             <a href="{{ url('dashboard') }}"><i data-feather="grid"></i><span>Dashboard</span></a>
@@ -16,7 +16,7 @@
                 </li>
 
                 <li class="submenu-open">
-                    <h6 class="submenu-hdr">FINANCE & SERVICES</h6>
+                    <h6 class="submenu-hdr">TRANSACTIONS & ORDERS</h6>
                     <ul>
                         <li class="submenu {{ Request::routeIs('transaction-types', 'transactions', 'archived-transactions', 'invoices') ? 'active' : '' }}">
                             <a href="javascript:void(0);"><i data-feather="smartphone"></i><span>Transactions</span><span class="menu-arrow"></span></a>
@@ -27,6 +27,24 @@
                             </ul>
                         </li>
 
+                        <li class="{{ Request::routeIs('orders') ? 'active' : '' }}">
+                            <a href="{{ route('orders') }}"><i data-feather="box"></i><span>Orders</span></a>
+                        </li>
+
+                        <li class="{{ Request::routeIs('tickets') ? 'active' : '' }}">
+                            <a href="{{ route('tickets') }}"><i data-feather="check-square"></i><span>Tickets</span></a>
+                        </li>
+
+                        <li class="{{ Request::routeIs('expenses') ? 'active' : '' }}">
+                            <a href="{{ route('expenses') }}"><i data-feather="dollar-sign"></i><span>Expenses</span></a>
+                        </li>
+                       
+                    </ul>
+                </li>
+
+                <li class="submenu-open">
+                    <h6 class="submenu-hdr">DOCUMENTS & SERVICES</h6>
+                    <ul>
                         <li class="submenu {{ Request::routeIs('documents', 'document-names') ? 'active' : '' }}">
                             <a href="javascript:void(0);"><i data-feather="file-text"></i><span>Documents</span><span class="menu-arrow"></span></a>
                             <ul>
@@ -35,20 +53,10 @@
                             </ul>
                         </li>
 
-                        <li class="{{ Request::routeIs('orders') ? 'active' : '' }}">
-                            <a href="{{ route('orders') }}"><i data-feather="box"></i><span>Orders</span></a>
-                        </li>
-
                         <li class="{{ Request::routeIs('services') ? 'active' : '' }}">
                             <a href="{{ route('services') }}"><i data-feather="briefcase"></i><span>Services</span></a>
                         </li>
                         
-                        <li class="{{ Request::routeIs('tickets') ? 'active' : '' }}">
-                            <a href="{{ route('tickets') }}"><i data-feather="check-square"></i><span>Tickets</span></a>
-                        </li>
-                        <li class="{{ Request::routeIs('expenses') ? 'active' : '' }}">
-                            <a href="{{ route('expenses') }}"><i data-feather="dollar-sign"></i><span>Expenses</span></a>
-                        </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"><i data-feather="tool"></i><span>Tools</span><span class="menu-arrow"></span></a>
                             <ul>
@@ -97,15 +105,11 @@
                         <li class="{{ Request::routeIs('reminders') ? 'active' : '' }}">
                             <a href="{{ route('reminders') }}"><i data-feather="bell"></i><span>Reminders</span></a>
                         </li>
-
-                        <li class="{{ Request::routeIs('assets') ? 'active' : '' }}">
-                            <a href="{{ route('assets') }}"><i data-feather="briefcase"></i><span>Office Assets</span></a>
-                        </li>
                     </ul>
                 </li>
 
                 <li class="submenu-open">
-                    <h6 class="submenu-hdr">EXTRAS</h6>
+                    <h6 class="submenu-hdr">ACTIVITIES</h6>
                     <ul>
                         <li class="{{ Request::routeIs('login-activities') ? 'active' : '' }}">
                             <a href="{{ route('login-activities') }}"><i data-feather="activity"></i><span>Login Activities</span></a>

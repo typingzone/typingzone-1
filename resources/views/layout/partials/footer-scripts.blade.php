@@ -34,131 +34,36 @@
  <!-- Bootstrap Core JS -->
  <script src="{{ URL::asset('/build/js/bootstrap.bundle.min.js') }}"></script>
 
-
- <!-- Swiper JS -->
- <!-- <script src="{{ URL::asset('/build/plugins/swiper/swiper.min.js') }}"></script>
-
- <!-- FancyBox JS -->
- <!-- <script src="{{ URL::asset('/build/plugins/fancybox/jquery.fancybox.min.js') }}"></script>
-
-
- <!-- Datetimepicker JS -->
- <!-- <script src="{{ URL::asset('/build/js/moment.min.js') }}"></script>
- <script src="{{ URL::asset('/build/js/bootstrap-datetimepicker.min.js') }}"></script>
- <script src="{{ URL::asset('/build/plugins/daterangepicker/daterangepicker.js') }}"></script> -->
-
  @if (Route::is(['todo']))
      <!-- Datetimepicker CSS -->
      <script src="{{ URL::asset('/build/plugins/moment/moment.min.js') }}"></script>
  @endif
 
- <!-- Bootstrap Tagsinput JS -->
- <!-- <script src="{{ URL::asset('/build/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js') }}"></script> -->
-
  <!-- Datatable JS -->
  <script src="{{ URL::asset('/build/js/jquery.dataTables.min.js') }}"></script>
  <script src="{{ URL::asset('/build/js/dataTables.bootstrap5.min.js') }}"></script>
 
- <!-- Summernote JS -->
- <!-- <script src="{{ URL::asset('/build/plugins/summernote/summernote-bs4.min.js') }}"></script> -->
-
- <!-- Mobile Input -->
- <!-- <script src="{{ URL::asset('/build/plugins/intltelinput/js/intlTelInput.js') }}"></script>
-
- <script src="{{ URL::asset('/build/js/plyr-js.js') }}"></script> -->
-
- <!-- Owl Carousel -->
- <!-- <script src="{{ URL::asset('/build/js/owl.carousel.min.js') }}"></script> -->
-
  <!-- Sticky-sidebar -->
  <script src="{{ URL::asset('/build/plugins/theia-sticky-sidebar/ResizeSensor.js') }}"></script>
  <script src="{{ URL::asset('/build/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js') }}"></script>
-
- @if (Route::is(['sales-dashboard']))
-     <!-- Map JS -->
-     <script src="{{ URL::asset('/build/plugins/jvectormap/jquery-jvectormap-2.0.5.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/jvectormap/jquery-jvectormap-world-mill.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/jvectormap/jquery-jvectormap-ru-mill.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/jvectormap/jquery-jvectormap-us-aea.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/jvectormap/jquery-jvectormap-uk_countries-mill.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/jvectormap/jquery-jvectormap-in-mill.js') }}"></script>
-     <script src="{{ URL::asset('/build/js/jvectormap.js') }}"></script>
- @endif
 
  @if (Route::is('calendar'))
  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.min.js"></script>
  @endif
 
- @if (Route::is(['ui-clipboard']))
-     <!-- Clipboard JS -->
-     <script src="{{ URL::asset('/build/plugins/clipboard/clipboard.min.js') }}"></script>
- @endif
-
- @if (Route::is(['ui-drag-drop']))
-     <!-- Dragula JS -->
-     <script src="{{ URL::asset('/build/plugins/dragula/js/dragula.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/dragula/js/drag-drop.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/dragula/js/draggable-cards.js') }}"></script>
- @endif
-
- @if (Route::is(['ui-rating']))
-     <!-- Rater JS -->
-     <script src="{{ URL::asset('/build/plugins/rater-js/index.js') }}"></script>
-     <!-- Internal Ratings JS -->
-     <script src="{{ URL::asset('/build/js/ratings.js') }}"></script>
- @endif
-
- @if (Route::is(['ui-counter']))
-     <!-- Stickynote JS -->
-     <script src="{{ URL::asset('/build/plugins/countup/jquery.counterup.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/countup/jquery.waypoints.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/countup/jquery.missofis-countdown.js') }}"></script>
- @endif
-
- @if (Route::is(['ui-text-editor']))
-     <!-- Summernote JS -->
-     <script src="{{ URL::asset('/build/plugins/summernote/summernote-bs4.min.js') }}"></script>
- @endif
-
- @if (Route::is(['ui-rangeslider']))
-     <!-- Rangeslider JS -->
-     <script src="{{ URL::asset('/build/plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/ion-rangeslider/js/custom-rangeslider.js') }}"></script>
- @endif
-
- @if (Route::is(['form-mask']))
-     <!-- Mask JS -->
-     <script src="{{ URL::asset('/build/js/jquery.maskedinput.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/js/mask.js') }}"></script>
- @endif
-
- @if (Route::is(['ui-scrollbar']))
-     <!-- Plyr JS -->
-     <script src="{{ URL::asset('/build/plugins/scrollbar/scrollbar.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/scrollbar/custom-scroll.js') }}"></script>
- @endif
-
- @if (Route::is(['ui-stickynote']))
-     <!-- Stickynote JS -->
-     <script src="{{ URL::asset('/build/js/jquery-ui.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/stickynote/sticky.js') }}"></script>
- @endif
-
-
  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
- @if (Route::is(['form-fileupload']))
-     <!-- Fileupload JS -->
-     <script src="{{ URL::asset('/build/plugins/fileupload/fileupload.min.js') }}"></script>
- @endif
-
- @if (Route::is(['form-wizard']))
-     <!-- Wizard JS -->
-     <script src="{{ URL::asset('/build/plugins/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/twitter-bootstrap-wizard/prettify.js') }}"></script>
-     <script src="{{ URL::asset('/build/plugins/twitter-bootstrap-wizard/form-wizard.js') }}"></script>
- @endif
 
  <!-- Custom JS -->
  <script src="{{ URL::asset('/build/js/script.js') }}"></script>
+
+ @if (Route::is('email-templates'))
+<script>
+    const quillAdd = new Quill('#template-email-body', {
+        theme: 'snow'
+    });
+    const quillEdit = new Quill('#edit-template-email-body', {
+        theme: 'snow'
+    });
+</script>
+@endif

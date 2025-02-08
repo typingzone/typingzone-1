@@ -2,14 +2,14 @@
   <div id="sidebar-menu-3" class="sidebar-menu">
     <ul class="nav">
       <li class="submenu">
-        <a href="{{ url('dashboard') }}" class="{{ Request::is('dashboard') ? 'active subdrop' : '' }}">
+        <a href="javascript:void(0);" class="{{ Request::is('dashboard') ? 'active subdrop' : '' }}">
           <i data-feather="grid"></i>
           <span>Main Menu</span>
           <span class="menu-arrow"></span>
         </a>
         <ul>
           <li>
-            <a href="{{ url('dashboard') }}" class="{{ Request::is('dashboard') ? 'active subdrop' : '' }}">
+            <a href="{{ url('dashboard') }}" class="{{ Request::is('dashboard') ? 'active' : '' }}">
               <i data-feather="home"></i>
               <span>Dashboard</span>
             </a>
@@ -30,7 +30,7 @@
         </a>
         <ul>
           <li class="submenu">
-            <a href="javascript:void(0);" class="{{ Request::is('transactions') ? 'active subdrop' : '' }}">
+            <a href="javascript:void(0);" class="{{ Request::is('transactions', 'transaction-types', 'transaction-histories', 'archived-transactions', 'invoices') ? 'active subdrop' : '' }}">
               <i data-feather="credit-card"></i>
               <span>Transactions</span>
               <span class="menu-arrow"></span>
@@ -59,7 +59,7 @@
             </ul>
           </li>
           <li class="submenu">
-            <a href="javascript:void(0);" class="{{ Request::is('documents') ? 'active subdrop' : '' }}">
+            <a href="javascript:void(0);" class="{{ Request::is('documents', 'document-names') ? 'active subdrop' : '' }}">
               <i data-feather="file-text"></i>
               <span>Documents</span>
               <span class="menu-arrow"></span>
@@ -78,7 +78,7 @@
             </ul>
           </li>
           <li class="submenu">
-            <a href="{{ url('orders') }}" class="{{ Request::is('orders') ? 'active subdrop' : '' }}">
+            <a href="{{ url('orders') }}" class="{{ Request::is('orders') ? 'active' : '' }}">
               <i data-feather="box"></i>
               <span>Orders</span>
             </a>
@@ -101,14 +101,14 @@
         </ul>
       </li>
       <li class="submenu">
-        <a href="javascript:void(0);" class="{{ Request::is('administration') ? 'active subdrop' : '' }}">
+        <a href="javascript:void(0);" class="{{ Request::is('administration', 'users', 'roles-permissions', 'settings') ? 'active subdrop' : '' }}">
           <i data-feather="users"></i>
           <span>ADMINISTRATION</span>
           <span class="menu-arrow"></span>
         </a>
         <ul>
           <li class="submenu">
-            <a href="javascript:void(0);" class="{{ Request::is('users') ? 'active subdrop' : '' }}">
+            <a href="javascript:void(0);" class="{{ Request::is('users', 'roles-permissions') ? 'active subdrop' : '' }}">
               <i data-feather="user"></i>
               <span>Users</span>
               <span class="menu-arrow"></span>
@@ -127,7 +127,7 @@
             </ul>
           </li>
           <li class="submenu">
-            <a href="javascript:void(0);" class="{{ Request::is('settings') ? 'active subdrop' : '' }}">
+            <a href="javascript:void(0);" class="{{ Request::is('settings', 'general-settings', 'notification-preferences') ? 'active subdrop' : '' }}">
               <i data-feather="settings"></i>
               <span>Settings</span>
               <span class="menu-arrow"></span>
@@ -148,7 +148,7 @@
         </ul>
       </li>
       <li class="submenu">
-        <a href="javascript:void(0);" class="{{ Request::is('extras') ? 'active subdrop' : '' }}">
+        <a href="javascript:void(0);" class="{{ Request::is('extras', 'guide', 'email-templates', 'reminders') ? 'active subdrop' : '' }}">
           <i data-feather="star"></i>
           <span>EXTRAS</span>
           <span class="menu-arrow"></span>
@@ -172,16 +172,10 @@
               <span>Reminders</span>
             </a>
           </li>
-          <li>
-            <a href="{{ url('office-assets') }}" class="{{ Request::is('office-assets') ? 'active' : '' }}">
-              <i data-feather="briefcase"></i>
-              <span>Office Assets</span>
-            </a>
-          </li>
         </ul>
       </li>
       <li class="submenu">
-        <a href="javascript:void(0);" class="{{ Request::is('activity') ? 'active subdrop' : '' }}">
+        <a href="javascript:void(0);" class="{{ Request::is('activity', 'login-activities', 'activity-log') ? 'active subdrop' : '' }}">
           <i data-feather="activity"></i>
           <span>ACTIVITY</span>
           <span class="menu-arrow"></span>
@@ -197,12 +191,6 @@
             <a href="{{ url('activity-log') }}" class="{{ Request::is('activity-log') ? 'active' : '' }}">
               <i data-feather="list"></i>
               <span>Activity Log</span>
-            </a>
-          </li>
-          <li>
-            <a href="{{ url('sales') }}" class="{{ Request::is('sales') ? 'active' : '' }}">
-              <i data-feather="shopping-cart"></i>
-              <span>Sales</span>
             </a>
           </li>
         </ul>

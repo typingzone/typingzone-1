@@ -864,3 +864,74 @@
     </div>
 </div>
 @endif
+
+
+
+@if(Route::is(['email-templates']))
+<!-- Modal -->
+<div class="modal fade" id="add-template-modal" tabindex="-1" aria-labelledby="add-template-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="add-template-modal-label">Add Template</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="template-form">
+                    <div class="mb-3">
+                        <label for="template-name" class="form-label">Template Name</label>
+                        <input type="text" class="form-control" id="template-name" placeholder="Enter template name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="template-subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="template-subject" placeholder="Enter subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="template-email-body" class="form-label">Email Body</label>
+                        <textarea id="template-email-body" class="form-control" rows="5" placeholder="Enter email body"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save-template">Save Template</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Edit Modal -->
+<div class="modal fade" id="edit-template-modal" tabindex="-1" aria-labelledby="edit-template-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-template-modal-label">Edit Template</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-template-form">
+                    <input type="hidden" id="edit-template-id">
+                    <div class="mb-3">
+                        <label for="edit-template-name" class="form-label">Template Name</label>
+                        <input type="text" class="form-control" id="edit-template-name" placeholder="Enter template name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-template-subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="edit-template-subject" placeholder="Enter subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-template-email-body" class="form-label">Email Body</label>
+                        <textarea id="edit-template-email-body" class="form-control" rows="5" placeholder="Enter email body"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save-edit-template">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endif

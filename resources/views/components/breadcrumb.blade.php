@@ -103,14 +103,21 @@
     @if (Route::is(['transactions']))
         <div class="page-btn">
             <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-transaction-modal"><i
-                    data-feather="plus-circle" class="me-2"></i> Add New</a>
+                    data-feather="plus-circle" class="me-2"></i> Transaction</a>
         </div>
     @endif
     
     @if (Route::is(['roles-permissions']))
         <div class="page-btn">
             <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-units"><i
-                    data-feather="plus-circle" class="me-2"></i> Add New Role</a>
+                    data-feather="plus-circle" class="me-2"></i> Role</a>
+        </div>
+    @endif
+
+    @if (Route::is(['email-templates']))
+        <div class="page-btn">
+            <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-template-modal"><i
+                    data-feather="plus-circle" class="me-2"></i> Template</a>
         </div>
     @endif
     
