@@ -18,12 +18,11 @@
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">TRANSACTIONS & ORDERS</h6>
                     <ul>
-                        <li class="submenu {{ Request::routeIs('transaction-types', 'transactions', 'archived-transactions', 'invoices') ? 'active' : '' }}">
-                            <a href="javascript:void(0);"><i data-feather="smartphone"></i><span>Transactions</span><span class="menu-arrow"></span></a>
+                        <li class="submenu">
+                            <a href="javascript:void(0);" class="{{ Request::routeIs('transactions', 'archived-transactions') ? 'subdrop active' : '' }}"><i data-feather="smartphone"></i><span>Transactions</span><span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="{{ route('transactions') }}">Transactions</a></li>
-                                <li><a href="{{ route('archived-transactions') }}">Archived Transactions</a></li>
-                                <li><a href="{{ route('invoices') }}">Invoices</a></li>
+                            <li><a href="{{ route('transactions') }}" class="{{ Request::routeIs('transactions') ? 'active' : '' }}">Transactions</a></li>
+                            <li><a href="{{ route('archived-transactions') }}" class="{{ Request::routeIs('archived-transactions') ? 'active' : '' }}">Archived Transactions</a></li>
                             </ul>
                         </li>
 
@@ -45,33 +44,26 @@
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">DOCUMENTS & SERVICES</h6>
                     <ul>
-                        <li class="submenu {{ Request::routeIs('documents', 'document-names') ? 'active' : '' }}">
-                            <a href="javascript:void(0);"><i data-feather="file-text"></i><span>Documents</span><span class="menu-arrow"></span></a>
+                        <li class="submenu">
+                            <a href="javascript:void(0);" class="{{ Request::routeIs('documents', 'document-names') ? 'subdrop active' : '' }}"><i data-feather="file-text"></i><span>Documents</span><span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="{{ route('documents') }}">Documents</a></li>
-                                <li><a href="{{ route('document-names') }}">Document Names</a></li>
+                                <li><a href="{{ route('documents') }}" class="{{ Request::routeIs('documents') ? 'active' : '' }}">Documents</a></li>
+                                <li><a href="{{ route('document-names') }}" class="{{ Request::routeIs('document-names') ? 'active' : '' }}">Document Names</a></li>
                             </ul>
                         </li>
 
                         <li class="{{ Request::routeIs('services') ? 'active' : '' }}">
                             <a href="{{ route('services') }}"><i data-feather="briefcase"></i><span>Services</span></a>
                         </li>
+                       
+                        <li class="submenu">
+                            <a href="javascript:void(0);" class="{{ Request::routeIs('invoices') ? 'subdrop active' : '' }}"><i data-feather="layout"></i><span>Invoies</span><span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="{{ route('invoices') }}" class="{{ Request::routeIs('invoices') ? 'active' : '' }}">Invoices</a></li>
+                                <li><a href="{{ route('invoices') }}" class="{{ Request::routeIs('invoices') ? 'active' : '' }}">Invoices Design</a></li>
+                            </ul>
+                        </li>
                         
-                        <li class="submenu">
-                            <a href="javascript:void(0);"><i data-feather="tool"></i><span>Tools</span><span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="chat.html">Image to PDF</a></li>
-                                <li><a href="calendar.html">PDF To Image</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="submenu">
-                            <a href="javascript:void(0);"><i data-feather="layout"></i><span>Invoices Design</span><span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="chat.html">Colors Picker</a></li>
-                                <li><a href="calendar.html">Invoices Design</a></li>
-                            </ul>
-                        </li>
                     </ul>
                 </li>
 
@@ -79,19 +71,15 @@
                     <h6 class="submenu-hdr">ADMINISTRATION</h6>
                     <ul>
                         <li class="submenu">
-                            <a href="javascript:void(0);"><i data-feather="users"></i><span>Users</span><span class="menu-arrow"></span></a>
+                            <a href="javascript:void(0);" class="{{ Request::routeIs('manage-users', 'role-permission') ? 'subdrop active' : '' }}"><i data-feather="users"></i><span>Users</span><span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="{{ route('manage-users') }}">Manage Users</a></li>
-                                <li><a href="{{ route('role-permission') }}">Roles & Permissions</a></li>
+                                <li><a href="{{ route('manage-users') }}" class="{{ Request::routeIs('manage-users') ? 'active' : '' }}">Manage Users</a></li>
+                                <li><a href="{{ route('role-permission') }}" class="{{ Request::routeIs('role-permission') ? 'active' : '' }}">Roles & Permissions</a></li>
                             </ul>
                         </li>
 
-                        <li class="submenu {{ Request::routeIs('general-settings', 'notes') ? 'active' : '' }}">
-                            <a href="javascript:void(0);"><i data-feather="settings"></i><span>Settings</span><span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="{{ route('general-settings') }}">General Settings</a></li>
-                                <li><a href="{{ route('notes') }}">Notes</a></li>
-                            </ul>
+                        <li class="{{ Request::routeIs('notes') ? 'active' : '' }}">
+                            <a href="{{ route('notes') }}"><i data-feather="file-text"></i><span>Notes</span></a>
                         </li>
 
                         <li class="{{ Request::routeIs('guides') ? 'active' : '' }}">

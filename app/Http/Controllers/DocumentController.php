@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Document;
-use App\Models\DocumentName;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 
-class DocumentsController extends Controller
+class DocumentController extends Controller
 {
     public function index()
     {
