@@ -15,7 +15,8 @@ class Order extends Model
         'files',
         'description',
         'assign_to',
-        'status'
+        'status',
+        'read_status'
     ];
 
     protected $casts = [

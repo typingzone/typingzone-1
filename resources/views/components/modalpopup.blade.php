@@ -9,12 +9,9 @@
                 </button>
             </div>
             <div class="modal-body p-4">
-                <div class="drag-drop text-center mb-4">
-                    <div class="upload">
-                        <a href="#"><img src="{{ URL::asset('/build/img/icons/drag-drop.svg')}}" alt=""></a>
-                        <p>Drag and drop a <a href="#">file to upload</a></p>
-                    </div>
-                    <input type="file" id="fileInput" name="fileInput" multiple="">
+                <div class="mb-3">
+                    <label for="documentName">Select File</label>
+                    <input type="file" class="form-control" id="fileInput" name="fileInput">
                 </div>
 
                 <div class="mb-3">
@@ -32,14 +29,6 @@
                     <input type="date" class="form-control" id="expiryDate" name="expiryDate">
                 </div>
 
-                <div class="d-flex align-items-center justify-content-between">
-                    <p>Uploading</p>
-                    <span id="uploadPercentage">0%</span>
-                </div>
-                <div class="progress mt-2 mb-4">
-                    <div class="progress-bar progress-bar bg-success" id="progressBar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-
                 <div class="text-end">
                     <button type="button" class="btn btn-primary" id="uploadButton">Upload</button>
                 </div>
@@ -48,6 +37,8 @@
     </div>
 </div>
 @endif
+
+
 
 
 

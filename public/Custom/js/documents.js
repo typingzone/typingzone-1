@@ -18,15 +18,24 @@ $(document).ready(function() {
 });
 
 
+
+
 $(document).ready(function () {
     $('#uploadButton').click(function() {
         var formData = new FormData();
         formData.append('document_name_id', $('#documentName').val());
         formData.append('expiry_date', $('#expiryDate').val());
         formData.append('file', $('#fileInput')[0].files[0]);
-
+        Swal.fire({
+            title: 'Uploading...',
+            text: 'Please wait while we upload your document.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
         $.ajax({
-            url: uploadDocumentUrl, // Use the global variable declared in Blade
+            url: uploadDocumentUrl,
             type: 'POST',
             data: formData,
             processData: false,
@@ -34,32 +43,20 @@ $(document).ready(function () {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            xhr: function () {
-                var xhr = new window.XMLHttpRequest();
-                xhr.upload.addEventListener("progress", function (evt) {
-                    if (evt.lengthComputable) {
-                        var percentComplete = Math.round((evt.loaded / evt.total) * 100);
-                        $('#progressBar').css('width', percentComplete + '%');
-                        $('#uploadPercentage').text(percentComplete + '%');
-                    }
-                }, false);
-                return xhr;
-            },
             success: function (response) {
+                Swal.close();
                 toastr.success('Document uploaded successfully');
-                $('#progressBar').css('width', '0%');
-                $('#uploadPercentage').text('0%');
                 $('#add-document-modal').modal('hide');
                 location.reload();
             },
             error: function (error) {
+                Swal.close(); 
                 toastr.error('Error uploading document');
-                $('#progressBar').css('width', '0%');
-                $('#uploadPercentage').text('0%');
             }
         });
     });
 });
+
 
 
 

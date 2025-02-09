@@ -49,13 +49,13 @@
               </h6>
               <ul class="search-tags">
                 <li>
-                  <a href="javascript:void(0);">Products</a>
+                  <a href="{{ route('orders') }}">Orders</a>
                 </li>
                 <li>
-                  <a href="javascript:void(0);">Sales</a>
+                  <a href="{{ route('transactions') }}">Transactions</a>
                 </li>
                 <li>
-                  <a href="javascript:void(0);">Applications</a>
+                  <a href="{{ route('documents') }}">Documents</a>
                 </li>
               </ul>
             </div>
@@ -126,44 +126,11 @@
       </a>
     </li> -->
     <!-- Notifications -->
-    <li class="nav-item dropdown nav-item-box">
-      <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-        <i data-feather="bell"></i>
-        <span class="badge rounded-pill">2</span>
-      </a>
-      <div class="dropdown-menu notifications">
-        <div class="topnav-dropdown-header">
-          <span class="notification-title">Notifications</span>
-          <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
-        </div>
-        <div class="noti-content">
-          <ul class="notification-list">
+   
             
-            <li class="notification-message">
-              <a href="{{ url('activities') }}">
-                <div class="media d-flex">
-                  <span class="avatar flex-shrink-0">
-                    <img alt="" src="{{ URL::asset('/build/img/profiles/avatar-13.jpg') }}">
-                  </span>
-                  <div class="media-body flex-grow-1">
-                    <p class="noti-details">
-                      <span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span>
-                    </p>
-                    <p class="noti-time">
-                      <span class="notification-time">2 days ago</span>
-                    </p>
-                  </div>
-                </div>
-              </a>
-            </li>
+            @include('layout.partials.notifications');
 
-          </ul>
-        </div>
-        <div class="topnav-dropdown-footer">
-          <a href="{{ url('activities') }}">View all Notifications</a>
-        </div>
-      </div>
-    </li>
+        
     <!-- /Notifications -->
     <li class="nav-item nav-item-box">
       <a href="{{ url('general-settings') }}">

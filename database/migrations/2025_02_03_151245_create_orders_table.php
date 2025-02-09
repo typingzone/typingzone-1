@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('assign_to')->nullable();
             $table->string('status');
+            $table->string('read_status')->default(0);
             $table->timestamps();
         });
     }

@@ -33,7 +33,7 @@
                                 <td>{{ $service->service_name }}</td>
                                 <td>{{ $service->govt_cost }}</td>
                                 <td>{{ $service->service_cost }}</td>
-                                <td><span class="badge badge-linesuccess">{{ $service->user->name ?? 'Default' }}</span></td>
+                                <td><span class="badge badge-dark custom-badge">{{ $service->user->name ?? 'System' }}</span></td>
                                 <td>{{ $service->created_at->diffForHumans() }}</td>
                                 <td class="action-table-data">
                                     <div class="edit-delete-action">
