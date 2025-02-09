@@ -26,7 +26,7 @@
                     </td>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $document->documentName->document_name }}</td>
-                    <td><span class="badge badge-linesuccess">{{ $document->expirey_data }}</span></td> 
+                    <td><span class="badge badge-linesuccess">{{ $document->expiry_date }}</span></td> 
                     <td class="action-table-data">
                         <div class="edit-delete-action">
                             <a class="me-2 p-2" href="#">

@@ -23,7 +23,7 @@
                             <i class="fa fa-info-circle"></i>
                         </a>
                     </td>
-                    <td><span class="badge badge-warning">{{ucfirst($task->status) }}</span></td> 
+                    <td><span class="badge badge-warning custom-badge">{{ucfirst($task->status) }}</span></td> 
                 </tr>
                 @endforeach
             </tbody>

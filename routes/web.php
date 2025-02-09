@@ -77,6 +77,7 @@ Route::middleware(['check.auth'])->controller(ExpenseController::class)->group(f
 
 Route::middleware(['check.auth'])->controller(ExcelController::class)->group(function () {
     Route::get('transactions/download', 'downloadTransactions')->name('transactions.download'); 
+    Route::get('expenses/download', 'downloadExpenses')->name('expenses.download'); 
 });
 
 Route::middleware(['check.auth'])->controller(GuideController::class)->group(function () {
