@@ -15,7 +15,6 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         .email-header {
-            background-color: #0073e6;
             padding: 20px;
             text-align: center;
         }
@@ -37,6 +36,5 @@
 <body>
     <div class="email-container">
         <div class="email-header">
-            <img src="{{ asset('path_to_logo.png') }}" alt="Logo" class="email-logo">
-            <h1>Your Company</h1>
+            <img src="{{ $companyLogo }}" alt="Logo" class="email-logo">
         </div>

@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ExpiryDocumentReminderMail extends Mailable
+class NotesReminderMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -14,27 +14,27 @@ class ExpiryDocumentReminderMail extends Mailable
     public $companyLogo;
     public $companyName;
     public $userName;
-    public $documents;
+    public $notes;
 
-    public function __construct($user, $companyLogo, $companyName, $userName, $documents)
+    public function __construct($user, $companyLogo, $companyName, $userName, $notes)
     {
         $this->user = $user;
         $this->companyLogo = $companyLogo;
         $this->companyName = $companyName;
         $this->userName = $userName;
-        $this->documents = $documents;
+        $this->notes = $notes;
     }
 
     public function build()
     {
-        return $this->view('emails.expiry_reminder')
-                    ->subject('Document Expiry Reminder')
+        return $this->view('emails.notes_reminder')
+                    ->subject('Notes Reminder')
                     ->with([
                         'user' => $this->user,
                         'companyLogo' => $this->companyLogo,
                         'companyName' => $this->companyName,
                         'userName' => $this->userName,
-                        'documents' => $this->documents,
+                        'notes' => $this->notes,
                     ]);
     }
 }

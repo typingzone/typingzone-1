@@ -40,9 +40,9 @@ Route::middleware(['check.auth'])->controller(CredentialController::class)->grou
     Route::delete('credentials/{id}', 'destroy')->name('credentials.destroy');
 });
 
-Route::middleware(['check.auth'])->controller(CronJobController::class)->group(function () {
-    Route::put('expiry-document-reminder', 'expiryDocumentReminder')->name('expiry-document-reminder');
-    Route::put('application-follow-up-reminder', 'applicationFollowUpReminder')->name('application-follow-up-reminder');
+Route::controller(CronJobController::class)->group(function () {
+    Route::get('expiry-document-reminder', 'expiryDocumentReminder')->name('expiry-document-reminder');
+    Route::get('notes-reminder', 'notesReminder')->name('notes-reminder');
 });
 
 Route::middleware(['check.auth'])->controller(DocumentNameController::class)->group(function () {
