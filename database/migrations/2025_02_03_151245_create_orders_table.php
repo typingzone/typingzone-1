@@ -21,7 +21,7 @@ return new class extends Migration
             $table->json('files')->nullable();
             $table->text('description')->nullable();
             $table->string('assign_to')->nullable();
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->string('read_status')->default(0);
             $table->timestamps();
         });

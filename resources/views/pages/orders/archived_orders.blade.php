@@ -1,14 +1,14 @@
-<?php $page = 'Archived Transactions'; ?>
+<?php $page = 'Archived Orders'; ?>
 @extends('layout.mainlayout')
 @section('content')
     <div class="page-wrapper">
         <div class="content">
             @component('components.breadcrumb')
                 @slot('title')
-                Archived Transactions
+                    Archived Orders
                 @endslot
                 @slot('li_1')
-                    Manage your Archived transactions
+                    Manage your Archived Orders
                 @endslot
                
             @endcomponent
@@ -49,7 +49,7 @@
                             </div>
                             <ul class="team-members">
                                 <li>
-                                    Total Transactions: 07
+                                    Total Orders: 07
                                 </li>
                                 <li>
                                     <ul>

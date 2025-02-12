@@ -190,8 +190,10 @@ $(document).on('click', '.delete-transaction', function() {
 });
 
 
+
+
 $(document).ready(function () {
-    $('[data-bs-toggle="tooltip"]').tooltip(); // Initialize tooltips globally
+    $('[data-bs-toggle="tooltip"]').tooltip();
     $('body').on('click', '.status-icon', function () {
         var transactionId = $(this).data('id');
         var currentStatus = $(this).data('status');
@@ -217,7 +219,7 @@ $(document).ready(function () {
 
     function updateStatus(transactionId, status, element) {
         $.ajax({
-            url: '/transaction/update-status/' + transactionId, 
+            url: '/transaction/update-status/' + transactionId,
             type: 'POST',
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -238,11 +240,11 @@ $(document).ready(function () {
                     icon = 'fa-clock text-warning';
                     title = 'Pending';
                 }
-                element.attr('class', 'fa ' + icon); // Update icon class
-                element.attr('data-bs-toggle', 'tooltip'); // Ensure tooltip functionality
-                element.attr('title', title); // Update title for tooltip
-                $(element).tooltip('dispose').tooltip(); // Dispose the old tooltip and initialize new one
-                toastr.success('Status ' + response.status); // Show success message
+                element.attr('class', 'fa ' + icon);
+                element.attr('data-bs-toggle', 'tooltip');
+                element.attr('title', title);
+                $(element).tooltip('dispose').tooltip();
+                toastr.success('Status ' + response.status);
             },
             error: function () {
                 Swal.fire('Error', 'Failed to update status.', 'error');

@@ -750,11 +750,86 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="edit-order-modal" tabindex="-1" role="dialog" aria-labelledby="edit-order-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-order-modal-label">Edit Order</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-order-modal-form" action="" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" id="edit_order_id" name="id" value="">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="edit_customer_name" class="form-label">Customer Name</label>
+                                <input type="text" class="form-control" id="edit_customer_name" name="customer_name" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="edit_phone_number" class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" id="edit_phone_number" name="phone_number" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="edit_email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="edit_email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="edit_services" class="form-label">Services</label>
+                                <select class="mySelect5 form-control" id="edit_services" name="services[]" multiple required>
+                                    @foreach($services as $service)
+                                        <option value="{{ $service->id }}" {{ in_array($service->id, old('services', $order->service_ids ?? [])) ? 'selected' : '' }}>
+                                            {{ $service->service_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="edit_assign_to" class="form-label">Assign To</label>
+                                <select class="mySelect4 form-control" id="edit_assign_to" name="assign_to" required>
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group mb-3">
+                                <label for="edit_description" class="form-label">Description</label>
+                                <textarea class="form-control" id="edit_description" name="description" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update Order</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endif
-
-
-
-
 
 
 
@@ -857,7 +932,6 @@
 @endif
 
 
-
 @if(Route::is(['email-templates']))
 <!-- Modal -->
 <div class="modal fade" id="add-template-modal" tabindex="-1" aria-labelledby="add-template-modal-label" aria-hidden="true">
@@ -890,8 +964,6 @@
         </div>
     </div>
 </div>
-
-
 
 <!-- Edit Modal -->
 <div class="modal fade" id="edit-template-modal" tabindex="-1" aria-labelledby="edit-template-modal-label" aria-hidden="true">

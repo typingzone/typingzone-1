@@ -23,6 +23,11 @@ class OrderController extends Controller
     }
 
 
+    public function archivedOrders()
+    {
+        return view('pages.orders.archived_orders');
+    }
+
 
 
     public function storeOrder(Request $request)
@@ -110,6 +115,38 @@ class OrderController extends Controller
         return response()->json($services);
     }
 
+
+
+    public function edit($id)
+    {
+        $order = Order::find($id);
+        if (!$order) {
+            return response()->json(['error' => 'Order not found'], 404);
+        }
+        $order->service_ids = explode(', ', $order->services);
+        $order->assign_to_id = $order->assignedTo ? $order->assignedTo->id : null;
+        return response()->json($order);
+    }
+    
+    
+
+    public function update(Request $request, $id)
+    {
+        $order = Order::find($id);
+        $order->update([
+            'customer_name' => $request->customer_name,
+            'phone_number' => $request->phone_number,
+            'email' => $request->email,
+            'description' => $request->description,
+            'services' => implode(', ', $request->services), 
+        ]);
+        if ($request->has('assign_to')) {
+            $order->assignedTo()->associate(User::find($request->assign_to))->save();
+        }    
+        return redirect()->back()->with('success', 'Order updated successfully.');
+    }
+    
+    
 
     
 }

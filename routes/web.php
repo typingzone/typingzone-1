@@ -98,6 +98,9 @@ Route::middleware(['check.auth'])->controller(OrderController::class)->group(fun
     Route::delete('/orders/{id}', 'destroy')->name('orders.destroy');
     Route::get('/orders/{id}/download', 'downloadFiles')->name('orders.download');
     Route::get('/orders/{orderId}/services', 'getOrderServices')->name('orders.services');
+    Route::get('/orders/{id}/edit','edit')->name('orders.edit');
+    Route::put('/orders/{id}', 'update')->name('orders.update');
+    Route::get('archived-orders', 'archivedOrders')->name('archived-orders');
 });
 
 Route::middleware(['check.auth'])->controller(PdfController::class)->group(function () {

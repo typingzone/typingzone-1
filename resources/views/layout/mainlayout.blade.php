@@ -64,7 +64,9 @@
 @yield('content')
 </div>
 <!-- /Main Wrapper -->
-@include('layout.partials.theme-settings')
+@if(!Route::is(['login']))
+    @include('layout.partials.theme-settings')
+@endif
 @component('components.modalpopup')
 @endcomponent
 @include('layout.partials.footer-scripts')

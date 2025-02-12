@@ -26,8 +26,13 @@
                             </ul>
                         </li>
 
-                        <li class="{{ Request::routeIs('orders') ? 'active' : '' }}">
-                            <a href="{{ route('orders') }}"><i data-feather="box"></i><span>Orders</span></a>
+
+                        <li class="submenu">
+                            <a href="javascript:void(0);" class="{{ Request::routeIs('orders', 'archived-orders') ? 'subdrop active' : '' }}"><i data-feather="box"></i><span>Orders</span><span class="menu-arrow"></span></a>
+                            <ul>
+                            <li><a href="{{ route('orders') }}" class="{{ Request::routeIs('orders') ? 'active' : '' }}">Orders</a></li>
+                            <li><a href="{{ route('archived-orders') }}" class="{{ Request::routeIs('archived-orders') ? 'active' : '' }}">Archived Orders</a></li>
+                            </ul>
                         </li>
 
                         <li class="{{ Request::routeIs('tickets') ? 'active' : '' }}">
