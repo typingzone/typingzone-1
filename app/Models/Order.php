@@ -15,8 +15,7 @@ class Order extends Model
         'files',
         'description',
         'assign_to',
-        'status',
-        'read_status'
+        'status'
     ];
 
     protected $casts = [
@@ -40,5 +39,10 @@ class Order extends Model
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Notification;
 
 class OrderController extends Controller
 {
@@ -52,7 +53,7 @@ class OrderController extends Controller
             }
         }
     
-        Order::create([
+        $order = Order::create([
             'user_id' => Auth::id(),
             'customer_name' => $request->customer_name,
             'phone_number' => $request->phone_number,
@@ -63,7 +64,14 @@ class OrderController extends Controller
             'assign_to' => $request->assign_to,
             'status' => 'pending',
         ]);
-    
+        
+        Notification::create([
+            'assign_to' => $request->assign_to,
+            'order_id' => $order->id, 
+            'comment' => $request->customer_name . ' has been assigned to you for further processing.',
+        ]);
+        
+        
         return response()->json(['success' => true]);
     }
     
@@ -148,5 +156,20 @@ class OrderController extends Controller
     
     
 
+    public function allNotifications()
+    {
+        $notifications = Notification::where('assign_to', Auth::id())->with('order')->get();
+        return view('pages.orders.all-notifications', compact('notifications'));
+    }
+    
+
+    public function deleteNotification($id)
+    {
+        $notification = Notification::findOrFail($id);
+        $notification->delete();
+        return response()->json(['success' => true]);
+    }
+
+    
     
 }

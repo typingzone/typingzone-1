@@ -17,6 +17,48 @@ $(document).ready(function() {
         }
     });
 
+    $('.mySelect7').select2({
+        placeholder: 'Search',
+        allowClear: true,
+        theme: "classic",
+        height: 'resolve',
+        dropdownParent: $('#edit-transaction-modal')
+    }).on('select2:open', function() {
+        var selectInstance = $(this).data('select2');
+        if (!$('.select2-link').length) {
+            selectInstance.$results.parents('.select2-results')
+                .append('<div class="select2-link"><a href="/orders" class="mt-2 btn btn-primary btn-sm form-control">Add Customer</a></div>')
+                .on('click', function() {
+                    selectInstance.trigger('close');
+                });
+        }
+    });
+
+    $('.mySelect8').select2({
+        placeholder: 'Search',
+        allowClear: true,
+        theme: "classic",
+        height: 'resolve',
+        dropdownParent: $('#edit-transaction-modal')
+    }).on('select2:open', function() {
+        var selectInstance = $(this).data('select2');
+        if (!$('.select2-link').length) {
+            selectInstance.$results.parents('.select2-results')
+                .append('<div class="select2-link"><a href="/services" class="mt-2 btn btn-primary btn-sm form-control">Add Service</a></div>')
+                .on('click', function() {
+                    selectInstance.trigger('close');
+                });
+        }
+    });
+
+    $('.mySelect9').select2({
+        placeholder: 'Search',
+        allowClear: true,
+        theme: "classic",
+        height: 'resolve',
+        dropdownParent: $('#edit-transaction-modal')
+    });
+
     $('.mySelect3').select2({
         placeholder: 'Search',
         allowClear: true,
@@ -251,4 +293,71 @@ $(document).ready(function () {
             }
         });
     }
+});
+
+
+
+
+$(document).ready(function() {
+    $('.edit-transaction').click(function() {
+        var transactionId = $(this).data('id');
+        $.ajax({
+            url: '/transactions/' + transactionId + '/edit',
+            type: 'GET',
+            success: function(data) {
+                $('#edit_transaction_id').val(data.id);
+                $('#edit_order_id').empty().append('<option value="'+ data.order_id +'">'+ data.order.customer_name +'</option>');
+                $('#edit_service_id').empty().append('<option value="'+ data.service_id +'">'+ data.service.service_name +'</option>');
+                $('#edit_application_no').val(data.application_no);
+                $('#edit_govt_cost').val(data.govt_cost);
+                $('#edit_service_cost').val(data.service_cost);
+                $('#edit_paid_by').val(data.paid_by);
+                $('#edit_description').val(data.description);
+                $('#edit-transaction-modal').modal('show');
+            },
+            error: function() {
+                Swal.fire('Error', 'Unable to fetch transaction data.', 'error');
+            }
+        });
+    });
+
+    $('#edit-transaction-form').on('submit', function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        var transactionId = $('#edit_transaction_id').val();
+        Swal.fire({
+            title: 'Updating...',
+            text: 'Please wait',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+        $.ajax({
+            url: '/transactions/' + transactionId + '/update',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                Swal.close();
+                if (response.success) {
+                    Swal.fire('Success', response.message, 'success');
+                    $('#edit-transaction-modal').modal('hide');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000);
+                }
+            },
+            error: function(xhr) {
+                Swal.close();
+                var errors = xhr.responseJSON.errors;
+                var errorMessage = '';
+                $.each(errors, function(key, value) {
+                    errorMessage += value[0] + '\n';
+                });
+                Swal.fire('Error', errorMessage, 'error');
+            }
+        });
+    });
 });

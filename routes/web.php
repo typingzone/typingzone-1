@@ -101,6 +101,8 @@ Route::middleware(['check.auth'])->controller(OrderController::class)->group(fun
     Route::get('/orders/{id}/edit','edit')->name('orders.edit');
     Route::put('/orders/{id}', 'update')->name('orders.update');
     Route::get('archived-orders', 'archivedOrders')->name('archived-orders');
+    Route::get('all-notifications', 'allNotifications')->name('all-notifications');
+    Route::delete('notifications/{id}', 'deleteNotification')->name('notification.delete');
 });
 
 Route::middleware(['check.auth'])->controller(PdfController::class)->group(function () {
@@ -146,6 +148,9 @@ Route::middleware(['check.auth'])->controller(TransactionController::class)->gro
     Route::get('archived-transactions', 'archivedTransactions')->name('archived-transactions');
     Route::get('invoices', 'showInvoices')->name('invoices');
     Route::post('/transaction/update-status/{id}', 'updateStatus')->name('transaction.updateStatus');
+    Route::get('/transactions/{id}/edit', 'edit')->name('transactions.edit');
+    Route::post('/transactions/{id}/update', 'update')->name('transactions.update');
+
 });
 
 Route::controller(UserController::class)->group(function () {

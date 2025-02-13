@@ -95,4 +95,19 @@ class TransactionController extends Controller
     }
 
 
+    public function edit($id)
+    {
+        $transaction = Transaction::with('order', 'service')->findOrFail($id);
+        return response()->json($transaction);
+    }
+    
+    public function update(Request $request, $id)
+    {
+        $transaction = Transaction::findOrFail($id);
+        $transaction->update($request->all());
+        return response()->json(['success' => true, 'message' => 'Transaction updated successfully.']);
+    }
+    
+
+
 }

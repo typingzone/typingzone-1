@@ -853,6 +853,7 @@
                                 <label for="order_id" class="form-label">Select Customer <span class="text-danger">*</span></label>
                                 <select class="mySelect2 form-control" id="order_id" name="order_id" required>
                                     @php  $orders = \App\Models\Order::where('assign_to', \Illuminate\Support\Facades\Auth::id())->where('status', 'pending')->get(); @endphp
+                                    <option></option>
                                     @foreach($orders as $order)
                                         <option value="{{ $order->id }}">{{ $order->customer_name }}</option>
                                     @endforeach
@@ -929,6 +930,105 @@
         </div>
     </div>
 </div>
+
+
+<!-- Edit Transaction Modal -->
+<div id="edit-transaction-modal" class="modal fade" tabindex="-1" aria-labelledby="editTransactionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editTransactionModalLabel">Edit Transaction</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-transaction-form" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="transaction_id" id="edit_transaction_id">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="edit_order_id" class="form-label">Select Customer</label>
+                                <select class="mySelect7 form-control" id="edit_order_id" name="order_id" required>
+                                    @foreach($orders as $order)
+                                        <option value="{{ $order->id }}">{{ $order->customer_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="edit_service_id" class="form-label">Select Service</label>
+                                <select class="mySelect8 form-control" id="edit_service_id" name="service_id" required>
+                                    <!-- Options will be populated via JS -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="edit_application_no" class="form-label">Application Number</label>
+                                <input type="text" class="form-control" id="edit_application_no" name="application_no" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="edit_govt_cost" class="form-label">Govt Cost</label>
+                                <input type="text" class="form-control" id="edit_govt_cost" name="govt_cost" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="edit_service_cost" class="form-label">Service Cost</label>
+                                <input type="text" class="form-control" id="edit_service_cost" name="service_cost" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="edit_receipt" class="form-label">Receipt</label>
+                                <input type="file" class="form-control" id="edit_receipt" name="receipt">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="edit_paid_by" class="form-label">Paid By</label>
+                                <select class="mySelect9 form-control" id="edit_paid_by" name="paid_by" required>
+                                    <option value="Card">Card</option>
+                                    <option value="Bank Transfer">Bank Transfer</option>
+                                    <option value="Customer">Customer</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="form-group mb-3">
+                                <label for="edit_description" class="form-label">Description</label>
+                                <textarea class="form-control" id="edit_description" name="description" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update Transaction</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @endif
 
 
