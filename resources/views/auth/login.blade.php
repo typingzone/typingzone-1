@@ -43,6 +43,6 @@
         </div>
     </div>
 
-    <script src="{{ asset('custom/js/login.js') }}"></script>
+    <script src="{{ asset('build/Custom/js/login.js') }}"></script>
 
 @endsection

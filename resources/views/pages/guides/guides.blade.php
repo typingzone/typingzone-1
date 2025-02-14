@@ -37,5 +37,5 @@
     </div>
 </div>
 
-<script src="{{ asset('custom/js/guides.js') }}"></script>
+<script src="{{ asset('build/Custom/js/guides.js') }}"></script>
 @endsection

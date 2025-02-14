@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('custom/js/reminders.js') }}"></script>
+    <script src="{{ asset('build/Custom/js/reminders.js') }}"></script>
 
     <style>
         /* Toggle Switch CSS */

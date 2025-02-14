@@ -45,5 +45,5 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('custom/js/all-notifications.js') }}"></script>
+    <script src="{{ asset('build/Custom/js/all-notifications.js') }}"></script>
 @endsection

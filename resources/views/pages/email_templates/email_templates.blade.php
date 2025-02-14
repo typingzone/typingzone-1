@@ -31,5 +31,5 @@
         </div>
     </div>
 
-    <script src="{{ asset('custom/js/email_templates.js') }}"></script>
+    <script src="{{ asset('build/Custom/js/email_templates.js') }}"></script>
 @endsection

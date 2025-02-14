@@ -92,5 +92,5 @@
     <script>
         var transactionsStore = "{{ route('transactions.store') }}";
     </script>
-    <script src="{{ asset('custom/js/transactions.js') }}"></script>
+    <script src="{{ asset('build/Custom/js/transactions.js') }}"></script>
 @endsection

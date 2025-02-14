@@ -37,6 +37,6 @@
         </div>
     </div>
     
-    <script src="{{ asset('custom/js/forgot_password.js') }}"></script>
+    <script src="{{ asset('build/Custom/js/forgot_password.js') }}"></script>
 
 @endsection

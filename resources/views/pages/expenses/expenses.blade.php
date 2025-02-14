@@ -53,5 +53,5 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('custom/js/expenses.js') }}"></script>
+    <script src="{{ asset('build/Custom/js/expenses.js') }}"></script>
 @endsection

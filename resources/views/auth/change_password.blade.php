@@ -42,6 +42,6 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('custom/js/change_password.js') }}"></script>
+    <script src="{{ asset('build/Custom/js/change_password.js') }}"></script>
 
 @endsection

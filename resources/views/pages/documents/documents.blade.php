@@ -59,5 +59,5 @@
     <script>
         var uploadDocumentUrl = "{{ route('documents.store') }}";
     </script>
-    <script src="{{ asset('custom/js/documents.js') }}"></script>
+    <script src="{{ asset('build/Custom/js/documents.js') }}"></script>
 @endsection

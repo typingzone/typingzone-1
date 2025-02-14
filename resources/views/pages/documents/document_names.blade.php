@@ -55,7 +55,7 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('custom/js/document_names.js') }}"></script>
+    <script src="{{ asset('build/Custom/js/document_names.js') }}"></script>
 
 
     <style>

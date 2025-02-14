@@ -55,5 +55,5 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('custom/js/manage_users.js') }}"></script>
+    <script src="{{ asset('build/Custom/js/manage_users.js') }}"></script>
 @endsection

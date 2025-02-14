@@ -56,6 +56,6 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('custom/js/login_activities.js') }}"></script>
+    <script src="{{ asset('build/Custom/js/login_activities.js') }}"></script>
 
 @endsection

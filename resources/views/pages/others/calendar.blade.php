@@ -36,6 +36,6 @@
     <script>
     var notes = @json($notes);
 </script>
-    <script src="{{ asset('custom/js/calendar.js') }}"></script>
+    <script src="{{ asset('build/Custom/js/calendar.js') }}"></script>
 
 @endsection

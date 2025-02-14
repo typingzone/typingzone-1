@@ -83,6 +83,6 @@
         </div>
     </div>
 
-    <script src="{{ asset('custom/js/general-settings.js') }}"></script>
+    <script src="{{ asset('build/Custom/js/general-settings.js') }}"></script>
 
 @endsection

@@ -50,6 +50,6 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('custom/js/tickets.js') }}"></script>
+    <script src="{{ asset('build/Custom/js/tickets.js') }}"></script>
 @endsection
 

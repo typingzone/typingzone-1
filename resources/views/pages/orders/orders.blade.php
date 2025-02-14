@@ -71,6 +71,6 @@
         var storeOrderUrl = "{{ route('orders.store') }}";
         var deleteOrderUrl = "{{ route('orders.destroy', ':id') }}"; 
     </script>
-    <script src="{{ asset('custom/js/orders.js') }}"></script>
+    <script src="{{ asset('build/Custom/js/orders.js') }}"></script>
 @endsection
 

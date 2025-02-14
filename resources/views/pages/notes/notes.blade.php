@@ -38,5 +38,5 @@
     </div>
 </div>
 
-<script src="{{ asset('custom/js/notes.js') }}"></script>
+<script src="{{ asset('build/Custom/js/notes.js') }}"></script>
 @endsection
