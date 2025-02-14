@@ -43,6 +43,7 @@ Route::middleware(['check.auth'])->controller(CredentialController::class)->grou
 Route::controller(CronJobController::class)->group(function () {
     Route::get('expiry-document-reminder', 'expiryDocumentReminder')->name('expiry-document-reminder');
     Route::get('notes-reminder', 'notesReminder')->name('notes-reminder');
+    Route::get('make-transactions-archive', 'makeTransactionsArchive')->name('make-transactions-archive');
 });
 
 Route::middleware(['check.auth'])->controller(DocumentNameController::class)->group(function () {
@@ -186,3 +187,4 @@ Route::middleware(['check.auth'])->controller(NotesController::class)->group(fun
     Route::put('notes/{id}', 'update');
     Route::delete('notes/{id}', 'destroy');
 });
+

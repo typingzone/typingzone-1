@@ -10,6 +10,8 @@ use App\Models\Note;
 use App\Models\Company;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Reminder;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CronJobController extends Controller
 {
@@ -64,13 +66,6 @@ class CronJobController extends Controller
         return response()->json(['status' => 'error', 'message' => 'No notes reminders found.']);
     }
 
-
-
-
-
-
-
-
     private function getCompanyInfo()
     {
         $company = Company::first();
@@ -82,4 +77,49 @@ class CronJobController extends Controller
         ];
     }
 
+
+    
+    public function makeTransactionsArchive()
+    {
+        $maxRecords = 2; 
+        $moveCount = 1;   
+        $currentCount = DB::table('transactions')->count();
+        if ($currentCount <= $maxRecords) {
+            return response()->json(['message' => 'No need to move records.'], 200);
+        }
+        $index = 1;
+        while (Schema::hasTable("transactions_$index")) {
+            $index++;
+        }
+        $newTable = "transactions_$index";
+        Schema::create($newTable, function ($table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('service_id');
+            $table->decimal('govt_cost', 10, 2)->nullable();
+            $table->decimal('service_cost', 10, 2)->nullable();
+            $table->decimal('total_cost', 10, 2)->nullable();
+            $table->string('application_no')->nullable();
+            $table->string('status')->nullable();
+            $table->string('paid_by')->nullable();
+            $table->string('pay_status')->nullable();
+            $table->string('description')->nullable();
+            $table->string('receipt')->nullable();
+            $table->decimal('vat_amount', 10, 2)->nullable();
+            $table->timestamps();
+        });
+        $oldestRecords = DB::table('transactions')->orderBy('created_at', 'asc')->limit($moveCount)->get();
+        if ($oldestRecords->isEmpty()) {
+            return response()->json(['message' => 'No records to move.'], 200);
+        }
+        foreach ($oldestRecords as $record) {
+            DB::table($newTable)->insert((array) $record);
+            DB::table('transactions')->where('id', $record->id)->delete();
+        }
+        return response()->json([
+            'message' => "Moved $moveCount records to $newTable",
+            'newTable' => $newTable
+        ], 200);
+    }
 }

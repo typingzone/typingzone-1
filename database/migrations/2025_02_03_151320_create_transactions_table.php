@@ -13,17 +13,19 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
-            $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
-            $table->decimal('govt_cost', 10, 2);
-            $table->decimal('service_cost', 10, 2);
-            $table->string('application_no');
-            $table->string('status');
-            $table->string('paid_by');
-            $table->string('pay_status');
-            $table->string('description');
-            $table->string('receipt');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('service_id');
+            $table->decimal('govt_cost', 10, 2)->nullable();
+            $table->decimal('service_cost', 10, 2)->nullable();
+            $table->decimal('total_cost', 10, 2)->nullable();
+            $table->string('application_no')->nullable();
+            $table->string('status')->nullable();
+            $table->string('paid_by')->nullable();
+            $table->string('pay_status')->nullable();
+            $table->string('description')->nullable();
+            $table->string('receipt')->nullable();
+            $table->decimal('vat_amount', 10, 2)->nullable();
             $table->timestamps();
         });
     }
