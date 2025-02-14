@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('file')->nullable();
             $table->text('vat')->nullable();
+            $table->text('amount');
             $table->timestamps();
         });
     }

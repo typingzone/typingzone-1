@@ -44,7 +44,7 @@ class TransactionController extends Controller
                 'govt_cost' => 'required|numeric',
                 'service_cost' => 'required|numeric',
                 'paid_by' => 'required|string',
-                'receipt' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+                'receipt' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
             ]);
             $this->transactionService->store($request);
             return response()->json(['success' => true, 'message' => 'Transaction created successfully.']);

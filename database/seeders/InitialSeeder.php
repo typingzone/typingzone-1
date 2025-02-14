@@ -7,19 +7,20 @@ use App\Models\Reminder;
 use App\Models\DocumentName;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class InitialSeeder extends Seeder
 {
     public function run()
     {
+        // Creating reminders
         $reminders = [
             ['reminder_type' => 'Document Expiry', 'status' => 1],
             ['reminder_type' => 'Notes Reminders', 'status' => 1],
             ['reminder_type' => 'Pending Transactions Reminder', 'status' => 1],
             ['reminder_type' => 'Unpaid Invoices Reminder', 'status' => 1],
         ];
-
-        // Creating reminders
         foreach ($reminders as $reminder) {
             Reminder::create([
                 'reminder_type' => $reminder['reminder_type'],
@@ -39,8 +40,6 @@ class InitialSeeder extends Seeder
             'Medical Insurance Card',
             'Residency Permit',
         ];
-
-        // Loop to create document names
         foreach ($documentNames as $documentName) {
             DocumentName::create([
                 'document_name' => $documentName,
@@ -92,8 +91,6 @@ class InitialSeeder extends Seeder
             ['service_name' => 'Visa Information Modification', 'govt_cost' => 204.15, 'service_cost' => 0],
             ['service_name' => 'Family Visa Holding', 'govt_cost' => 20, 'service_cost' => 0],
         ];
-        
-
         foreach ($services as $service) {
             Service::create([
                 'user_id' => Auth::id(),
@@ -102,6 +99,15 @@ class InitialSeeder extends Seeder
                 'service_cost' => $service['service_cost'],
             ]);
         }
+
+
+
+        // create user 
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('admin'),
+        ]);
 
 
     }

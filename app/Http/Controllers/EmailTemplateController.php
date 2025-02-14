@@ -7,7 +7,7 @@ use App\Models\EmailTemplate;
 class EmailTemplateController extends Controller
 {
     public function index() {
-        $templates = EmailTemplate::all();
+        $templates = EmailTemplate::orderBy('created_at', 'desc')->get();
         return view('pages.email_templates.email_templates', compact('templates'));
     }
 

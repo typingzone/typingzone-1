@@ -535,7 +535,7 @@
                     <input type="hidden" name="id" value="">
 
                     <div class="form-group mb-3">
-                        <label for="name">Expense Name</label>
+                        <label for="name">Expense Name *</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Enter expense name" required>
                     </div>
 
@@ -549,7 +549,7 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="amount">Amount</label>
+                        <label for="amount">Amount *</label>
                         <input type="number" class="form-control" id="amount" name="amount" step="0.01" placeholder="Enter amount" required>
                     </div>
 
@@ -559,11 +559,11 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="date">Date</label>
-                        <input type="date" class="form-control" id="date" name="date" required>
+                        <input type="date" class="form-control" id="date" name="date">
                     </div>
                     <div class="form-group mb-3">
                         <label for="description">Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter description" required></textarea>
+                        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter description"></textarea>
                     </div>
 
                     <div class="modal-footer">
@@ -680,14 +680,14 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group mb-3">
-                                <label for="customer_name" class="form-label">Customer Name</label>
+                                <label for="customer_name" class="form-label">Customer Name *</label>
                                 <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Enter customer name" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="phone_number" class="form-label">Phone Number</label>
-                                <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Enter phone number" required>
+                                <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Enter phone number">
                             </div>
                         </div>
                     </div>
@@ -696,12 +696,12 @@
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="email" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" required>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-3">
-                                <label for="services" class="form-label">Services</label>
+                                <label for="services" class="form-label">Services *</label>
                                 @php $services = \App\Models\Service::all(); @endphp
                                 <select class="mySelect3 form-control" id="services" name="services[]" multiple required>
                                     @foreach($services as $service)
@@ -721,7 +721,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-3">
-                                <label for="assign_to" class="form-label">Assign To</label>
+                                <label for="assign_to" class="form-label">Assign To *</label>
                                 <select class="mySelect2 form-control" id="assign_to" name="assign_to" required>
                                     @php $users = \App\Models\User::all(); @endphp
                                     @foreach($users as $user)
@@ -769,14 +769,14 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group mb-3">
-                                <label for="edit_customer_name" class="form-label">Customer Name</label>
+                                <label for="edit_customer_name" class="form-label">Customer Name *</label>
                                 <input type="text" class="form-control" id="edit_customer_name" name="customer_name" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="edit_phone_number" class="form-label">Phone Number</label>
-                                <input type="text" class="form-control" id="edit_phone_number" name="phone_number" required>
+                                <input type="text" class="form-control" placeholder="Enter phone number" id="edit_phone_number" name="phone_number">
                             </div>
                         </div>
                     </div>
@@ -784,12 +784,12 @@
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="edit_email" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="edit_email" name="email" required>
+                                <input type="email" class="form-control" placeholder="Enter email address" id="edit_email" name="email">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-3">
-                                <label for="edit_services" class="form-label">Services</label>
+                                <label for="edit_services" class="form-label">Services *</label>
                                 <select class="mySelect5 form-control" id="edit_services" name="services[]" multiple required>
                                     @foreach($services as $service)
                                         <option value="{{ $service->id }}" {{ in_array($service->id, old('services', $order->service_ids ?? [])) ? 'selected' : '' }}>
@@ -803,7 +803,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group mb-3">
-                                <label for="edit_assign_to" class="form-label">Assign To</label>
+                                <label for="edit_assign_to" class="form-label">Assign To *</label>
                                 <select class="mySelect4 form-control" id="edit_assign_to" name="assign_to" required>
                                     @foreach($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -816,7 +816,7 @@
                         <div class="col-md-12">
                             <div class="form-group mb-3">
                                 <label for="edit_description" class="form-label">Description</label>
-                                <textarea class="form-control" id="edit_description" name="description" rows="4"></textarea>
+                                <textarea class="form-control" id="edit_description" placeholder="Enter description" name="description" rows="4"></textarea>
                             </div>
                         </div>
                     </div>
@@ -895,8 +895,8 @@
 
                         <div class="col-md-4">
                             <div class="form-group mb-3">
-                                <label for="receipt" class="form-label">Receipt <span class="text-danger">*</span></label>
-                                <input type="file" class="form-control" id="receipt" name="receipt" required>
+                                <label for="receipt" class="form-label">Receipt</label>
+                                <input type="file" class="form-control" id="receipt" name="receipt">
                             </div>
                         </div>
                         

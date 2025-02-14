@@ -11,7 +11,7 @@ class GuideController extends Controller
     public function index()
     {
         try {
-            $guides = Guide::all();
+            $guides = Guide::orderBy('created_at', 'desc')->get();
             return view('pages.guides.guides', compact('guides'));
         } catch (\Exception $e) {
             Log::error('Error fetching guides: ' . $e->getMessage());

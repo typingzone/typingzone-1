@@ -13,7 +13,7 @@ class ExpenseController extends Controller
 {
     public function index()
     {
-        $expenses = Expense::with('user')->get();
+        $expenses = Expense::with('user')->orderBy('created_at', 'desc')->get();
         return view('pages.expenses.expenses', compact('expenses'));
     }
 

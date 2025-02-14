@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->foreignId('document_name_id')->constrained('document_names');
             $table->string('file');
             $table->date('expiry_date');

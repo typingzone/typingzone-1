@@ -12,6 +12,7 @@ class CreateDocumentNamesTable extends Migration
             $table->id();
             $table->string('document_name');
             $table->boolean('expiry_reminder')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -128,7 +128,7 @@
     <!-- Notifications -->
    
             
-            @include('layout.partials.notifications');
+            @include('layout.partials.notifications')
 
         
     <!-- /Notifications -->

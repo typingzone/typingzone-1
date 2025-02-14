@@ -9,7 +9,7 @@ class CredentialController extends Controller
 {
     public function index()
     {
-        $credentials = Credential::all();
+        $credentials = Credential::orderBy('created_at', 'desc')->get();
         return view('credentials.index', compact('credentials'));
     }
 

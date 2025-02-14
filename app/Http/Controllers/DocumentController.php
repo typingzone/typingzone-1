@@ -13,7 +13,7 @@ class DocumentController extends Controller
 {
     public function index()
     {
-        $documents = Document::with('user', 'documentName')->get(); 
+        $documents = Document::with('user', 'documentName')->orderBy('created_at', 'desc')->get(); 
         return view('pages.documents.documents', compact('documents'));
     }
     

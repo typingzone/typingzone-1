@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable();
             $table->string('service_name');
             $table->decimal('govt_cost', 10, 2);
             $table->decimal('service_cost', 10, 2);

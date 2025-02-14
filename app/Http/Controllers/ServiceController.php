@@ -10,7 +10,7 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::with('user')->get();
+        $services = Service::with('user')->orderBy('created_at', 'desc')->get();
         return view('pages.services.services', compact('services'));
     }
 

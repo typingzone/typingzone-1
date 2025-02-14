@@ -11,7 +11,7 @@ class DocumentNameController extends Controller
     public function index()
     {
         try {
-            $documentNames = DocumentName::all();
+            $documentNames = DocumentName::orderBy('created_at', 'desc')->get();
             return view('pages.documents.document_names', compact('documentNames'));
         } catch (\Exception $e) {
             Log::error('Error fetching document names: ' . $e->getMessage());

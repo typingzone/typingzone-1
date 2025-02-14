@@ -19,7 +19,7 @@ class TicketController extends Controller
 
     public function index()
     {
-        $tickets = Ticket::get();
+        $tickets = Ticket::orderBy('created_at', 'desc')->get();
         return view('pages.tickets.tickets', compact('tickets'));
     }
 
