@@ -3,7 +3,7 @@
   <!-- Logo -->
   <div class="header-left active">
     <a href="{{ url('dashboard') }}" class="logo logo-normal">
-      <img src="{{ $company && $company->company_logo ? asset('storage/' . $company->company_logo) : asset('/build/img/logo.jpeg') }}" alt="Company Logo">
+      <img src="{{ $company && $company->company_logo ? asset('storage/' . $company->company_logo) : asset('/build/img/logo.png') }}" alt="Company Logo">
     </a>
     <a href="{{ url('dashboard') }}" class="logo logo-white">
       <img src="{{ $company && $company->company_logo ? asset('storage/' . $company->company_logo) : asset('/build/img/logo-white.png') }}" alt="Company Logo White">

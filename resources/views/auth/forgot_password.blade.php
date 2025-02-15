@@ -5,7 +5,7 @@
         <div class="login-wrapper login-new">
             <div class="login-content user-login">
                 <div class="login-logo">
-                    <img src="{{ URL::asset('/build/img/logo.jpeg') }}" alt="img">
+                    <img src="{{ URL::asset('/build/img/logo.png') }}" alt="img">
                     <a href="{{ url('index') }}" class="login-logo logo-white">
                         <img src="{{ URL::asset('/build/img/logo-white.png') }}" alt="">
                     </a>
