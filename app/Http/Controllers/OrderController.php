@@ -10,6 +10,10 @@ use App\Models\Service;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Notification;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use App\Exports\ArchivedOrdersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
@@ -26,8 +30,16 @@ class OrderController extends Controller
 
     public function archivedOrders()
     {
-        return view('pages.orders.archived_orders');
+        $tableNames = [];
+        for ($i = 1; $i <= 10; $i++) {
+            $tableName = "orders_$i";
+            if (Schema::hasTable($tableName)) {
+                $tableNames[] = $tableName;
+            }
+        }
+        return view('pages.orders.archived_orders', compact('tableNames'));
     }
+    
 
 
 
@@ -170,6 +182,11 @@ class OrderController extends Controller
         return response()->json(['success' => true]);
     }
 
+
+    public function exportArchivedOrders($tableName)
+    {
+        return Excel::download(new ArchivedOrdersExport($tableName), $tableName . '.xlsx');
+    }
     
     
 }

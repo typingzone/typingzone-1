@@ -5,6 +5,9 @@ use Illuminate\Http\Request;
 use App\Models\Transaction; 
 use App\Services\TransactionService;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ArchivedTransactionsExport;
+use Illuminate\Support\Facades\Schema;
 
 class TransactionController extends Controller
 {
@@ -19,20 +22,31 @@ class TransactionController extends Controller
 
     public function index()
     {
-        $transactions = Transaction::with('order', 'user')->orderBy('created_at', 'desc')->get();
+        $transactions = Transaction::with(['order' => function($query) {
+            $query->withTrashed();
+        }, 'user'])->orderBy('created_at', 'desc')->get();
         return view('pages.transactions.transactions', compact('transactions'));
     }
     
     
     public function archivedTransactions()
     {
-        return view('pages.transactions.archived_transactions');
+        $tableNames = [];
+        for ($i = 1; $i <= 10; $i++) {
+            $tableName = "transactions_$i";
+            if (Schema::hasTable($tableName)) {
+                $tableNames[] = $tableName;
+            }
+        }
+        return view('pages.transactions.archived_transactions', compact('tableNames'));
     }
+
 
     public function showInvoices()
     {
         return view('pages.transactions.invoices');
     }
+
 
     public function store(Request $request)
     {
@@ -97,9 +111,12 @@ class TransactionController extends Controller
 
     public function edit($id)
     {
-        $transaction = Transaction::with('order', 'service')->findOrFail($id);
+        $transaction = Transaction::with(['order' => function($query) {
+            $query->withTrashed();
+        }, 'service'])->findOrFail($id);
         return response()->json($transaction);
     }
+    
     
     public function update(Request $request, $id)
     {
@@ -109,5 +126,9 @@ class TransactionController extends Controller
     }
     
 
+    public function exportArchivedTransactions($tableName)
+    {
+        return Excel::download(new ArchivedTransactionsExport($tableName), $tableName . '.xlsx');
+    }
 
 }

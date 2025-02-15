@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Reminder;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use App\Models\Order;
 
 class CronJobController extends Controller
 {
@@ -122,4 +123,54 @@ class CronJobController extends Controller
             'newTable' => $newTable
         ], 200);
     }
+
+
+    public function makeOrdersArchive()
+    {
+        $maxRecords = 2; 
+        $moveCount = 1;   
+        $currentCount = DB::table('orders')->count();
+        if ($currentCount <= $maxRecords) {
+            return response()->json(['message' => 'No need to move records.'], 200);
+        }
+        $index = 1;
+        while (Schema::hasTable("orders_$index")) {
+            $index++;
+        }
+        $newTable = "orders_$index";
+        Schema::create($newTable, function ($table) {
+            $table->id();
+            $table->foreignId('user_id');
+            $table->string('customer_name');
+            $table->string('phone_number')->nullable();
+            $table->string('email')->nullable();
+            $table->json('services');
+            $table->json('files')->nullable();
+            $table->text('description')->nullable();
+            $table->string('assign_to')->nullable();
+            $table->string('status')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
+        $oldestRecords = DB::table('orders')->orderBy('created_at', 'asc')->limit($moveCount)->get();
+        if ($oldestRecords->isEmpty()) {
+            return response()->json(['message' => 'No records to move.'], 200);
+        }
+        foreach ($oldestRecords as $record) {
+            DB::table($newTable)->insert((array) $record);
+            DB::table('orders')->where('id', $record->id)->delete();
+        }
+        return response()->json([
+            'message' => "Moved $moveCount records to $newTable",
+            'newTable' => $newTable
+        ], 200);
+    }
+
+
+
+    public function deleteSoftdeleteOrders()
+    {
+        Order::onlyTrashed()->forceDelete();
+    }
+    
 }

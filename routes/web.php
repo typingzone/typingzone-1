@@ -41,9 +41,11 @@ Route::middleware(['check.auth'])->controller(CredentialController::class)->grou
 });
 
 Route::controller(CronJobController::class)->group(function () {
-    Route::get('expiry-document-reminder', 'expiryDocumentReminder')->name('expiry-document-reminder');
-    Route::get('notes-reminder', 'notesReminder')->name('notes-reminder');
-    Route::get('make-transactions-archive', 'makeTransactionsArchive')->name('make-transactions-archive');
+    Route::get('expiry-document-reminder', 'expiryDocumentReminder')->name('expiry-document-reminder');     // Run each 1st date of the month
+    Route::get('notes-reminder', 'notesReminder')->name('notes-reminder');                                  // Run daily
+    Route::get('make-transactions-archive', 'makeTransactionsArchive')->name('make-transactions-archive');  // Run after 60 days
+    Route::get('make-orders-archive', 'makeOrdersArchive')->name('make-orders-archive');                    // Run after 60 days
+    Route::get('delete-softdelete-orders', 'deleteSoftdeleteOrders')->name('delete-softdelete-orders');     // Run after 60 days
 });
 
 Route::middleware(['check.auth'])->controller(DocumentNameController::class)->group(function () {
@@ -104,6 +106,7 @@ Route::middleware(['check.auth'])->controller(OrderController::class)->group(fun
     Route::get('archived-orders', 'archivedOrders')->name('archived-orders');
     Route::get('all-notifications', 'allNotifications')->name('all-notifications');
     Route::delete('notifications/{id}', 'deleteNotification')->name('notification.delete');
+    Route::get('/export-archived-orders/{tableName}', 'exportArchivedOrders')->name('export.archived.orders');
 });
 
 Route::middleware(['check.auth'])->controller(PdfController::class)->group(function () {
@@ -151,7 +154,7 @@ Route::middleware(['check.auth'])->controller(TransactionController::class)->gro
     Route::post('/transaction/update-status/{id}', 'updateStatus')->name('transaction.updateStatus');
     Route::get('/transactions/{id}/edit', 'edit')->name('transactions.edit');
     Route::post('/transactions/{id}/update', 'update')->name('transactions.update');
-
+    Route::get('/export-archived-transactions/{tableName}', 'exportArchivedTransactions')->name('export.archived.transactions');
 });
 
 Route::controller(UserController::class)->group(function () {
@@ -178,6 +181,7 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/users/{id}/edit','edit')->name('users.edit');
     Route::post('/users/{id}', 'update')->name('users.update');
     Route::delete('/users/{id}', 'destroy')->name('users.destroy');
+    Route::delete('deleteMultipleLoginActivities', 'deleteMultipleLoginActivities')->name('deleteMultipleLoginActivities');
 });
 
 Route::middleware(['check.auth'])->controller(NotesController::class)->group(function () {

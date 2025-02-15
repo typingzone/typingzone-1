@@ -16,6 +16,12 @@
                 <table class="table table-sm datanew table-striped">
                     <thead>
                         <tr>
+                            <th class="sorting sorting_asc">
+                                <label class="checkboxs">
+                                    <input type="checkbox" id="select-all">
+                                    <span class="checkmarks"></span>
+                                </label>
+                            </th>
                             <th>SNO</th>
                             <th>Username</th>
                             <th>Email</th>
@@ -29,6 +35,12 @@
                     <tbody>
                         @foreach($loginActivities as $activity)
                         <tr id="activity-row-{{ $activity->id }}">
+                            <td class="sorting_1">
+                                <label class="checkboxs">
+                                    <input type="checkbox" class="selectRow" value="{{ $activity->id }}">
+                                    <span class="checkmarks"></span>
+                                </label>
+                            </td>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $activity->user->name }}</td>
                             <td>{{ $activity->user->email }}</td>
@@ -57,5 +69,4 @@
         </div>
     </div>
     <script src="{{ asset('build/Custom/js/login_activities.js') }}"></script>
-
 @endsection

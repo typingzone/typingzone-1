@@ -71,6 +71,16 @@ class UserController extends Controller
         return response()->json(['success' => false]);
     }
     
+    public function deleteMultipleLoginActivities(Request $request)
+    {
+        $ids = $request->ids;
+        if ($ids) {
+            LoginActivity::whereIn('id', $ids)->delete();
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false]);
+    }
+
 
     public function handlePasswordChange(Request $request)
     {

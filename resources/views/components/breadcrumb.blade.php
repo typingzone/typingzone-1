@@ -8,27 +8,29 @@
     </div>
     <ul class="table-top-head">
         <!-- <li>
-            <a data-bs-toggle="tooltip" data-bs-placement="top" title="Pdf"><img
-                    src="{{ URL::asset('/build/img/icons/pdf.svg') }}" alt="img"></a>
+            <a data-bs-toggle="tooltip" data-bs-placement="top" title="Pdf">
+                <img src="{{ URL::asset('/build/img/icons/pdf.svg') }}" alt="img"></a>
         </li> -->
         @if (Route::is(['transactions', 'expenses']))
-            <li>
-                <a href="{{ route(Route::currentRouteName() . '.download') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Excel">
-                    <img src="{{ URL::asset('/build/img/icons/excel.svg') }}" alt="img">
-                </a>
-            </li>
-        @endif
-
         <li>
-            <a data-bs-toggle="tooltip" data-bs-placement="top" title="Refresh"><i data-feather="rotate-ccw"
-                    class="feather-rotate-ccw"></i></a>
+            <a href="{{ route(Route::currentRouteName() . '.download') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Excel">
+                <img src="{{ URL::asset('/build/img/icons/excel.svg') }}" alt="img">
+            </a>
+        </li>
+        @endif
+        <li>
+            <a data-bs-toggle="tooltip" data-bs-placement="top" title="Refresh"><i data-feather="rotate-ccw" class="feather-rotate-ccw"></i></a>
         </li>
         <li>
-            <a data-bs-toggle="tooltip" data-bs-placement="top" title="Collapse" id="collapse-header"><i
-                    data-feather="chevron-up" class="feather-chevron-up"></i></a>
+            <a data-bs-toggle="tooltip" data-bs-placement="top" title="Collapse" id="collapse-header"><i data-feather="chevron-up" class="feather-chevron-up"></i></a>
         </li>
     </ul>
     
+    @if (Route::is(['login-activities']))
+    <div class="page-btn">
+        <a href="#" id="deleteSelected" class="btn btn-danger">Delete</a>
+    </div>
+    @endif
     @if (Route::is(['manage-users']))
     <div class="page-btn">
         <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-user-modal">
@@ -99,26 +101,25 @@
         </a>
     </div>
     @endif
-    
     @if (Route::is(['transactions']))
         <div class="page-btn">
-            <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-transaction-modal"><i
-                    data-feather="plus-circle" class="me-2"></i> Transaction</a>
+            <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-transaction-modal">
+                <i data-feather="plus-circle" class="me-2"></i> Transaction
+            </a>
         </div>
     @endif
-    
     @if (Route::is(['roles-permissions']))
         <div class="page-btn">
-            <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-units"><i
-                    data-feather="plus-circle" class="me-2"></i> Role</a>
+            <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-units">
+                <i data-feather="plus-circle" class="me-2"></i> Role
+            </a>
         </div>
     @endif
-
     @if (Route::is(['email-templates']))
         <div class="page-btn">
-            <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-template-modal"><i
-                    data-feather="plus-circle" class="me-2"></i> Template</a>
+            <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-template-modal">
+                <i data-feather="plus-circle" class="me-2"></i> Template
+            </a>
         </div>
     @endif
-    
 </div>

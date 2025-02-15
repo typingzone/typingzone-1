@@ -35,7 +35,7 @@
                             @foreach($transactions as $index => $transaction)
                                 <tr id="transaction-row-{{ $transaction->id }}">
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $transaction->order->customer_name }}</td>
+                                    <td>{{ $transaction->order->customer_name ?? 'N/A' }}</td>
                                     <td>
                                         {{ $transaction->service->service_name }}
                                         @if($transaction->description)
