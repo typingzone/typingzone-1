@@ -33,4 +33,9 @@ class CompanyController extends Controller
             return response()->json(['success' => false, 'message' => 'Something went wrong.']);
         }
     }
+
+    public function help()
+    {
+        return view('pages.settings.help');
+    }
 }

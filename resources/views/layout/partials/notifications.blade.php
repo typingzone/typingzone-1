@@ -15,7 +15,7 @@
             <ul class="notification-list">
                 @foreach($notifications as $notification)
                 <li class="notification-message" id="notification-{{ $notification->id }}">
-                    <a href="{{ url('orders/'.$notification->id) }}">
+                    <a href="{{ url('all-notifications') }}">
                         <div class="media d-flex">
                             <span class="avatar flex-shrink-0">
                                 <img alt="" src="https://static-00.iconduck.com/assets.00/task-ongoing-icon-512x512-mi2ty2za.png">

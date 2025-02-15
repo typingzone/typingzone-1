@@ -7,10 +7,12 @@ use App\Models\Document;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 
 
 class DocumentController extends Controller
 {
+    
     public function index()
     {
         $documents = Document::with('user', 'documentName')->orderBy('created_at', 'desc')->get(); 
@@ -48,6 +50,33 @@ class DocumentController extends Controller
             return response()->json(['success' => false, 'message' => 'Document deletion failed'], 500);
         }
     }
+
+
+    public function download($documentId)
+    {
+        try {
+            $document = Document::findOrFail($documentId);
+            $filePath = $document->file;
+            $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+            $fileName = ($document->documentName->document_name ?? 'document') . '.' . $extension;
+            $temporaryUrl = Storage::disk('s3')->temporaryUrl($filePath, now()->addMinutes(5));
+            $fileContent = file_get_contents($temporaryUrl);
+            $mimeType = Storage::disk('s3')->mimeType($filePath);
+            return Response::make($fileContent, 200, [
+                'Content-Type' => $mimeType,
+                'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+                'Content-Length' => strlen($fileContent)
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Document not found'], 404);
+        }
+    }
+    
+
+    
+    
+    
+
 
 
 

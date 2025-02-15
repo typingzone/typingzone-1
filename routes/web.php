@@ -30,6 +30,7 @@ Route::middleware(['check.auth'])->controller(CalendarController::class)->group(
 
 Route::middleware(['check.auth'])->controller(CompanyController::class)->group(function () {
     Route::get('general-settings', 'index')->name('general-settings'); 
+    Route::get('help', 'help')->name('help'); 
     Route::post('updated-company-profile', 'updateCompanyProfile')->name('updated-company-profile');
 });
 
@@ -61,6 +62,7 @@ Route::middleware(['check.auth'])->controller(DocumentController::class)->group(
     Route::get('documents', 'index')->name('documents');
     Route::post('documents/store', 'store')->name('documents.store');
     Route::delete('documents/{id}', 'destroy')->name('documents.destroy');
+    Route::get('/documents/download/{id}', 'download')->name('documents.download');
 });
 
 Route::middleware(['check.auth'])->controller(EmailTemplateController::class)->group(function () {
@@ -107,6 +109,7 @@ Route::middleware(['check.auth'])->controller(OrderController::class)->group(fun
     Route::get('all-notifications', 'allNotifications')->name('all-notifications');
     Route::delete('notifications/{id}', 'deleteNotification')->name('notification.delete');
     Route::get('/export-archived-orders/{tableName}', 'exportArchivedOrders')->name('export.archived.orders');
+    Route::post('delete-archived-orders-table', 'deleteArchivedOrdersTable')->name('delete-archived-orders-table');
 });
 
 Route::middleware(['check.auth'])->controller(PdfController::class)->group(function () {
@@ -155,6 +158,7 @@ Route::middleware(['check.auth'])->controller(TransactionController::class)->gro
     Route::get('/transactions/{id}/edit', 'edit')->name('transactions.edit');
     Route::post('/transactions/{id}/update', 'update')->name('transactions.update');
     Route::get('/export-archived-transactions/{tableName}', 'exportArchivedTransactions')->name('export.archived.transactions');
+    Route::post('delete-archived-transactions-table', 'deleteArchivedTransactionsTable')->name('delete-archived-transactions-table');
 });
 
 Route::controller(UserController::class)->group(function () {

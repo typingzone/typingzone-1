@@ -1,6 +1,5 @@
 <?php $page = 'All Notifications'; ?>
 @extends('layout.mainlayout')
-
 @section('content')
     <div class="page-wrapper">
         <div class="content">
@@ -19,7 +18,7 @@
                             <tr>
                                 <th>SNO</th>
                                 <th>Customer Name</th>
-                                <th>Message</th>
+                                <th>Description</th>
                                 <th>Date</th>
                                 <th>Action</th>
                             </tr>
@@ -28,14 +27,15 @@
                             @foreach($notifications as $index => $notification)
                                 <tr id="notification-row-{{ $notification->id }}">
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $notification->order->customer_name }}</td> <!-- Display Customer Name -->
-                                    <td>{{ $notification->comment ?? 'No Message' }}</td> <!-- Display Notification Message -->
-                                    <td>{{ $notification->created_at->format('Y-m-d H:i:s') }}</td>
-                                   
-                                    <td>
-                                        <button class="btn btn-danger delete-notification" data-id="{{ $notification->id }}">
-                                            <i class="fa fa-trash"></i> Delete
-                                        </button>
+                                    <td>{{ $notification->order->customer_name }}</td> 
+                                    <td>{{ $notification->order->description }}</td> 
+                                    <td>{{ $notification->created_at->format('Y-m-d') }}</td>
+                                    <td class="action-table-data">
+                                        <div class="edit-delete-action d-flex justify-content-start">
+                                            <a class="me-2 p-2 delete-notification" href="javascript:void(0);" data-id="{{ $notification->id }}">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

@@ -9,15 +9,42 @@
     var salesChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['January', 'February', 'March', 'April', 'May'],
+            labels: [
+                @php
+                    use App\Models\Transaction;
+                    use Carbon\Carbon;
+
+                    $transactions = Transaction::selectRaw('YEAR(created_at) as year, WEEK(created_at) as week, SUM(total_cost) as total')
+                        ->groupBy('year', 'week')
+                        ->orderBy('year', 'asc')  // Ensure order by year in ascending order
+                        ->orderBy('week', 'asc')  // Ensure order by week in ascending order
+                        ->get();
+
+                    $labels = [];
+                    $salesData = [];
+
+                    foreach ($transactions as $transaction) {
+                        $startOfWeek = Carbon::now()->setISODate($transaction->year, $transaction->week)->startOfWeek()->format('d M Y');
+                        $endOfWeek = Carbon::now()->setISODate($transaction->year, $transaction->week)->endOfWeek()->format('d M Y');
+                        $labels[] = "$startOfWeek - $endOfWeek";
+                        $salesData[] = $transaction->total;
+                    }
+
+                    echo '"' . implode('", "', $labels) . '"';
+                @endphp
+            ],
             datasets: [{
-                label: 'Sales',
-                data: [120, 90, 150, 180, 110], // Fake data
+                label: 'Weekly Sales',
+                data: [
+                    @php
+                        echo implode(', ', $salesData);
+                    @endphp
+                ],
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderWidth: 2,
-                fill: true, // Area below the line will be filled
-                tension: 0.3, // Smoothness of the curve
+                fill: true,
+                tension: 0.3,
             }]
         },
         options: {

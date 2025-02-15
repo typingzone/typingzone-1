@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ArchivedTransactionsExport;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -129,6 +130,16 @@ class TransactionController extends Controller
     public function exportArchivedTransactions($tableName)
     {
         return Excel::download(new ArchivedTransactionsExport($tableName), $tableName . '.xlsx');
+    }
+
+    public function deleteArchivedTransactionsTable(Request $request)
+    {
+        try {
+            DB::statement("DROP TABLE IF EXISTS {$request->tableName}");
+            return response()->json(['status' => 'success', 'message' => 'Table deleted successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => 'Failed to delete the table!']);
+        }
     }
 
 }

@@ -30,7 +30,7 @@
                                 <tr data-row-id="{{ $document->id }}">
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $document->documentName->document_name ?? 'N/A' }}</td>
-                                    <td>{{ $document->expiry_date}}</td>
+                                    <td><span class="badge badge-linesuccess">{{ $document->expiry_date }}</span></td> 
                                     <td><span class="badge badge-dark custom-badge">{{ $document->user->name ?? 'System' }}</span></td>
                                     <td>{{ $document->created_at->diffForHumans() }}</td>
                                     <td class="action-table-data">
@@ -38,11 +38,11 @@
                                             <a class="me-2 p-2" href="javascript:void(0);" data-id="{{ $document->id }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
+                                            <a class="me-2 p-2" href="{{ route('documents.download', $document->id) }}">
+                                                <i class="fa fa-download"></i>
+                                            </a>
                                             <a class="me-2 p-2 delete-document" href="javascript:void(0);" data-id="{{ $document->id }}">
                                                 <i class="fa fa-trash"></i>
-                                            </a>
-                                            <a class="p-2" href="{{ asset('storage/' . $document->file) }}" download>
-                                                <i class="fa fa-download"></i>
                                             </a>
                                         </div>
                                     </td>

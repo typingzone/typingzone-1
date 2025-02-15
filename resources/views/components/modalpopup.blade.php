@@ -10,25 +10,22 @@
             </div>
             <div class="modal-body p-4">
                 <div class="mb-3">
-                    <label for="documentName">Select File</label>
-                    <input type="file" class="form-control" id="fileInput" name="fileInput">
+                    <label for="documentName">Select File *</label>
+                    <input type="file" class="form-control" id="fileInput" name="fileInput" required>
                 </div>
-
                 <div class="mb-3">
-                    <label for="documentName">Document Name</label>
-                    <select class="mySelect2 form-control" id="documentName" name="documentName">
+                    <label for="documentName">Document Name *</label>
+                    <select class="mySelect2 form-control" id="documentName" name="documentName" required>
                         @php $documentNames = \App\Models\DocumentName::all(); @endphp
                         @foreach($documentNames as $documentName)
                             <option value="{{ $documentName->id }}">{{ $documentName->document_name }}</option>
                         @endforeach
                     </select>
                 </div>
-
                 <div class="mb-3">
                     <label for="expiryDate">Expiry Date</label>
                     <input type="date" class="form-control" id="expiryDate" name="expiryDate">
                 </div>
-
                 <div class="text-end">
                     <button type="button" class="btn btn-primary" id="uploadButton">Upload</button>
                 </div>

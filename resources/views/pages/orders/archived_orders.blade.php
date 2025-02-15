@@ -18,7 +18,7 @@
                     @if(count($tableNames) > 0)
                         @foreach($tableNames as $tableName)
                             <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6">
-                                <div class="employee-grid-profile">
+                                <div class="employee-grid-profile" data-table-name="{{ $tableName }}">
                                     <div class="profile-head">
                                         <div class="dep-name">
                                             @php
@@ -38,7 +38,7 @@
                                                         <a href="{{ route('export.archived.orders', ['tableName' => $tableName]) }}" class="dropdown-item"><i data-feather="download" class="info-img"></i> Download</a>
                                                     </li>
                                                     <li>
-                                                        <a href="javascript:void(0);" class="dropdown-item confirm-text mb-0"><i data-feather="trash-2" class="info-img"></i> Delete All</a>
+                                                        <a href="javascript:void(0);" class="dropdown-item delete-archive mb-0"><i data-feather="trash-2" class="info-img"></i> Delete All</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -69,4 +69,5 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('build/Custom/js/archived_orders.js') }}"></script>
 @endsection

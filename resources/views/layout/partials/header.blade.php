@@ -119,6 +119,11 @@
         <i data-feather="maximize"></i>
       </a>
     </li>
+    <li class="nav-item nav-item-box">
+      <a href="{{ url('help') }}">
+        <i data-feather="help-circle"></i>
+      </a>
+    </li>
     <!-- <li class="nav-item nav-item-box">
       <a href="{{ url('email') }}">
         <i data-feather="mail"></i>
@@ -130,7 +135,7 @@
             
             @include('layout.partials.notifications')
 
-        
+   
     <!-- /Notifications -->
     <li class="nav-item nav-item-box">
       <a href="{{ url('general-settings') }}">

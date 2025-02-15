@@ -189,4 +189,16 @@ class OrderController extends Controller
     }
     
     
+    public function deleteArchivedOrdersTable(Request $request)
+    {
+        try {
+            DB::statement("DROP TABLE IF EXISTS {$request->tableName}");
+            return response()->json(['status' => 'success', 'message' => 'Table deleted successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => 'Failed to delete the table!']);
+        }
+    }
+    
+
+
 }
