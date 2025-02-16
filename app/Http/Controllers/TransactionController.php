@@ -117,33 +117,14 @@ class TransactionController extends Controller
     
     public function update(Request $request, $id)
     {
-        $transaction = Transaction::findOrFail($id);
-    
-        $serviceCost = $request->service_cost;
-        $vatAmount = $serviceCost * 0.05;
-        $totalCost = $serviceCost + $request->govt_cost;
-    
-        if ($request->hasFile('receipt')) {
-            $filePath = $request->file('receipt')->store('receipts', 's3');
-            $transaction->receipt = $filePath;
+        try {
+            $transaction = $this->transactionService->updateTransaction($request, $id);
+            return response()->json(['success' => true, 'message' => 'Transaction updated successfully.']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Error updating transaction: ' . $e->getMessage()]);
         }
-    
-        $transaction->update([
-            'order_id' => $request->order_id,
-            'service_id' => $request->service_id,
-            'application_no' => $request->application_no,
-            'govt_cost' => $request->govt_cost,
-            'service_cost' => $serviceCost,
-            'total_cost' => $totalCost,
-            'vat_amount' => $vatAmount,
-            'status' => $request->status ?? $transaction->status,
-            'paid_by' => $request->paid_by,
-            'pay_status' => $request->pay_status ?? $transaction->pay_status,
-            'description' => $request->description,
-        ]);
-    
-        return response()->json(['success' => true, 'message' => 'Transaction updated successfully.']);
     }
+    
     
     
 
