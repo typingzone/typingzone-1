@@ -7,10 +7,13 @@
         </div>
     </div>
     <ul class="table-top-head">
-        <!-- <li>
-            <a data-bs-toggle="tooltip" data-bs-placement="top" title="Pdf">
-                <img src="{{ URL::asset('/build/img/icons/pdf.svg') }}" alt="img"></a>
-        </li> -->
+        @if (Route::is(['customer-profile']))
+        <li>
+            <a href="{{ route('invoice.download', ['order_id' => request()->route('id')]) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Download PDF Invoice">
+                <img src="{{ URL::asset('/build/img/icons/pdf.svg') }}" alt="img">
+            </a>
+        </li>
+        @endif
         @if (Route::is(['transactions', 'expenses']))
         <li>
             <a href="{{ route(Route::currentRouteName() . '.download') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Excel">

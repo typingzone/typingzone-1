@@ -114,8 +114,7 @@ Route::middleware(['check.auth'])->controller(OrderController::class)->group(fun
 });
 
 Route::middleware(['check.auth'])->controller(PdfController::class)->group(function () {
-    Route::get('download-expenses-pdf', 'downloadExpensesPdf')->name('download-expenses-pdf'); 
-    Route::get('download-applications-pdf', 'downloadApplicationsPdf')->name('download-applications-pdf'); 
+    Route::get('invoice/download/{order_id}', 'downloadInvoice')->name('invoice.download');
 });
 
 Route::middleware(['check.auth'])->controller(ReminderController::class)->group(function () {
@@ -198,3 +197,9 @@ Route::middleware(['check.auth'])->controller(NotesController::class)->group(fun
     Route::delete('notes/{id}', 'destroy');
 });
 
+Route::fallback(function () {
+    return redirect()->route('page-not-found');
+});
+Route::get('page-not-found', function () {
+    return view('errors.error-404');
+})->name('page-not-found');

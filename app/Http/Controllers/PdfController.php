@@ -2,23 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Transaction;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
-use App\Models\Expense;
-use App\Models\Application;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\ExpensesExport;
-use App\Exports\ApplicationsExport;
 
 class PdfController extends Controller
 {
-    public function downloadExpensesPdf()
+    
+    public function downloadInvoice($orderId)
     {
-       
+        $profileData = Order::with(['transactions', 'transactions.service'])->findOrFail($orderId);
+        $pdf = PDF::loadView('pages.transactions.invoice-template', compact('profileData'));
+        return $pdf->download('invoice_' . $profileData->customer_name . '.pdf');
     }
 
-    public function downloadApplicationsPdf()
-    {
-        
-    }
+
 
 }
