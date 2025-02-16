@@ -34,7 +34,13 @@
                             <li><a href="{{ route('archived-orders') }}" class="{{ Request::routeIs('archived-orders') ? 'active' : '' }}">Archived Orders</a></li>
                             </ul>
                         </li>
-
+                        <li class="submenu">
+                            <a href="javascript:void(0);" class="{{ Request::routeIs('invoices') ? 'subdrop active' : '' }}"><i data-feather="layout"></i><span>Invoies</span><span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="{{ route('invoices') }}" class="{{ Request::routeIs('invoices') ? 'active' : '' }}">Invoices</a></li>
+                                <li><a href="{{ route('invoices') }}" class="{{ Request::routeIs('invoices') ? 'active' : '' }}">Invoices Design</a></li>
+                            </ul>
+                        </li>
                         <li class="{{ Request::routeIs('tickets') ? 'active' : '' }}">
                             <a href="{{ route('tickets') }}"><i data-feather="check-square"></i><span>Tickets</span></a>
                         </li>
@@ -60,20 +66,12 @@
                         <li class="{{ Request::routeIs('services') ? 'active' : '' }}">
                             <a href="{{ route('services') }}"><i data-feather="briefcase"></i><span>Services</span></a>
                         </li>
-                       
-                        <li class="submenu">
-                            <a href="javascript:void(0);" class="{{ Request::routeIs('invoices') ? 'subdrop active' : '' }}"><i data-feather="layout"></i><span>Invoies</span><span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="{{ route('invoices') }}" class="{{ Request::routeIs('invoices') ? 'active' : '' }}">Invoices</a></li>
-                                <li><a href="{{ route('invoices') }}" class="{{ Request::routeIs('invoices') ? 'active' : '' }}">Invoices Design</a></li>
-                            </ul>
-                        </li>
                         
                     </ul>
                 </li>
 
                 <li class="submenu-open">
-                    <h6 class="submenu-hdr">ADMINISTRATION</h6>
+                    <h6 class="submenu-hdr">USERS & SETTINGS</h6>
                     <ul>
                         <li class="submenu">
                             <a href="javascript:void(0);" class="{{ Request::routeIs('manage-users', 'role-permission') ? 'subdrop active' : '' }}"><i data-feather="users"></i><span>Users</span><span class="menu-arrow"></span></a>

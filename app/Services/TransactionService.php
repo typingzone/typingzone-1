@@ -14,7 +14,7 @@ class TransactionService
    {
         $serviceCost = $request->service_cost;
         $vatAmount = $serviceCost * 0.05;
-        $totalCost = $serviceCost + $vatAmount;
+        $totalCost = $serviceCost + $request->govt_cost;
         if ($request->hasFile('receipt')) {
             $filePath = $request->file('receipt')->store('receipts', 's3');
         }

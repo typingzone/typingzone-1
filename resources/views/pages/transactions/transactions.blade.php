@@ -23,7 +23,7 @@
                                 <th>Govt Cost</th>
                                 <th>Service Cost</th>
                                 <th>Total Cost</th>
-                                <th>Vat Amount</th>
+                                <!-- <th>Vat Amount</th> -->
                                 <th>Paid By</th>
                                 <th>Pay Status</th>
                                 <th>Added By</th>
@@ -63,11 +63,11 @@
                                     <td>{{ $transaction->govt_cost }}</td>
                                     <td>{{ $transaction->service_cost }}</td>
                                     <td>{{ $transaction->total_cost }}</td>
-                                    <td>{{ $transaction->vat_amount }}</td>
+                                    <!-- <td>{{ $transaction->vat_amount }}</td> -->
                                     <td><span class="badge badge-info custom-badge">{{ $transaction->paid_by }}</span></td>
                                     <td><span class="badge badge-success custom-badge">{{ $transaction->pay_status }}</span></td>
                                     <td><span class="badge badge-dark custom-badge">{{ $transaction->user->name }}</span></td>
-                                    <td>{{ $transaction->created_at }}</td>
+                                    <td>{{ $transaction->created_at->format('Y-m-d') }}</td>
                                     <td class="action-table-data">
                                         <div class="edit-delete-action">
                                             <a class="me-2 p-2" href="{{ route('transaction.receipt', $transaction->id) }}">

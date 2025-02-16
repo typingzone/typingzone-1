@@ -37,11 +37,11 @@
                                 <td>{{ $expense->created_at->diffForHumans() }}</td>
                                 <td class="action-table-data">
                                     <div class="edit-delete-action">
-                                        <a class="p-2 delete-expense" href="javascript:void(0);" data-id="{{ $expense->id }}">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
                                         <a class="p-2 download-file" href="{{ route('expenses.download', $expense->id) }}">
                                             <i class="fa fa-download"></i>
+                                        </a>
+                                        <a class="p-2 delete-expense" href="javascript:void(0);" data-id="{{ $expense->id }}">
+                                            <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
                                 </td>
