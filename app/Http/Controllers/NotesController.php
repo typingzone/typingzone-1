@@ -15,7 +15,6 @@ class NotesController extends Controller
     }
     
 
-
     public function store(Request $request)
     {
         try {
@@ -24,14 +23,12 @@ class NotesController extends Controller
                 'note' => 'required|string',
                 'reminder_date' => 'nullable|date',
             ]);
-        
             Note::create([
                 'title' => $request->input('title'),
                 'note' => $request->input('note'),
                 'reminder_date' => $request->input('reminder_date'),
                 'user_id' => Auth::id(),
             ]);
-        
             return redirect()->back()->with('success', 'Note added successfully.');
         } catch (\Exception $e) {
             Log::error('Error creating note: ' . $e->getMessage(), [
@@ -60,14 +57,12 @@ class NotesController extends Controller
                 'editNote' => 'required|string',
                 'editreminder_date' => 'nullable|date',
             ]);
-    
             $note = Note::findOrFail($id);
             $note->title = $request->input('editTitle');
             $note->note = $request->input('editNote');
             $note->reminder_date = $request->input('editReminder_date');
             $note->user_id = Auth::id(); 
             $note->save();
-    
             return response()->json(['message' => 'Note updated successfully']);
         } catch (\Exception $e) {
             Log::error('Error updating note: ' . $e->getMessage());
@@ -76,7 +71,6 @@ class NotesController extends Controller
     }
     
     
-
     public function destroy($id)
     {
         $note = Note::findOrFail($id);

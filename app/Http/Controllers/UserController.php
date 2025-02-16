@@ -28,8 +28,6 @@ class UserController extends Controller
     }
 
 
-
-
     public function changeUserSettings(Request $request)
     {
         try {
@@ -48,7 +46,6 @@ class UserController extends Controller
     }
     
 
-    
     public function handleLogin(Request $request)
     {
         try {
@@ -212,7 +209,6 @@ class UserController extends Controller
     }
     
 
-
     public function getRolePermissions($role)
     {
         try {
@@ -230,8 +226,6 @@ class UserController extends Controller
             return response()->json(['error' => 'Role not found.'.$role], 404);
         }
     }
-
-
 
 
     public function updateRolePermissions(Request $request, $roleId)

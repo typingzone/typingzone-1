@@ -20,7 +20,6 @@ class TransactionController extends Controller
         $this->transactionService = $transactionService;
     }
 
-
     public function index()
     {
         $transactions = Transaction::with(['order' => function($query) {
@@ -28,7 +27,6 @@ class TransactionController extends Controller
         }, 'user'])->orderBy('created_at', 'desc')->get();
         return view('pages.transactions.transactions', compact('transactions'));
     }
-    
     
     public function archivedTransactions()
     {
@@ -50,8 +48,6 @@ class TransactionController extends Controller
     }
     
     
-
-
     public function store(Request $request)
     {
         try {
@@ -72,7 +68,6 @@ class TransactionController extends Controller
         }
     }
     
-   
 
     public function destroy($id)
     {
@@ -86,8 +81,6 @@ class TransactionController extends Controller
     }
     
     
-    
-
     public function downloadReceipt($id)
     {
         try {

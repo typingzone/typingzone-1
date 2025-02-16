@@ -26,12 +26,10 @@ class DocumentNameController extends Controller
                 'document_name' => 'required|string|max:255',
                 'expiry_reminder' => 'required|boolean',
             ]);
-    
             DocumentName::create([
                 'document_name' => $request->document_name,
                 'expiry_reminder' => $request->expiry_reminder,
             ]);
-    
             return response()->json(['success' => 'Document Name added successfully']);
         } catch (\Exception $e) {
             Log::error('Error storing document name: ' . $e->getMessage());
@@ -44,11 +42,9 @@ class DocumentNameController extends Controller
     {
         try {
             $documentName = DocumentName::findOrFail($id);
-
             $request->validate([
                 'document_name' => 'required|string|max:255'
             ]);
-
             $documentName->update($request->all());
             return response()->json(['message' => 'Document name updated successfully.'], 200);
         } catch (\Exception $e) {
@@ -79,7 +75,6 @@ class DocumentNameController extends Controller
             $documentName = DocumentName::findOrFail($id);
             $documentName->expiry_reminder = !$documentName->expiry_reminder;  // Toggle the value
             $documentName->save();
-
             return response()->json(['success' => 'Expiry reminder status toggled successfully']);
         } catch (\Exception $e) {
             Log::error('Error toggling expiry reminder: ' . $e->getMessage());

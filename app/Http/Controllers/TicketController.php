@@ -23,7 +23,6 @@ class TicketController extends Controller
         return view('pages.tickets.tickets', compact('tickets'));
     }
 
-
     public function addTicket(Request $request)
     {
         $validator = Validator::make($request->all(), [

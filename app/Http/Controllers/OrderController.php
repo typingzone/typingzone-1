@@ -60,7 +60,6 @@ class OrderController extends Controller
             'description' => 'nullable|string',
             'assign_to' => 'required|integer',
         ]);
-    
         $files = [];
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $file) {
@@ -69,7 +68,6 @@ class OrderController extends Controller
                 $files[] = $filename;
             }
         }
-    
         $order = Order::create([
             'user_id' => Auth::id(),
             'customer_name' => $request->customer_name,
@@ -81,14 +79,11 @@ class OrderController extends Controller
             'assign_to' => $request->assign_to,
             'status' => 'pending',
         ]);
-        
         Notification::create([
             'assign_to' => $request->assign_to,
             'order_id' => $order->id, 
             'comment' => $request->customer_name . ' has been assigned to you for further processing.',
         ]);
-        
-        
         return response()->json(['success' => true]);
     }
     
@@ -110,11 +105,9 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
         $files = explode(', ', $order->files);
-        
         $zip = new ZipArchive;
         $zipFileName = 'order_' . $id . '_files.zip';
         $zipFilePath = storage_path('app/public/' . $zipFileName);
-        
         if ($zip->open($zipFilePath, ZipArchive::CREATE) === TRUE) {
             foreach ($files as $file) {
                 $filePath = Storage::disk('s3')->url('orders/attachments/' . $file);
@@ -122,10 +115,8 @@ class OrderController extends Controller
                 $zip->addFromString($file, $fileContent);
             }
             $zip->close();
-            
             return response()->download($zipFilePath)->deleteFileAfterSend(true);
         }
-
         return response()->json(['error' => 'Failed to create ZIP file'], 500);
     }
 

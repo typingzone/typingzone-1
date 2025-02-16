@@ -28,14 +28,11 @@ class ExpenseController extends Controller
             'date' => 'required|date',
             'description' => 'required|string',
         ]);
-
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 400);
         }
-
         try {
             $file = $request->file('file')->store('expenses_files', 's3');
-
             Expense::create([
                 'name' => $request->name,
                 'vat' => $request->vat,
@@ -45,12 +42,9 @@ class ExpenseController extends Controller
                 'description' => $request->description,
                 'user_id' => Auth::user()->id,
             ]);
-
             return response()->json(['success' => 'Expense added successfully'], 200);
         } catch (\Exception $e) {
-            Log::error('Error adding expense: ' . $e->getMessage(), [
-                'request_data' => $request->all(),
-            ]);
+            Log::error('Error adding expense: ' . $e->getMessage());
             return response()->json(['error' => 'An error occurred while adding the expense. Please try again.'], 500);
         }
     }

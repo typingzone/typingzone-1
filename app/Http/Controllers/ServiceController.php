@@ -30,14 +30,12 @@ class ServiceController extends Controller
         return response()->json(['message' => 'Service added successfully']);
     }
 
-
     public function destroy($id)
     {
         $service = Service::findOrFail($id);
         $service->delete();
         return response()->json(['message' => 'Service deleted successfully']);
     }
-
 
     public function edit($id)
     {
@@ -51,7 +49,6 @@ class ServiceController extends Controller
         $service->update($request->all());
         return response()->json(['message' => 'Service updated successfully']);
     }
-
 
     public function getServiceCosts($serviceId)
     {
