@@ -45,8 +45,11 @@ class TransactionController extends Controller
 
     public function showInvoices()
     {
-        return view('pages.transactions.invoices');
+        $invoices = Transaction::where('pay_status', 'unpaid')->with('order', 'user', 'service')->orderBy('created_at', 'desc')->get();
+        return view('pages.transactions.invoices', ['invoices' => $invoices]);
     }
+    
+    
 
 
     public function store(Request $request)
@@ -141,5 +144,14 @@ class TransactionController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Failed to delete the table!']);
         }
     }
+
+    public function markAsPaid($id)
+    {
+        $invoice = Transaction::findOrFail($id);
+        $invoice->pay_status = 'paid';
+        $invoice->save();
+        return response()->json(['success' => true]);
+    }
+
 
 }

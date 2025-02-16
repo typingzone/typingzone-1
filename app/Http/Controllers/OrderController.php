@@ -41,6 +41,11 @@ class OrderController extends Controller
     }
     
 
+    public function customerProfile($id)
+    {
+        $profileData = Order::with('transactions', 'user')->findOrFail($id);
+        return view('pages.orders.customer-profile', compact('profileData'));
+    }
 
 
     public function storeOrder(Request $request)

@@ -99,6 +99,7 @@ Route::middleware(['check.auth'])->controller(IndexController::class)->group(fun
 
 Route::middleware(['check.auth'])->controller(OrderController::class)->group(function () {
     Route::get('orders', 'showOrders')->name('orders');
+    Route::get('customer-profile/{id}', 'customerProfile')->name('customer-profile');
     Route::post('orders/store', 'storeOrder')->name('orders.store'); 
     Route::delete('/orders/{id}', 'destroy')->name('orders.destroy');
     Route::get('/orders/{id}/download', 'downloadFiles')->name('orders.download');
@@ -159,6 +160,7 @@ Route::middleware(['check.auth'])->controller(TransactionController::class)->gro
     Route::post('/transactions/{id}/update', 'update')->name('transactions.update');
     Route::get('/export-archived-transactions/{tableName}', 'exportArchivedTransactions')->name('export.archived.transactions');
     Route::post('delete-archived-transactions-table', 'deleteArchivedTransactionsTable')->name('delete-archived-transactions-table');
+    Route::post('/invoices/mark-paid/{id}', 'markAsPaid');
 });
 
 Route::controller(UserController::class)->group(function () {
