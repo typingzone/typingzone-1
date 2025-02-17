@@ -5,10 +5,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Transaction; 
-
+use Pusher\Pusher;
 
 class TransactionService
 {
+
+    protected $pusherService;
+    public function __construct(PusherService $pusherService)
+    {
+        $this->pusherService = $pusherService;
+    }
 
    public function store($request)
    {
@@ -33,6 +39,7 @@ class TransactionService
             'description' => $request->description,
             'receipt' => $filePath ?? null,
         ]);
+        $this->pusherService->sendTransactionNotification($transaction);
    }
     
 

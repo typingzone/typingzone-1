@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Transaction; 
 use App\Services\TransactionService;
+use App\Services\PusherService;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ArchivedTransactionsExport;
@@ -14,10 +15,12 @@ class TransactionController extends Controller
 {
 
     protected $transactionService;
+    protected $pusherService;
 
-    public function __construct(TransactionService $transactionService)
+    public function __construct(TransactionService $transactionService, PusherService $pusherService)
     {
         $this->transactionService = $transactionService;
+        $this->pusherService = $pusherService;
     }
 
     public function index()
@@ -102,6 +105,7 @@ class TransactionController extends Controller
         $transaction = Transaction::findOrFail($id);
         $transaction->status = $request->status;
         $transaction->save();
+        $this->pusherService->sendTransactionStatusNotification($transaction);
         return response()->json(['status' => $request->status]);
     }
 
