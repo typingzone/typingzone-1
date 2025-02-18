@@ -14,7 +14,7 @@
 
             <div class="row">
                 <!-- Customer Profile Card -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Customer Information</h5>
@@ -30,11 +30,11 @@
                 </div>
 
                 <!-- Transactions Table Card -->
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Customer Transactions</h5>
-                            <table class="table table-sm table-striped">
+                            <table class="table datanew table-sm table-striped">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -54,7 +54,7 @@
                                             <td>{{ $transaction->service->service_name ?? 'N/A' }}</td>
                                             <td>{{ $transaction->total_cost }}</td>
                                             <td>{{ $transaction->paid_by }}</td>
-                                            <td>{{ $transaction->pay_status }}</td>
+                                            <td><span class="badge badge-success custom-badge">{{ $transaction->pay_status }}</span></td>
                                             <td>{{ $transaction->created_at->format('Y-m-d') }}</td>
                                         </tr>
                                     @endforeach

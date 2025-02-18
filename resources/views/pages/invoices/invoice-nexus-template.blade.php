@@ -9,7 +9,7 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f6f9;
+            background-color: #eef2f7;
         }
 
         .invoice-container {
@@ -19,6 +19,7 @@
             background: #fff;
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #4CAF50;
         }
 
         .invoice-header {
@@ -26,8 +27,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
-            border-bottom: 2px solid #f0f0f0;
             padding-bottom: 20px;
+            border-bottom: 3px solid #f0f0f0;
         }
 
         .invoice-logo {
@@ -36,16 +37,19 @@
         }
 
         .invoice-title {
-            font-size: 28px;
+            font-size: 12px;
             font-weight: bold;
             color: #333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .invoice-details {
             margin-top: 30px;
             display: flex;
             justify-content: space-between;
-            font-size: 16px;
+            font-size: 12px;
+            color: #555;
         }
 
         .invoice-details div {
@@ -60,45 +64,44 @@
             width: 100%;
             margin-top: 30px;
             border-collapse: collapse;
-            border: 1px solid #ddd;
-        }
-
-        .invoice-table th, .invoice-table td {
-            padding: 12px;
-            text-align: left;
-            border: 1px solid #ddd;
-            font-size: 14px;
+            background-color: #f9f9f9;
+            color: #444;
+            font-size: 12px;
         }
 
         .invoice-table th {
-            background-color: #f9f9f9;
-            font-weight: bold;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .invoice-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .invoice-table tr:nth-child(even) {
+            background-color: #f2f2f2;
         }
 
         .invoice-footer {
             text-align: right;
             margin-top: 40px;
-            font-size: 18px;
+            font-size: 12px;
             font-weight: bold;
+            color: #333;
         }
 
         .invoice-footer p {
             margin: 5px 0;
         }
 
-        .btn-download {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .btn-download:hover {
-            background-color: #45a049;
+        .highlight {
+            color: #FF5722;
         }
     </style>
 </head>
@@ -107,7 +110,8 @@
     <div class="invoice-container">
         <!-- Invoice Header -->
         <div class="invoice-header">
-            <img src="{{ public_path('images/company_logo.png') }}" alt="Company Logo" class="invoice-logo">
+            @php $company = \App\Models\Company::first(); @endphp
+            <img src="{{ public_path($company->company_logo) }}" alt="Company Logo" class="invoice-logo">
             <h2 class="invoice-title">Invoice</h2>
         </div>
 
@@ -118,9 +122,9 @@
                 <p><strong>Email:</strong> {{ $profileData->email }}</p>
                 <p><strong>Phone:</strong> {{ $profileData->phone_number }}</p>
             </div>
-            <div style="text-align: right;">
+            <div style="text-align: left;">
                 <p><strong>Invoice Date:</strong> {{ now()->format('Y-m-d') }}</p>
-                <p><strong>Due Date:</strong> {{ now()->addDays(30)->format('Y-m-d') }}</p>
+                <p><strong>Due Date:</strong> <span class="highlight">{{ now()->addDays(30)->format('Y-m-d') }}</span></p>
             </div>
         </div>
 
@@ -140,7 +144,7 @@
                     <tr>
                         <td>{{ $transaction->service->service_name ?? 'N/A' }}</td>
                         <td>{{ $transaction->application_no }}</td>
-                        <td>{{ $transaction->total_cost }}</td>
+                        <td>{{ $transaction->total_cost }} AED</td>
                         <td>{{ $transaction->paid_by }}</td>
                         <td>{{ $transaction->pay_status }}</td>
                     </tr>
@@ -150,10 +154,9 @@
 
         <!-- Total Due -->
         <div class="invoice-footer">
-            <p><strong>Total Due:</strong> {{ $profileData->transactions->where('pay_status', 'unpaid')->sum('total_cost') }}</p>
+            <p><strong>Total Due:</strong> <span class="highlight">{{ $profileData->transactions->where('pay_status', 'unpaid')->sum('total_cost') }} AED</span></p>
         </div>
 
-        <!-- Download Button -->
     </div>
 
 </body>

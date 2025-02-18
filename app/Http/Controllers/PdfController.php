@@ -13,7 +13,7 @@ class PdfController extends Controller
     public function downloadInvoice($orderId)
     {
         $profileData = Order::with(['transactions', 'transactions.service'])->findOrFail($orderId);
-        $pdf = PDF::loadView('pages.transactions.invoice-template', compact('profileData'));
+        $pdf = PDF::loadView('pages.invoices.invoice-template', compact('profileData'));
         return $pdf->download('invoice_' . $profileData->customer_name . '.pdf');
     }
 

@@ -3,13 +3,13 @@
   <!-- Logo -->
   <div class="header-left active">
     <a href="{{ url('dashboard') }}" class="logo logo-normal">
-      <img src="{{ $company && $company->company_logo ? asset('storage/' . $company->company_logo) : asset('/build/img/logo.png') }}" alt="Company Logo">
+      <img src="{{ $company && $company->company_logo ? asset($company->company_logo) : asset('/build/img/logo.png') }}" alt="Company Logo">
     </a>
     <a href="{{ url('dashboard') }}" class="logo logo-white">
-      <img src="{{ $company && $company->company_logo ? asset('storage/' . $company->company_logo) : asset('/build/img/logo-white.png') }}" alt="Company Logo White">
+      <img src="{{ $company && $company->company_logo ? asset($company->company_logo) : asset('/build/img/logo-white.png') }}" alt="Company Logo White">
     </a>
     <a href="{{ url('dashboard') }}" class="logo-small">
-      <img src="{{ $company && $company->company_icon ? asset('storage/' . $company->company_icon) : asset('/build/img/logo-small.jpeg') }}" alt="Company Icon">
+      <img src="{{ $company && $company->company_icon ? asset($company->company_icon) : asset('/build/img/logo-small.jpeg') }}" alt="Company Icon">
     </a>
     <a id="toggle_btn" href="javascript:void(0);">
       <i data-feather="chevrons-left" class="feather-16"></i>
@@ -85,7 +85,7 @@
       <a href="javascript:void(0);" class="dropdown-toggle nav-link select-store" data-bs-toggle="dropdown">
         <span class="user-info">
           <span class="user-letter">
-            <img src="{{ $company && $company->company_icon ? asset('storage/' . $company->company_icon) :asset('/build/img/store/store-01.png') }}" alt="Store Logo" class="img-fluid">
+            <img src="{{ $company && $company->company_icon ? asset($company->company_icon) :asset('/build/img/store/store-01.png') }}" alt="Store Logo" class="img-fluid">
           </span>
           <span class="user-detail">
             <span class="user-name">{{ ($company && $company->company_name) ? $company->company_name : 'Company Name' }}</span>
