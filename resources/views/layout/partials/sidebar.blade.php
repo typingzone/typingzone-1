@@ -38,7 +38,7 @@
                             <a href="javascript:void(0);" class="{{ Request::routeIs('invoices') ? 'subdrop active' : '' }}"><i data-feather="layout"></i><span>Invoies</span><span class="menu-arrow"></span></a>
                             <ul>
                                 <li><a href="{{ route('invoices') }}" class="{{ Request::routeIs('invoices') ? 'active' : '' }}">Invoices</a></li>
-                                <li><a href="{{ route('invoices') }}" class="{{ Request::routeIs('invoices') ? 'active' : '' }}">Invoices Design</a></li>
+                                <li><a href="{{ route('invoice-templates') }}" class="{{ Request::routeIs('invoice-templates') ? 'active' : '' }}">Invoice Templates</a></li>
                             </ul>
                         </li>
                         <li class="{{ Request::routeIs('tickets') ? 'active' : '' }}">

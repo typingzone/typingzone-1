@@ -146,7 +146,7 @@
       <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
         <span class="user-info">
           <span class="user-letter">
-            <img src="{{ Auth::user()->profile_photo ? asset('storage/'.Auth::user()->profile_photo) : asset('build/img/profiles/avator1.jpg') }}" alt="" class="img-fluid">
+            <img src="{{ Auth::user()->profile_photo ? asset(Auth::user()->profile_photo) : asset('build/img/profiles/avator1.jpg') }}" alt="" class="img-fluid">
           </span>
           <span class="user-detail">
             <span class="user-name">{{ Auth::user()->name }}</span>
@@ -158,7 +158,7 @@
         <div class="profilename">
           <div class="profileset">
             <span class="user-img">
-            <img src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('build/img/profiles/avator1.jpg') }}" alt="">
+            <img src="{{ Auth::user()->profile_photo ? asset(Auth::user()->profile_photo) : asset('build/img/profiles/avator1.jpg') }}" alt="">
               <span class="status online"></span>
             </span>
             <div class="profilesets">

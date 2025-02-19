@@ -154,6 +154,8 @@ Route::middleware(['check.auth'])->controller(TransactionController::class)->gro
     Route::get('/transaction/receipt/{id}', 'downloadReceipt')->name('transaction.receipt');
     Route::get('archived-transactions', 'archivedTransactions')->name('archived-transactions');
     Route::get('invoices', 'showInvoices')->name('invoices');
+    Route::get('invoice-templates', 'invoiceTemplates')->name('invoice-templates');
+    Route::post('/set-active-template', 'setActiveTemplate')->name('set-active-template');
     Route::post('/transaction/update-status/{id}', 'updateStatus')->name('transaction.updateStatus');
     Route::get('/transactions/{id}/edit', 'edit')->name('transactions.edit');
     Route::post('/transactions/{id}/update', 'update')->name('transactions.update');

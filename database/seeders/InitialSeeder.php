@@ -110,5 +110,7 @@ class InitialSeeder extends Seeder
         ]);
 
 
+        
+
     }
 }

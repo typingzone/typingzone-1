@@ -29,17 +29,23 @@ class UserService
         }
         if (isset($data['profile_photo'])) {
             if ($user->profile_photo) {
-                Storage::delete($user->profile_photo);
+                $oldPhotoPath = public_path($user->profile_photo);
+                if (file_exists($oldPhotoPath)) {
+                    unlink($oldPhotoPath);
+                }
             }
-            $fileName = $data['profile_photo']->store('profile_photos', 'public');
-            $user->profile_photo = $fileName;
+            $folderName = 'build/profile_photos';
+            $folderPath = public_path($folderName);
+            if (!file_exists($folderPath)) {
+                mkdir($folderPath, 0777, true);
+            }
+            $fileName = time() . '_' . $data['profile_photo']->getClientOriginalName();
+            $data['profile_photo']->move($folderPath, $fileName);
+            $user->profile_photo = $folderName . '/' . $fileName;
         }
-        /** @var \App\Models\User $user */
         $user->save();
     }
-
-
-
+    
 
 
     public function login($credentials, Request $request)
@@ -47,8 +53,6 @@ class UserService
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             $agent = new Agent();
-    
-            // Store login activity
             $loginActivity = new LoginActivity();
             $loginActivity->user_id = $user->id;
             $loginActivity->ip_address = $request->ip();
@@ -60,8 +64,6 @@ class UserService
         }
         return ['success' => false, 'message' => 'Invalid credentials'];
     }
-
-
 
 
     public function resetPassword($data)
@@ -80,8 +82,6 @@ class UserService
     }
 
 
-
-
     public function sendPasswordResetLink($data)
     {
         $status = Password::sendResetLink($data);
@@ -92,10 +92,9 @@ class UserService
     }
 
 
-
     public function getUserById($id)
     {
-        return User::with('roles')->findOrFail($id); // Eager load roles
+        return User::with('roles')->findOrFail($id); 
     }
 
 
@@ -105,13 +104,28 @@ class UserService
         $user->name = $data['username'];
         $user->email = $data['email'];
         if (isset($data['profile_photo'])) {
-            $path = $data['profile_photo']->store('profile_photos', 'public');
-            $user->profile_photo = $path;
+            if ($user->profile_photo) {
+                $oldPhotoPath = public_path($user->profile_photo);
+                if (file_exists($oldPhotoPath)) {
+                    unlink($oldPhotoPath);
+                }
+            }
+            $folderName = 'build/profile_photos'; // Fixed folder inside 'build'
+            $folderPath = public_path($folderName);
+            if (!file_exists($folderPath)) {
+                mkdir($folderPath, 0777, true);
+            }
+            $fileName = time() . '_' . $data['profile_photo']->getClientOriginalName();
+            $data['profile_photo']->move($folderPath, $fileName);
+            $user->profile_photo = $folderName . '/' . $fileName;
         }
         $user->save();
-        $user->roles()->sync([$data['role_id']]); 
+        $user->roles()->sync([$data['role_id']]);
         return true;
     }
+    
+
+
 
 
     public function deleteUser($id)

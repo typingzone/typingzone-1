@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ArchivedTransactionsExport;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use App\Models\Company;
 
 class TransactionController extends Controller
 {
@@ -47,7 +48,7 @@ class TransactionController extends Controller
     public function showInvoices()
     {
         $invoices = Transaction::where('pay_status', 'unpaid')->with('order', 'user', 'service')->orderBy('created_at', 'desc')->get();
-        return view('pages.transactions.invoices', ['invoices' => $invoices]);
+        return view('pages.invoices.invoices', ['invoices' => $invoices]);
     }
     
     
@@ -130,7 +131,6 @@ class TransactionController extends Controller
     }
     
     
-    
 
     public function exportArchivedTransactions($tableName)
     {
@@ -152,6 +152,28 @@ class TransactionController extends Controller
         $invoice = Transaction::findOrFail($id);
         $invoice->pay_status = 'paid';
         $invoice->save();
+        return response()->json(['success' => true]);
+    }
+
+
+    public function invoiceTemplates()
+    {
+        $company = Company::first();
+        $templates = $company->invoice_templates;
+        return view('pages.invoices.invoice-templates', ['templates' => $templates]);
+    }
+    
+    
+
+    public function setActiveTemplate(Request $request)
+    {
+        $company = Company::first();
+        $templates = $company->invoice_templates;
+        foreach ($templates as &$template) {
+            $template['active'] = $template['template_name'] === $request->template_name;
+        }
+        $company->invoice_templates = $templates;
+        $company->save();
         return response()->json(['success' => true]);
     }
 
