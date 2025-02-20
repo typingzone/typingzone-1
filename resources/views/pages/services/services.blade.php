@@ -53,5 +53,10 @@
             </div>
         </div>
     </div>
+
+    <!-- Pass services data to JavaScript -->
+    <script>
+        let servicesData = @json($services);
+    </script>
     <script src="{{ asset('build/Custom/js/services.js') }}"></script>
 @endsection

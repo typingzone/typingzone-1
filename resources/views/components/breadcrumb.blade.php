@@ -96,6 +96,11 @@
             <i data-feather="plus-circle" class="me-2"></i> Service
         </a>
     </div>
+    <div class="page-btn">
+        <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#show-quotation-modal">
+            <i data-feather="info" class="me-2"></i> Quotation
+        </a>
+    </div>
     @endif
     @if (Route::is(['orders']))
     <div class="page-btn">
