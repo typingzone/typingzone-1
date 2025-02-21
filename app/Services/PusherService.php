@@ -23,7 +23,10 @@ class PusherService
         $order = Order::find($transaction->order_id);
         $service = Service::find($transaction->service_id);
         $message = "{$user->name} added Transaction for customer {$order->customer_name} using service {$service->service_name} with application number {$transaction->application_no}";
-        $data = ['message' => $message];
+        $data = [
+            'message' => $message,
+            'transaction' => $transaction->load('order', 'service', 'user')
+        ];
         $this->pusher->trigger('new-transaction-channel', 'transaction-added', $data);
     }
 

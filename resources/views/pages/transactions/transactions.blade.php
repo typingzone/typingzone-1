@@ -13,7 +13,7 @@
             @endcomponent
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-sm datanew table-striped">
+                    <table class="table table-sm datanew table-striped" id="transaction-table">
                         <thead>
                             <tr>
                                 <th>SNO</th>
