@@ -89,9 +89,9 @@
                             <a href="{{ route('guides') }}"><i data-feather="book-open"></i><span>Guides</span></a>
                         </li>
 
-                        <li class="{{ Request::routeIs('email-templates') ? 'active' : '' }}">
+                        <!-- <li class="{{ Request::routeIs('email-templates') ? 'active' : '' }}">
                             <a href="{{ route('email-templates') }}"><i data-feather="mail"></i><span>Email Templates</span></a>
-                        </li>
+                        </li> -->
 
                         <li class="{{ Request::routeIs('reminders') ? 'active' : '' }}">
                             <a href="{{ route('reminders') }}"><i data-feather="bell"></i><span>Reminders</span></a>

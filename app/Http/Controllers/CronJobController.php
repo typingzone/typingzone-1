@@ -9,10 +9,14 @@ use App\Mail\NotesReminderMail;
 use App\Models\Note;
 use App\Models\Company;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\TodayTransactionsHistory;
 use App\Models\Reminder;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Models\Order;
+use App\Models\Transaction;
+use App\Exports\DailyTransactionExport;
 
 class CronJobController extends Controller
 {
@@ -172,5 +176,41 @@ class CronJobController extends Controller
     {
         Order::onlyTrashed()->forceDelete();
     }
+
+    public function receiveTodayTransactionsHistory()
+    {
+        try {
+            $transactions = Transaction::with(['order', 'user', 'service'])
+                ->whereDate('created_at', now()->toDateString())
+                ->get();
+
+            if ($transactions->isEmpty()) {
+                return response()->json(['message' => 'No transactions found for today']);
+            }
+
+            $export = new DailyTransactionExport($transactions);
+            $filePath = $export->handle();
+            
+            if ($filePath) {
+                $company = Company::first();
+                $companyEmail = $company->email;
+                $companyLogo = $company->company_logo;
+                $companyName = $company->company_name;
+                Mail::to($companyEmail)->send(new TodayTransactionsHistory($companyLogo, $companyName, $transactions, $filePath));
+                
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+                
+                return response()->json(['message' => 'Transaction report sent successfully']);
+            }
+
+            return response()->json(['error' => 'Failed to generate excel file'], 500);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return response()->json(['error' => 'Failed to process transaction report'], 500);
+        }
+    }
     
+
 }

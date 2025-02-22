@@ -20,6 +20,7 @@ class InitialSeeder extends Seeder
             ['reminder_type' => 'Notes Reminders', 'status' => 1],
             ['reminder_type' => 'Pending Transactions Reminder', 'status' => 1],
             ['reminder_type' => 'Unpaid Invoices Reminder', 'status' => 1],
+            ['reminder_type' => 'Receive Daily Transactions', 'status' => 1],
         ];
         foreach ($reminders as $reminder) {
             Reminder::create([

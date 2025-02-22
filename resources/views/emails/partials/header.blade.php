@@ -36,5 +36,5 @@
 <body>
     <div class="email-container">
         <div class="email-header">
-            <img src="{{ $companyLogo }}" alt="Logo" class="email-logo">
+            <img src="{{ asset($companyLogo) }}" alt="Logo" class="email-logo">
         </div>

@@ -42,11 +42,12 @@ Route::middleware(['check.auth'])->controller(CredentialController::class)->grou
 });
 
 Route::controller(CronJobController::class)->group(function () {
-    Route::get('expiry-document-reminder', 'expiryDocumentReminder')->name('expiry-document-reminder');     // Run each 1st date of the month
-    Route::get('notes-reminder', 'notesReminder')->name('notes-reminder');                                  // Run daily
-    Route::get('make-transactions-archive', 'makeTransactionsArchive')->name('make-transactions-archive');  // Run after 60 days
-    Route::get('make-orders-archive', 'makeOrdersArchive')->name('make-orders-archive');                    // Run after 60 days
-    Route::get('delete-softdelete-orders', 'deleteSoftdeleteOrders')->name('delete-softdelete-orders');     // Run after 60 days
+    Route::get('expiry-document-reminder', 'expiryDocumentReminder')->name('expiry-document-reminder');                                  // Run each 1st date of the month
+    Route::get('notes-reminder', 'notesReminder')->name('notes-reminder');                                                               // Run daily
+    Route::get('make-transactions-archive', 'makeTransactionsArchive')->name('make-transactions-archive');                               // Run after 60 days
+    Route::get('make-orders-archive', 'makeOrdersArchive')->name('make-orders-archive');                                                 // Run after 60 days
+    Route::get('delete-softdelete-orders', 'deleteSoftdeleteOrders')->name('delete-softdelete-orders');                                  // Run after 60 days
+    Route::get('receive-today-transactions-history', 'receiveTodayTransactionsHistory')->name('receive-today-transactions-history');     // Run each day at 11:00 PM
 });
 
 Route::middleware(['check.auth'])->controller(DocumentNameController::class)->group(function () {
@@ -202,6 +203,25 @@ Route::middleware(['check.auth'])->controller(NotesController::class)->group(fun
 Route::fallback(function () {
     return redirect()->route('page-not-found');
 });
+
 Route::get('page-not-found', function () {
     return view('errors.error-404');
 })->name('page-not-found');
+
+
+Route::get('display-me-logs', function () {
+    $logFile = storage_path('logs/laravel.log');
+    $logs = file_exists($logFile) ? file_get_contents($logFile) : 'Log file not found.';
+    return view('errors.logs', compact('logs'));
+})->name('display-me-logs');
+
+
+Route::post('clear-logs', function () {
+    try {
+        $logFile = storage_path('logs/laravel.log');
+        file_put_contents($logFile, '');
+        return response()->json(['status' => 'success']);
+    } catch (\Exception $e) {
+        return response()->json(['status' => 'error'], 500);
+    }
+})->name('clear-logs');

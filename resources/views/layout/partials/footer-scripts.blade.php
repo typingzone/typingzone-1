@@ -67,3 +67,17 @@
     });
 </script>
 @endif
+
+
+<!-- file validation overall application before upload -->
+<script>
+    $('input[type="file"]').on('change', function() {
+        const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.pdf)$/i;
+        const file = this.files[0];
+        if (file && !allowedExtensions.exec(file.name)) {
+            toastr.warning('Invalid file type. Only images and PDF files are allowed.');
+            $(this).val('');
+        }
+    });
+</script>
+
