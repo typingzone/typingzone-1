@@ -48,6 +48,7 @@ Route::controller(CronJobController::class)->group(function () {
     Route::get('make-orders-archive', 'makeOrdersArchive')->name('make-orders-archive');                                                 // Run after 60 days
     Route::get('delete-softdelete-orders', 'deleteSoftdeleteOrders')->name('delete-softdelete-orders');                                  // Run after 60 days
     Route::get('receive-today-transactions-history', 'receiveTodayTransactionsHistory')->name('receive-today-transactions-history');     // Run each day at 11:00 PM
+    Route::get('delete-activities-log', 'deleteActivitiesLog')->name('delete-activities-log');                                           // Run each Month
 });
 
 Route::middleware(['check.auth'])->controller(DocumentNameController::class)->group(function () {
@@ -109,6 +110,7 @@ Route::middleware(['check.auth'])->controller(OrderController::class)->group(fun
     Route::put('/orders/{id}', 'update')->name('orders.update');
     Route::get('archived-orders', 'archivedOrders')->name('archived-orders');
     Route::get('all-notifications', 'allNotifications')->name('all-notifications');
+    Route::post('clear-all-notifications', 'clearAllNotifications')->name('clear-all-notifications');
     Route::delete('notifications/{id}', 'deleteNotification')->name('notification.delete');
     Route::get('/export-archived-orders/{tableName}', 'exportArchivedOrders')->name('export.archived.orders');
     Route::post('delete-archived-orders-table', 'deleteArchivedOrdersTable')->name('delete-archived-orders-table');
@@ -177,6 +179,7 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/edit-access-level', 'viewEditAccessLevel')->name('edit-access-level');
     Route::post('/update-user-role/{id}', 'updateUserRole')->name('update-user-role');
     Route::get('login-activities', 'loginActivities')->name('login-activities');
+    Route::get('log-activities', 'logActivities')->name('log-activities');
     Route::get('logout', 'logout')->name('logout');
     Route::get('password/reset/{token}', 'showResetForm')->name('password.reset');
     Route::post('password/reset', 'handlePasswordReset')->name('password.update'); 

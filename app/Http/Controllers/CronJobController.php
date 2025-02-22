@@ -213,4 +213,11 @@ class CronJobController extends Controller
     }
     
 
+
+    public function deleteActivitiesLog(){
+        DB::table('activity_log')->where('created_at','<',now()->subDays(30))->delete();
+        return response()->json(['message'=>'Activity log deleted successfully']);
+    }
+    
+
 }

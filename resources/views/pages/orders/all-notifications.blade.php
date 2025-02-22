@@ -27,8 +27,8 @@
                             @foreach($notifications as $index => $notification)
                                 <tr id="notification-row-{{ $notification->id }}">
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $notification->order->customer_name }}</td> 
-                                    <td>{{ $notification->order->description }}</td> 
+                                    <td>{{ $notification->order->customer_name ?? '' }}</td> 
+                                    <td>{{ $notification->order->description ?? '' }}</td> 
                                     <td>{{ $notification->created_at->format('Y-m-d') }}</td>
                                     <td class="action-table-data">
                                         <div class="edit-delete-action d-flex justify-content-start">

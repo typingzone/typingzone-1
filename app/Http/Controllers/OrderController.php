@@ -74,7 +74,7 @@ class OrderController extends Controller
             'phone_number' => $request->phone_number,
             'email' => $request->email,
             'services' => implode(', ', $request->services),
-            'files' => implode(', ', $files),
+            'files' => $files ? implode(', ', $files) : null,
             'description' => $request->description,
             'assign_to' => $request->assign_to,
             'status' => 'pending',
@@ -110,7 +110,7 @@ class OrderController extends Controller
         $zipFilePath = storage_path('app/public/' . $zipFileName);
         if ($zip->open($zipFilePath, ZipArchive::CREATE) === TRUE) {
             foreach ($files as $file) {
-                $filePath = Storage::disk('s3')->url('orders/attachments/' . $file);
+                $filePath = Storage::disk('s3')->temporaryUrl('orders/attachments/' . $file, now()->addMinutes(30));
                 $fileContent = file_get_contents($filePath);
                 $zip->addFromString($file, $fileContent);
             }
@@ -195,6 +195,12 @@ class OrderController extends Controller
         }
     }
     
+
+    public function clearAllNotifications()
+    {
+        Notification::where('assign_to',  Auth::id())->delete();
+        return response()->json(['status' => 'success']);
+    }
 
 
 }

@@ -4,15 +4,15 @@
 <li class="nav-item dropdown nav-item-box">
     <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
         <i data-feather="bell"></i>
-        <span class="badge rounded-pill">{{ $notifications->count() }}</span>
+        <span class="badge rounded-pill" id="notification-count">{{ $notifications->count() }}</span>
     </a>
     <div class="dropdown-menu notifications">
         <div class="topnav-dropdown-header">
             <span class="notification-title">Notifications</span>
-            <a href="javascript:void(0)" class="clear-noti">Clear All</a>
+            <a href="javascript:void(0)" class="clear-noti" id="clear-all">Clear All</a>
         </div>
         <div class="noti-content">
-            <ul class="notification-list">
+            <ul class="notification-list" id="notification-list">
                 @foreach($notifications as $notification)
                 <li class="notification-message" id="notification-{{ $notification->id }}">
                     <a href="{{ url('all-notifications') }}">
@@ -40,3 +40,34 @@
     </div>
 </li>
 
+
+<script>
+    $('#clear-all').click(function() {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You want to clear all notifications!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, clear them!',
+        cancelButtonText: 'No, keep them'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '{{ route("clear-all-notifications") }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    Swal.fire('Cleared!', 'All notifications have been cleared.', 'success');
+                    $('#notification-list').empty();
+                    $('#notification-count').text('0');
+                },
+                error: function() {
+                    Swal.fire('Error!', 'There was an issue clearing notifications.', 'error');
+                }
+            });
+        }
+    });
+});
+</script>

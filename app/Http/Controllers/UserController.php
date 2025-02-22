@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use Spatie\Permission\Models\Permission;
 use App\Models\LoginActivity;
+use Spatie\Activitylog\Models\Activity;
 
 
 class UserController extends Controller
@@ -267,4 +268,11 @@ class UserController extends Controller
     }
 
 
+
+    public function logActivities()
+    {
+        $logActivities = Activity::orderBy('created_at', 'desc')->get();
+        return view('pages.others.log_activities', compact('logActivities'));
+    }
+    
 }

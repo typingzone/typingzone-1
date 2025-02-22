@@ -102,6 +102,9 @@
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">ACTIVITIES</h6>
                     <ul>
+                        <li class="{{ Request::routeIs('log-activities') ? 'active' : '' }}">
+                            <a href="{{ route('log-activities') }}"><i data-feather="clock"></i><span>Log Activities</span></a>
+                        </li>
                         <li class="{{ Request::routeIs('login-activities') ? 'active' : '' }}">
                             <a href="{{ route('login-activities') }}"><i data-feather="activity"></i><span>Login Activities</span></a>
                         </li>
