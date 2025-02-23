@@ -159,7 +159,7 @@ class TransactionController extends Controller
     public function invoiceTemplates()
     {
         $company = Company::first();
-        $templates = $company->invoice_templates;
+        $templates = json_decode($company->invoice_templates, true);
         return view('pages.invoices.invoice-templates', ['templates' => $templates]);
     }
     

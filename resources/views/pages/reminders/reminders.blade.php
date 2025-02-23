@@ -29,10 +29,12 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $reminder->reminder_type }}</td>
                                     <td>
+                                        @can('Reminders edit0')
                                         <label class="switch">
                                             <input type="checkbox" class="status-toggle" data-id="{{ $reminder->id }}" {{ $reminder->status ? 'checked' : '' }}>
                                             <span class="slider round"></span>
                                         </label>
+                                        @endcan
                                     </td>
                                     <td>{{ $reminder->updated_at->diffForHumans() }}</td>
                                 </tr>

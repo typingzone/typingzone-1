@@ -54,9 +54,11 @@
                             <td>{{ $activity->login_time }}</td>
                             <td class="action-table-data">
                                 <div class="edit-delete-action">
+                                    @can('Login Activities delete')
                                      <a href="javascript:void(0);" class="p-2 delete-activity" data-id="{{ $activity->id }}">
                                         <i class="fa fa-trash"></i>
                                     </a>
+                                    @endcan
                                 </div>
                             </td>
                         </tr>

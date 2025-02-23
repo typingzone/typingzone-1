@@ -36,10 +36,12 @@
                                     data-feather="chevron-up" class="feather-chevron-up"></i></a>
                         </li>
                     </ul>
+                    @can('Notes Add')
                     <div class="page-btn">
-                        <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#note-units"><i
-                                data-feather="plus-circle" class="me-2"></i> Add Note</a>
+                        <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#note-units">
+                            <i data-feather="plus-circle" class="me-2"></i> Add Note</a>
                     </div>
+                    @endcan
                 </div>
             </div>
 

@@ -13,6 +13,10 @@ class RolePermissionMiddleware
             return redirect('login');
         }
 
+        if (Auth::user()->hasRole('Admin')) {
+            return $next($request);
+        }
+        
         if (!$request->user()->hasRole($role)) {
             abort(403, 'Access denied');
         }

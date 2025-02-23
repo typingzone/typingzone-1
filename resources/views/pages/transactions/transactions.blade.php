@@ -70,15 +70,21 @@
                                     <td>{{ $transaction->created_at->format('Y-m-d') }}</td>
                                     <td class="action-table-data">
                                         <div class="edit-delete-action">
+                                            @can('Tranactions download')
                                             <a class="me-2 p-2" href="{{ route('transaction.receipt', $transaction->id) }}">
                                                 <i class="fa fa-download"></i>
                                             </a>
+                                            @endcan
+                                            @can('Tranactions edit')
                                             <a class="me-2 edit-transaction p-2" href="javascript:void(0);" data-id="{{ $transaction->id }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
+                                            @endcan
+                                            @can('Tranactions delete')
                                             <a class="p-2 delete-transaction" href="javascript:void(0);" data-id="{{ $transaction->id }}">
                                                 <i class="fa fa-trash"></i>
                                             </a>
+                                            @endcan
                                         </div>
                                     </td>
                                 </tr>

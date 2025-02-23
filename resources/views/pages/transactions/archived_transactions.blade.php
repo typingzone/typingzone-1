@@ -34,12 +34,16 @@
                                                     <i data-feather="more-vertical" class="feather-user"></i>
                                                 </a>
                                                 <ul class="dropdown-menu">
+                                                    @can('Archived Tranactions download')
                                                     <li>
                                                         <a href="{{ route('export.archived.transactions', ['tableName' => $tableName]) }}" class="dropdown-item"><i data-feather="download" class="info-img"></i> Download</a>
                                                     </li>
+                                                    @endcan
+                                                    @can('Archived Tranactions delete')
                                                     <li>
                                                         <a href="javascript:void(0);" class="dropdown-item delete-archive mb-0"><i data-feather="trash-2" class="info-img"></i> Delete All</a>
                                                     </li>
+                                                    @endcan
                                                 </ul>
                                             </div>
                                         </div>

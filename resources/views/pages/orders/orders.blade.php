@@ -48,17 +48,23 @@
                                 <td>{{ $order->created_at->diffForHumans() }}</td>
                                 <td class="action-table-data">
                                     <div class="edit-delete-action">
-                                        @if($order->files)
-                                        <a class="me-2 p-2" href="{{ route('orders.download', $order->id) }}">
-                                            <i class="fa fa-download"></i>
-                                        </a>
-                                        @endif
+                                        @can('Orders download')
+                                            @if($order->files)
+                                            <a class="me-2 p-2" href="{{ route('orders.download', $order->id) }}">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                            @endif
+                                        @endcan
+                                        @can('Orders edit')
                                         <a class="me-2 edit-order p-2" href="javascript:void(0);" data-id="{{ $order->id }}">
                                             <i class="fa fa-edit"></i>
                                         </a>
+                                        @endcan
+                                        @can('Orders delete')
                                         <a class="p-2 delete-order" href="javascript:void(0);" data-id="{{ $order->id }}">
                                             <i class="fa fa-trash"></i>
                                         </a>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

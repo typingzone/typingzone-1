@@ -6,9 +6,11 @@ use Illuminate\Database\Seeder;
 use App\Models\Reminder;
 use App\Models\DocumentName;
 use App\Models\Service;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class InitialSeeder extends Seeder
 {
@@ -31,15 +33,8 @@ class InitialSeeder extends Seeder
 
         // Adding document names used in UAE
         $documentNames = [
-            'Passport',
-            'Emirates ID',
-            'Driver License',
-            'Visa',
-            'Labor Card',
-            'Trade License',
-            'Vehicle Registration',
-            'Medical Insurance Card',
-            'Residency Permit',
+            'Passport', 'Emirates ID', 'Driver License', 'Visa', 'Labor Card', 'Trade License', 
+            'Vehicle Registration', 'Medical Insurance Card', 'Residency Permit',
         ];
         foreach ($documentNames as $documentName) {
             DocumentName::create([
@@ -47,9 +42,33 @@ class InitialSeeder extends Seeder
             ]);
         }
 
+        // Creating the Admin role if not exists
+        if (!Role::where('name', 'Admin')->exists()) {
+            $role = Role::create(['name' => 'Admin']);
+        } else {
+            $role = Role::findByName('Admin');
+        }
+        $user = User::create([
+            'name' => 'Admin User',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('admin'), 
+        ]);
+        $user->assignRole('Admin');
+        $pages = [
+            'Calendar', 'Transactions', 'Archived Transactions', 'Orders', 'Archived Orders', 'Invoices', 
+            'Invoice Templates', 'Tickets', 'Expenses', 'Documents', 'Document Names', 'Services', 
+            'Manage Users', 'Roles & Permissions', 'Notes', 'Guides', 'Reminders', 'Log Activities', 
+            'Login Activities', 'Settings'
+        ];
+        foreach ($pages as $page) {
+            foreach (['view', 'add', 'edit', 'delete', 'download'] as $action) {
+                $permissionName = $page . ' ' . $action;
+                $permission = Permission::create(['name' => $permissionName]);
+                $role->givePermissionTo($permission);
+            }
+        }
 
-
-
+        // Creating services
         $services = [
             ['service_name' => 'Employment Offer & Pre-Approval Processing (First Visit)', 'govt_cost' => 278.77, 'service_cost' => 0],
             ['service_name' => 'UAE Mofa Attestation', 'govt_cost' => 184.17, 'service_cost' => 0],
@@ -94,7 +113,7 @@ class InitialSeeder extends Seeder
         ];
         foreach ($services as $service) {
             Service::create([
-                'user_id' => Auth::id(),
+                'user_id' => $user->id, 
                 'service_name' => $service['service_name'],
                 'govt_cost' => $service['govt_cost'],
                 'service_cost' => $service['service_cost'],
@@ -102,16 +121,25 @@ class InitialSeeder extends Seeder
         }
 
 
-
-        // create user 
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('admin'),
+        // create company
+        Company::create([
+            'company_name' => 'Typing Zone LLC',
+            'company_icon' => '',
+            'company_logo' => '',
+            'address' => 'Company Address',
+            'invoice_templates' => json_encode([
+                [
+                    'template_name' => 'Emirald',
+                    'active' => false
+                ],
+                [
+                    'template_name' => 'Nexus',
+                    'active' => true
+                ]
+            ]),
+            'email' => '',
+            'phone' => '1234567890',
         ]);
-
-
         
-
     }
 }

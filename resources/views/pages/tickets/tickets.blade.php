@@ -31,15 +31,21 @@
                                     <td>{{ $ticket->created_at->format('Y-m-d') }}</td>
                                     <td class="action-table-data">
                                         <div class="edit-delete-action">
+                                            @can('Tickets view')
                                             <a class="me-2 p-2 show-ticket" data-id="{{ $ticket->id }}" href="#">
                                                 <i class="fa fa-eye"></i>
                                             </a>
+                                            @endcan
+                                            @can('Tickets edit')
                                             <a class="me-2 p-2 edit-ticket" data-id="{{ $ticket->id }}" href="#">
                                                 <i class="fa fa-edit"></i>
                                             </a>
+                                            @endcan
+                                            @can('Tickets delete')
                                             <a class="p-2 delete-ticket" data-id="{{ $ticket->id }}" href="#">
                                                 <i class="fa fa-trash"></i>
                                             </a>
+                                            @endcan
                                         </div>
                                     </td>
                                 </tr>

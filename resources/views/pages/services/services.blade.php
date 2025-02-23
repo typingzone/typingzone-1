@@ -37,12 +37,16 @@
                                 <td>{{ $service->created_at->diffForHumans() }}</td>
                                 <td class="action-table-data">
                                     <div class="edit-delete-action">
+                                        @can('Services edit')
                                         <a class="me-2 edit-icon p-2 edit-service" href="javascript:void(0);" data-id="{{ $service->id }}">
                                             <i class="fa fa-edit"></i>
                                         </a>
+                                        @endcan
+                                        @can('Services delete')
                                         <a class="p-2 delete-service" href="javascript:void(0);" data-id="{{ $service->id }}">
                                             <i class="fa fa-trash"></i>
                                         </a>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

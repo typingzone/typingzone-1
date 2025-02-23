@@ -79,7 +79,8 @@
                 </th>
               </tr>
             </thead>
-            <tbody> @foreach (['Expiry Documents', 'Calendar', 'Transaction Types', 'Transaction History', 'Archived Transactions', 'Invoices', 'Documents', 'Document Names', 'Orders', 'Tools', 'Color Picker', 'Invoice Templates', 'Manage Users', 'Roles & Permissions', 'General Settings', 'Notification Preferences', 'Guide', 'Email Template', 'Reminders', 'Office Assets', 'Login Activities'] as $page) <tr>
+            <tbody> 
+                @foreach (['Calendar', 'Transactions', 'Archived Transactions', 'Orders', 'Archived Orders', 'Invoices', 'Invoice Templates', 'Tickets', 'Expenses', 'Documents', 'Document Names', 'Services', 'Manage Users', 'Roles & Permissions', 'Notes', 'Guides', 'Reminders', 'Log Activities', 'Login Activities', 'settings'] as $page) <tr>
                 <td>
                   <input type="checkbox" class="page-select" data-page="{{ $page }}"> {{ $page }}
                 </td>
@@ -98,7 +99,9 @@
                 <td>
                   <input type="checkbox" data-bs-toggle="tooltip" data-bs-placement="top" title="Download" name="permissions[{{ $page }}][]" value="{{ $page }} download" class="page-checkbox download-checkbox">
                 </td>
-              </tr> @endforeach </tbody>
+              </tr> 
+              @endforeach 
+            </tbody>
           </table>
           <div class="d-grid gap-2">
             <br>

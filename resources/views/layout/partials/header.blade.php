@@ -6,7 +6,7 @@
       <img src="{{ $company && $company->company_logo ? asset($company->company_logo) : asset('/build/img/logo.png') }}" alt="Company Logo">
     </a>
     <a href="{{ url('dashboard') }}" class="logo logo-white">
-      <img src="{{ $company && $company->company_logo ? asset($company->company_logo) : asset('/build/img/logo-white.png') }}" alt="Company Logo White">
+      <img src="{{ $company && $company->company_logo ? asset($company->company_logo) : asset('/build/img/logo.png') }}" alt="Company Logo White">
     </a>
     <a href="{{ url('dashboard') }}" class="logo-small">
       <img src="{{ $company && $company->company_icon ? asset($company->company_icon) : asset('/build/img/logo-small.jpeg') }}" alt="Company Icon">
@@ -146,7 +146,7 @@
       <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
         <span class="user-info">
           <span class="user-letter">
-            <img src="{{ Auth::user()->profile_photo ? asset(Auth::user()->profile_photo) : asset('build/img/profiles/avator1.jpg') }}" alt="" class="img-fluid">
+            <img src="{{ asset(Auth::user()->profile_photo) ?? asset('/build/img/profiles/avator1.jpg') }}" alt="" class="img-fluid">
           </span>
           <span class="user-detail">
             <span class="user-name">{{ Auth::user()->name }}</span>
@@ -158,7 +158,7 @@
         <div class="profilename">
           <div class="profileset">
             <span class="user-img">
-            <img src="{{ Auth::user()->profile_photo ? asset(Auth::user()->profile_photo) : asset('build/img/profiles/avator1.jpg') }}" alt="">
+            <img src="{{ asset(Auth::user()->profile_photo) ?? asset('/build/img/profiles/avator1.jpg') }}" alt="">
               <span class="status online"></span>
             </span>
             <div class="profilesets">
