@@ -167,6 +167,7 @@ Route::middleware(['check.auth'])->controller(TransactionController::class)->gro
     Route::post('/invoices/mark-paid/{id}', 'markAsPaid');
 });
 
+
 Route::controller(UserController::class)->group(function () {
     Route::get('login', 'showLoginPage')->name('login');
     Route::get('new-password', 'showChangePasswordPage')->name('new-password');
