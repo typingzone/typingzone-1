@@ -13,7 +13,7 @@
                 <form id="loginForm">
                     <div class="login-userset">
                         <div class="login-userheading">
-                            <h3>Login bro</h3>
+                            <h3>Login</h3>
                             <h4>Access Dashboard through entering your credentials</h4>
                         </div>
                         <div class="form-login">
