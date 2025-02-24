@@ -9,7 +9,11 @@ class TaskController extends Controller
 {
     public function index()
     {
+<<<<<<< HEAD
         $tasks = Task::all();
+=======
+        $tasks = Task::orderBy('created_at', 'desc')->get();
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
         return view('tasks.index', compact('tasks'));
     }
 

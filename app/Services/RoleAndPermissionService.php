@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 class RoleAndPermissionService
 {
     public function addRolePermission(Request $request) {
+<<<<<<< HEAD
         $roleName = "Admin ".$request->input('roleName');
         $permissions = $request->input('permissions', []);
     
@@ -22,11 +23,22 @@ class RoleAndPermissionService
             return redirect()->back()->with('error', 'Role already exists. Create new with different name');
         }
 
+=======
+        $roleName = $request->input('roleName');
+        $permissions = $request->input('permissions', []);
+        $existingRole = Role::where('name', $roleName)->where('guard_name', 'web')->first();
+        if ($existingRole) {
+            return redirect()->back()->with('error', 'Role already exists. Create new with different name');
+        }
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
         $role = Role::create([
             'name' => $roleName,
             'guard_name' => 'web',
         ]);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
         foreach ($permissions as $module => $actions) {
             foreach ($actions as $action) {
                 $permissionName = $action;
@@ -57,7 +69,10 @@ class RoleAndPermissionService
             Storage::disk('s3')->put($filePath, file_get_contents($uploadedFile), 'public');
         }
     
+<<<<<<< HEAD
         // Create the SuperAdmin user
+=======
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
         $user = User::create([
             'name' => $request->input('userName'),
             'email' => $request->input('userEmail'),
@@ -66,13 +81,19 @@ class RoleAndPermissionService
             'profile_photo' => $fileName,
             'status' => 1,
         ]);
+<<<<<<< HEAD
     
         // Assign the role to the user
+=======
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
         $role = Role::find($request->input('userRole'));
         if ($role) {
             $user->assignRole($role->name);
         }
+<<<<<<< HEAD
     
+=======
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
         if ($request->has('directPermissions')) {
             foreach ($request->input('directPermissions') as $permissionName) {
                 $permission = Permission::firstOrCreate([
@@ -82,7 +103,10 @@ class RoleAndPermissionService
                 $user->givePermissionTo($permission);
             }
         }
+<<<<<<< HEAD
     
+=======
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
         return redirect()->back()->with('success', 'User created, role and permissions assigned successfully.');
     }
     
@@ -118,7 +142,10 @@ class RoleAndPermissionService
         $permissionsToUpdate = [];
         if ($request->has('permissions')) {
             $permissions = $request->input('permissions');
+<<<<<<< HEAD
 
+=======
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
             foreach ($permissions as $page => $actions) {
                 foreach ($actions as $action) {
                     $permissionName = $action;
@@ -157,4 +184,46 @@ class RoleAndPermissionService
         return response()->json(['success' => false, 'message' => 'User not found'], 404);
     }
 
+<<<<<<< HEAD
+=======
+
+    public function getRolesPermissions(){
+        $roles = Role::all();
+        $permissions = Permission::all();
+        return view('auth.role_permission', compact('roles', 'permissions'));
+    }
+
+
+
+    public function storeUser($validated)
+    {
+        try {
+            $randomName = rand(40, 5999) . '.' . $validated['profile_photo']->getClientOriginalExtension();
+            $imagePath = $validated['profile_photo']->storeAs('profile_photos', $randomName, 'public');
+            $user = User::create([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'password' => bcrypt($validated['password']),
+                'profile_photo' => $imagePath,
+            ]);
+            $role = Role::find($validated['role_id']);
+            $user->assignRole($role);   
+            return back()->with('success', 'User created successfully.');      
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    
+
+
+
+
+        public function deleteRolePermission($roleId)
+        {
+            $role = Role::findOrFail($roleId);
+            $role->permissions()->detach();
+            $role->delete();
+        }
+        
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
 }

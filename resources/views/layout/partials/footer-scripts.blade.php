@@ -1,5 +1,34 @@
+<<<<<<< HEAD
  <!-- jQuery -->
  <script src="{{ URL::asset('/build/js/jquery-3.7.1.min.js') }}"></script>
+=======
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if (session('success'))
+    <script>
+        toastr.success("{{ session('success') }}");
+    </script>
+@endif
+
+@if (session('info'))
+    <script>
+        toastr.info("{{ session('info') }}");
+    </script>
+@endif
+
+@if (session('warning'))
+    <script>
+        toastr.warning("{{ session('warning') }}");
+    </script>
+@endif
+
+@if (session('error'))
+    <script>
+        toastr.error("{{ session('error') }}");
+    </script>
+@endif
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
 
  <!-- Feather Icon JS -->
  <script src="{{ URL::asset('/build/js/feather.min.js') }}"></script>
@@ -10,6 +39,7 @@
  <!-- Bootstrap Core JS -->
  <script src="{{ URL::asset('/build/js/bootstrap.bundle.min.js') }}"></script>
 
+<<<<<<< HEAD
  <!-- Chart JS -->
  <script src="{{ URL::asset('/build/plugins/apexchart/apexcharts.min.js') }}"></script>
  <script src="{{ URL::asset('/build/plugins/apexchart/chart-data.js') }}"></script>
@@ -32,18 +62,24 @@
  <script src="{{ URL::asset('/build/js/bootstrap-datetimepicker.min.js') }}"></script>
  <script src="{{ URL::asset('/build/plugins/daterangepicker/daterangepicker.js') }}"></script>
 
+=======
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
  @if (Route::is(['todo']))
      <!-- Datetimepicker CSS -->
      <script src="{{ URL::asset('/build/plugins/moment/moment.min.js') }}"></script>
  @endif
 
+<<<<<<< HEAD
  <!-- Bootstrap Tagsinput JS -->
  <script src="{{ URL::asset('/build/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js') }}"></script>
 
+=======
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
  <!-- Datatable JS -->
  <script src="{{ URL::asset('/build/js/jquery.dataTables.min.js') }}"></script>
  <script src="{{ URL::asset('/build/js/dataTables.bootstrap5.min.js') }}"></script>
 
+<<<<<<< HEAD
  <!-- Summernote JS -->
  <script src="{{ URL::asset('/build/plugins/summernote/summernote-bs4.min.js') }}"></script>
 
@@ -55,10 +91,13 @@
  <!-- Owl Carousel -->
  <script src="{{ URL::asset('/build/js/owl.carousel.min.js') }}"></script>
 
+=======
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
  <!-- Sticky-sidebar -->
  <script src="{{ URL::asset('/build/plugins/theia-sticky-sidebar/ResizeSensor.js') }}"></script>
  <script src="{{ URL::asset('/build/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js') }}"></script>
 
+<<<<<<< HEAD
  @if (Route::is(['sales-dashboard']))
      <!-- Map JS -->
      <script src="{{ URL::asset('/build/plugins/jvectormap/jquery-jvectormap-2.0.5.min.js') }}"></script>
@@ -202,3 +241,39 @@
  <!-- Custom JS -->
  <script src="{{ URL::asset('/build/js/theme-script.js') }}"></script>
  <script src="{{ URL::asset('/build/js/script.js') }}"></script>
+=======
+ @if (Route::is('calendar'))
+ <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.min.js"></script>
+ @endif
+
+ <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+ <!-- Custom JS -->
+ <script src="{{ URL::asset('/build/js/script.js') }}"></script>
+
+ @if (Route::is('email-templates'))
+<script>
+    const quillAdd = new Quill('#template-email-body', {
+        theme: 'snow'
+    });
+    const quillEdit = new Quill('#edit-template-email-body', {
+        theme: 'snow'
+    });
+</script>
+@endif
+
+
+<!-- file validation overall application before upload -->
+<script>
+    $('input[type="file"]').on('change', function() {
+        const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.pdf)$/i;
+        const file = this.files[0];
+        if (file && !allowedExtensions.exec(file.name)) {
+            toastr.warning('Invalid file type. Only images and PDF files are allowed.');
+            $(this).val('');
+        }
+    });
+</script>
+
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0

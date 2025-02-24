@@ -2,6 +2,7 @@
 
 return [
 
+<<<<<<< HEAD
     /*
     |--------------------------------------------------------------------------
     | Default Filesystem Disk
@@ -27,6 +28,14 @@ return [
     | Supported drivers: "local", "ftp", "sftp", "s3"
     |
     */
+=======
+   
+
+    // 'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DRIVER', 's3'),
+
+  
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
 
     'disks' => [
 
@@ -47,7 +56,11 @@ return [
             'report' => false,
         ],
 
+<<<<<<< HEAD
         's3' => [
+=======
+       's3' => [
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
@@ -55,6 +68,7 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
+<<<<<<< HEAD
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
             'report' => false,
@@ -72,6 +86,12 @@ return [
     | the locations of the links and the values should be their targets.
     |
     */
+=======
+        ],
+
+
+    ],
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
 
     'links' => [
         public_path('storage') => storage_path('app/public'),

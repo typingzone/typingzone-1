@@ -10,9 +10,22 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+<<<<<<< HEAD
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
         "spatie/laravel-permission": "^6.10"
+=======
+        "barryvdh/laravel-dompdf": "^3.1",
+        "jenssegers/agent": "^2.6",
+        "laravel/framework": "^11.31",
+        "laravel/tinker": "^2.9",
+        "league/flysystem-aws-s3-v3": "3.0",
+        "maatwebsite/excel": "3.1.55",
+        "pusher/pusher-php-server": "^7.2",
+        "spatie/laravel-activitylog": "^4.10",
+        "spatie/laravel-permission": "^6.10",
+        "twilio/sdk": "^8.3"
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

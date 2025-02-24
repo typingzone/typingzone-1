@@ -1,11 +1,17 @@
 /.phpunit.cache
 /node_modules
+<<<<<<< HEAD
 /public/build
 /public/hot
 /public/storage
 /storage/*.key
 /storage/pail
 /vendor
+=======
+/public/storage
+/storage/*.key
+/storage/pail
+>>>>>>> 023abcbfc092666fd811ecc2b6e7e0a49bdf5ac0
 .env
 .env.backup
 .env.production
