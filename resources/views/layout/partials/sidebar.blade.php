@@ -2,6 +2,13 @@
     <div class="sidebar-inner slimscroll">
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
+                <!-- <li class="submenu-open">
+                    <ul>
+                        <li class="{{ Request::routeIs('dashboard') ? 'active' : '' }}">
+                           <input type="text" class="form-control" placeholder="Search...">
+                        </li>
+                    </ul>
+                </li> -->
 
                 {{-- MAIN MENU --}}
                 <li class="submenu-open">

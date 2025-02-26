@@ -159,23 +159,28 @@ class TransactionController extends Controller
     public function invoiceTemplates()
     {
         $company = Company::first();
-        $templates = json_decode($company->invoice_templates, true);
-        return view('pages.invoices.invoice-templates', ['templates' => $templates]);
+        $templates = json_decode($company->invoice_templates, true); // Decoding JSON to array
+        return view('pages.invoices.invoice-templates', compact('templates')); // Pass 'templates' correctly
     }
-    
-    
 
     public function setActiveTemplate(Request $request)
     {
-        $company = Company::first();
-        $templates = $company->invoice_templates;
-        foreach ($templates as &$template) {
-            $template['active'] = $template['template_name'] === $request->template_name;
+        try {
+            $company = Company::first();
+            $templates = json_decode($company->invoice_templates, true); // Decode the templates
+            foreach ($templates as &$template) {
+                $template['active'] = $template['template_name'] === $request->template_name;
+            }
+            $company->invoice_templates = json_encode($templates); // Encode back to JSON
+            $company->save();
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            Log::error('Failed to set active template: ' . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'An error occurred']);
         }
-        $company->invoice_templates = $templates;
-        $company->save();
-        return response()->json(['success' => true]);
     }
+
+    
 
 
 }

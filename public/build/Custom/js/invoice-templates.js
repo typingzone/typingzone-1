@@ -1,25 +1,32 @@
 $(document).ready(function() {
     $('.template-card').on('click', function() {
         var templateName = $(this).data('template');
+
         $.ajax({
             url: '/set-active-template',
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            type: 'POST',
             data: {
-                template_name: templateName
+                template_name: templateName,
+                _token: $('meta[name="csrf-token"]').attr('content')
             },
-            success: function(response) {
-                if(response.success) {
-                    toastr.success('Template activated successfully.');
-                    window.location.reload();
+            success: function(data) {
+                if (data.success) {
+                    $('.template-card').removeClass('active-template');
+                    $('.active-status').removeClass('active').addClass('inactive').text('Inactive');
+
+                    $('[data-template="' + templateName + '"]').addClass('active-template');
+                    $('[data-template="' + templateName + '"] .active-status')
+                        .removeClass('inactive')
+                        .addClass('active')
+                        .text('Active');
+                        
+                    toastr.success('Template activated successfully');
                 } else {
-                    toastr.error('Failed to activate template.');
+                    toastr.error('Failed to activate template');
                 }
             },
-            error: function(xhr, status, error) {
-                toastr.error('An error occurred while activating the template. Please try again.');
+            error: function() {
+                toastr.error('An error occurred while activating the template');
             }
         });
     });

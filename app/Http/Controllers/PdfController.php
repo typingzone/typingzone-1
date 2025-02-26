@@ -14,11 +14,13 @@ class PdfController extends Controller
     public function downloadInvoice($orderId)
     {
         $company = Company::first();
-        $activeTemplate = collect($company->invoice_templates)->firstWhere('active', true)['template_name'];
+        $invoiceTemplates = json_decode($company->invoice_templates, true);
+        $activeTemplate = collect($invoiceTemplates)->firstWhere('active', true)['template_name'];
         $profileData = Order::with(['transactions', 'transactions.service'])->findOrFail($orderId);
         $pdf = PDF::loadView('pages.invoices.'.$activeTemplate, compact('profileData'));
         return $pdf->download('invoice_' . $profileData->customer_name . '.pdf');
     }
+
     
 
 
