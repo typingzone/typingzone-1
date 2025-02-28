@@ -33,7 +33,7 @@
         </a>
         <form action="#" class="dropdown">
           <div class="searchinputs dropdown-toggle" id="dropdownMenuClickable" data-bs-toggle="dropdown" data-bs-auto-close="false">
-            <input type="text" placeholder="Search">
+            <input type="text" id="searchCustomer" placeholder="Search">
             <div class="search-addon">
               <span>
                 <i data-feather="x-circle" class="feather-14"></i>
@@ -59,7 +59,6 @@
                 </li>
               </ul>
             </div>
-           
             <div class="search-info">
               <h6>
                 <span>
@@ -67,12 +66,12 @@
                 </span>Customers
               </h6>
               <ul class="customers">
-
+                @php $customers = App\Models\Order::orderBy('id', 'desc')->limit(5)->get(); @endphp
+                @foreach($customers as $customer)
                 <li>
-                  <a href="javascript:void(0);">Aron Varu <img src="{{ URL::asset('/build/img/profiles/avator1.jpg') }}" alt="" class="img-fluid">
-                  </a>
+                  <a href="{{ route('customer-profile', ['id' => $customer->id]) }}">{{ $customer->customer_name }} <img src="{{ URL::asset('/build/profile_photos/customer.jpg') }}" alt="" class="img-fluid"></a>
                 </li>
-               
+                @endforeach
               </ul>
             </div>
           </div>
@@ -131,11 +130,7 @@
       </a>
     </li> -->
     <!-- Notifications -->
-   
-            
-            @include('layout.partials.notifications')
-
-   
+      @include('layout.partials.notifications')
     <!-- /Notifications -->
     <li class="nav-item nav-item-box">
       <a href="{{ url('general-settings') }}">

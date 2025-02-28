@@ -81,3 +81,4 @@
     });
 </script>
 
+<script src="{{ URL::asset('/build/Custom/js/search_customers.js') }}"></script>

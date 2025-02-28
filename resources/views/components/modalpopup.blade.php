@@ -1002,9 +1002,7 @@
                                 <input type="file" class="form-control" id="receipt" name="receipt">
                             </div>
                         </div>
-                        
                     </div>
-
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group mb-3">
@@ -1023,10 +1021,9 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <div class="modal-footer justify-content-end">
                         <button type="submit" class="btn btn-primary">Save Order</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div>
@@ -1052,7 +1049,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group mb-3">
-                                <label for="edit_order_id" class="form-label">Select Customer</label>
+                                <label for="edit_order_id" class="form-label">Select Customer *</label>
                                 <select class="mySelect7 form-control" id="edit_order_id" name="order_id" required>
                                     @foreach($orders as $order)
                                         <option value="{{ $order->id }}">{{ $order->customer_name }}</option>
@@ -1060,39 +1057,34 @@
                                 </select>
                             </div>
                         </div>
-
                         <div class="col-md-4">
                             <div class="form-group mb-3">
-                                <label for="edit_service_id" class="form-label">Select Service</label>
+                                <label for="edit_service_id" class="form-label">Select Service *</label>
                                 <select class="mySelect8 form-control" id="edit_service_id" name="service_id" required>
                                     <!-- Options will be populated via JS -->
                                 </select>
                             </div>
                         </div>
-
                         <div class="col-md-4">
                             <div class="form-group mb-3">
-                                <label for="edit_application_no" class="form-label">Application Number</label>
+                                <label for="edit_application_no" class="form-label">Application Number *</label>
                                 <input type="text" class="form-control" id="edit_application_no" name="application_no" required>
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group mb-3">
-                                <label for="edit_govt_cost" class="form-label">Govt Cost</label>
+                                <label for="edit_govt_cost" class="form-label">Govt Cost *</label>
                                 <input type="text" class="form-control" id="edit_govt_cost" name="govt_cost" required>
                             </div>
                         </div>
-
                         <div class="col-md-4">
                             <div class="form-group mb-3">
-                                <label for="edit_service_cost" class="form-label">Service Cost</label>
+                                <label for="edit_service_cost" class="form-label">Service Cost *</label>
                                 <input type="text" class="form-control" id="edit_service_cost" name="service_cost" required>
                             </div>
                         </div>
-
                         <div class="col-md-4">
                             <div class="form-group mb-3">
                                 <label for="edit_receipt" class="form-label">Receipt</label>
@@ -1100,11 +1092,10 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group mb-3">
-                                <label for="edit_paid_by" class="form-label">Paid By</label>
+                                <label for="edit_paid_by" class="form-label">Paid By *</label>
                                 <select class="mySelect9 form-control" id="edit_paid_by" name="paid_by" required>
                                     <option value="Card">Card</option>
                                     <option value="Bank Transfer">Bank Transfer</option>
@@ -1112,7 +1103,6 @@
                                 </select>
                             </div>
                         </div>
-
                         <div class="col-md-8">
                             <div class="form-group mb-3">
                                 <label for="edit_description" class="form-label">Description</label>
@@ -1120,10 +1110,9 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <div class="modal-footer justify-content-end">
                         <button type="submit" class="btn btn-primary">Update Transaction</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div>

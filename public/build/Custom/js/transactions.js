@@ -39,6 +39,7 @@ $(document).ready(function() {
         allowClear: true,
         theme: "classic",
         height: 'resolve',
+        width: '100%',
         dropdownParent: $('#edit-transaction-modal')
     }).on('select2:open', function() {
         var selectInstance = $(this).data('select2');
@@ -299,7 +300,7 @@ $(document).ready(function () {
 
 
 $(document).ready(function() {
-    $('.edit-transaction').click(function() {
+    $(document).on('click', '.edit-transaction', function() {
         var transactionId = $(this).data('id');
         $.ajax({
             url: '/transactions/' + transactionId + '/edit',

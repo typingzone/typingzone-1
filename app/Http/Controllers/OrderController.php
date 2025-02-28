@@ -203,4 +203,11 @@ class OrderController extends Controller
     }
 
 
+    public function searchCustomers(Request $request) {
+        $query = $request->input('query');
+        $customers = Order::where('customer_name', 'LIKE', '%' . $query . '%')->orderBy('id', 'desc')->get();
+        return response()->json($customers);
+    }
+
+    
 }
