@@ -21,6 +21,7 @@ use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\DocumentNameController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\WebsiteController;
 use App\Http\Middleware\RolePermissionMiddleware;
 
 
@@ -99,6 +100,14 @@ Route::middleware(['check.auth'])->controller(IndexController::class)->group(fun
     Route::get('dashboard', 'index')->name('dashboard');
 });
 
+Route::middleware(['check.auth'])->controller(NotesController::class)->group(function () {
+    Route::get('notes', 'index')->name('notes');
+    Route::post('note', 'store')->name('add-note');
+    Route::get('notes/{id}/edit', 'edit');
+    Route::put('notes/{id}', 'update');
+    Route::delete('notes/{id}', 'destroy');
+});
+
 Route::middleware(['check.auth'])->controller(OrderController::class)->group(function () {
     Route::get('orders', 'showOrders')->name('orders');
     Route::get('customer-profile/{id}', 'customerProfile')->name('customer-profile');
@@ -168,7 +177,6 @@ Route::middleware(['check.auth'])->controller(TransactionController::class)->gro
     Route::post('/invoices/mark-paid/{id}', 'markAsPaid');
 });
 
-
 Route::controller(UserController::class)->group(function () {
     Route::get('login', 'showLoginPage')->name('login');
     Route::get('new-password', 'showChangePasswordPage')->name('new-password');
@@ -197,12 +205,8 @@ Route::controller(UserController::class)->group(function () {
     Route::delete('deleteMultipleLoginActivities', 'deleteMultipleLoginActivities')->name('deleteMultipleLoginActivities');
 });
 
-Route::middleware(['check.auth'])->controller(NotesController::class)->group(function () {
-    Route::get('notes', 'index')->name('notes');
-    Route::post('note', 'store')->name('add-note');
-    Route::get('notes/{id}/edit', 'edit');
-    Route::put('notes/{id}', 'update');
-    Route::delete('notes/{id}', 'destroy');
+Route::controller(WebsiteController::class)->group(function () {
+    Route::get('/', 'index')->name('/');
 });
 
 Route::fallback(function () {
