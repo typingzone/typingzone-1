@@ -80,7 +80,7 @@
               </tr>
             </thead>
             <tbody> 
-                @foreach (['Calendar', 'Transactions', 'Archived Transactions', 'Orders', 'Archived Orders', 'Invoices', 'Invoice Templates', 'Tickets', 'Expenses', 'Documents', 'Document Names', 'Services', 'Manage Users', 'Roles & Permissions', 'Notes', 'Guides', 'Reminders', 'Log Activities', 'Login Activities', 'settings'] as $page) <tr>
+                @foreach (['Calendar', 'Transactions', 'Archived Transactions', 'Orders', 'Archived Orders', 'Invoices', 'Invoice Templates', 'Tickets', 'Expenses', 'Documents', 'Document Names', 'Services', 'Manage Users', 'Roles & Permissions', 'Notes', 'Guides', 'Reminders', 'Website Setup', 'Log Activities', 'Login Activities', 'settings'] as $page) <tr>
                 <td>
                   <input type="checkbox" class="page-select" data-page="{{ $page }}"> {{ $page }}
                 </td>

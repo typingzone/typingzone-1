@@ -176,19 +176,21 @@
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">ACTIVITIES</h6>
                     <ul>
-
+                        @can('Website Setup view')
+                        <li class="{{ Request::routeIs('website-setup') ? 'active' : '' }}">
+                            <a href="{{ route('website-setup') }}"><i data-feather="globe"></i><span>Website Setup</span></a>
+                        </li>
+                        @endcan
                         @can('Log Activities view')
                         <li class="{{ Request::routeIs('log-activities') ? 'active' : '' }}">
                             <a href="{{ route('log-activities') }}"><i data-feather="clock"></i><span>Log Activities</span></a>
                         </li>
                         @endcan
-
                         @can('Login Activities view')
                         <li class="{{ Request::routeIs('login-activities') ? 'active' : '' }}">
                             <a href="{{ route('login-activities') }}"><i data-feather="activity"></i><span>Login Activities</span></a>
                         </li>
                         @endcan
-
                     </ul>
                 </li>
                 @endcanany

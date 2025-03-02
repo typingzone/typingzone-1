@@ -207,6 +207,8 @@ Route::controller(UserController::class)->group(function () {
 
 Route::controller(WebsiteController::class)->group(function () {
     Route::get('/', 'index')->name('/');
+    Route::get('website-setup', 'websiteSetup')->name('website-setup');
+    Route::post('/website-setup/update', 'updateWebsiteSetup')->name('website-setup.update');
     Route::get('customer-send-email', 'customerSendEmail')->name('customer-send-email');
 });
 
