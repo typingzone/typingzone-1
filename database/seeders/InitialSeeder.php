@@ -8,6 +8,7 @@ use App\Models\DocumentName;
 use App\Models\Service;
 use App\Models\Company;
 use App\Models\User;
+use App\Models\WebsiteSetup;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -140,6 +141,33 @@ class InitialSeeder extends Seeder
             'email' => '',
             'phone' => '1234567890',
         ]);
+
+
+        WebsiteSetup::create([
+            'cover_photo' => '',
+            'welcome_message' => 'Welcome to Typing Zone LLC',
+            'about_us' => 'We are a leading typing center in the UAE offering a variety of services for your document and application needs.',
+            'our_services' => json_encode([
+                'Emirates ID Application',
+                'Visa Application & Renewal',
+                'Labor Contract Typing',
+                'Medical Fitness Test Application',
+                'Company Registration & Renewal',
+                'Driving License Application',
+                'Attestation Services',
+                'Passport Renewal Services',
+                'Translation Services',
+                'Bank Account Opening Assistance'
+            ]),
+            'faqs' => json_encode([
+                ['question' => 'What documents are required for an Emirates ID renewal?', 'answer' => 'You will need a valid passport, visa, and the expired Emirates ID.'],
+                ['question' => 'How long does the visa renewal process take?', 'answer' => 'The visa renewal process typically takes 2-5 working days.'],
+                ['question' => 'Do you offer translation services for legal documents?', 'answer' => 'Yes, we provide certified translation services for legal documents.'],
+                ['question' => 'Can I apply for a family visa at your center?', 'answer' => 'Yes, we assist with family visa applications for your spouse and children.'],
+                ['question' => 'What are your operating hours?', 'answer' => 'We are open from 9 AM to 6 PM, Sunday to Thursday.']
+            ]),
+        ]);
+        
         
     }
 }

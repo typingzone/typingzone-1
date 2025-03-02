@@ -207,6 +207,7 @@ Route::controller(UserController::class)->group(function () {
 
 Route::controller(WebsiteController::class)->group(function () {
     Route::get('/', 'index')->name('/');
+    Route::get('customer-send-email', 'customerSendEmail')->name('customer-send-email');
 });
 
 Route::fallback(function () {
