@@ -14,36 +14,9 @@
             <form action="{{ route('website-setup.update') }}" method="POST" id="websiteSetupForm" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-                    <!-- Services Card -->
-                    <div class="col-md-6">
-                        <div class="card h-100 shadow-sm">
-                            <div class="card-header bg-light">
-                                <h5 class="mb-0">Services Management</h5>
-                            </div>
-                            <div class="card-body" style="height: 350px; overflow-y: auto;">
-                                <div id="services-wrapper">
-                                    @if($websiteSetup && $websiteSetup->our_services)
-                                        @foreach(json_decode($websiteSetup->our_services) as $key => $service)
-                                            <div class="input-group mb-3 service-item">
-                                                <input type="text" name="our_services[]" class="form-control" value="{{ $service }}">
-                                                <div class="input-group-append">
-                                                    <button type="button" class="btn btn-outline-danger remove-service">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                </div>
-                                <button type="button" id="add-service" class="btn btn-primary mt-2">
-                                    <i class="fas fa-plus"></i> Add Service
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Cover Photo and Welcome Message Card -->
-                    <div class="col-md-6">
+
+                  <!-- Cover Photo and Welcome Message Card -->
+                  <div class="col-md-6">
                         <div class="card h-100 shadow-sm">
                             <div class="card-header bg-light">
                                 <h5 class="mb-0">Cover Photo & Welcome Message</h5>
@@ -77,6 +50,36 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Services Card -->
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">Services Management</h5>
+                            </div>
+                            <div class="card-body" style="height: 350px; overflow-y: auto;">
+                                <div id="services-wrapper">
+                                    @if($websiteSetup && $websiteSetup->our_services)
+                                        @foreach(json_decode($websiteSetup->our_services) as $key => $service)
+                                            <div class="input-group mb-3 service-item">
+                                                <input type="text" name="our_services[]" class="form-control" value="{{ $service }}">
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-outline-danger remove-service">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+                                <button type="button" id="add-service" class="btn btn-primary mt-2">
+                                    <i class="fas fa-plus"></i> Add Service
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                  
 
                     <!-- About Us Card -->
                     <div class="col-md-6 mt-4">

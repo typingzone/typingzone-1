@@ -128,7 +128,5 @@
             </div>
         </div>
     </div>
-
     <script src="{{ asset('build/Custom/js/general-settings.js') }}"></script>
-
 @endsection

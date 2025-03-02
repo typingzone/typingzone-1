@@ -267,12 +267,55 @@ class UserController extends Controller
         return response()->json(['success' => $deleted]);
     }
 
-
-
     public function logActivities()
     {
         $logActivities = Activity::orderBy('created_at', 'desc')->get();
         return view('pages.others.log_activities', compact('logActivities'));
     }
+
+    public function profileSettings()
+    {
+        $user = User::where('id', Auth::id())->first();
+        return view('pages.settings.profile_settings', compact('user'));
+    }
+
+  
+    public function updateProfile(Request $request)
+    {
+        $user = User::find(Auth::id());
+        $rules = [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ];
+        $updatePassword = false;
+        if ($request->filled('new_password')) {
+            $rules['current_password'] = 'required';
+            $rules['new_password'] = 'required|string|min:8';
+            $updatePassword = true;
+        }
+        $request->validate($rules);
+        if ($updatePassword) {
+            if (!Hash::check($request->current_password, $user->password)) {
+                return redirect()->back()->with('error', 'Current password is incorrect');
+            }
+            $user->password = Hash::make($request->new_password);
+        }
+        if ($request->hasFile('profile_photo')) {
+            if ($user->profile_photo && file_exists(public_path($user->profile_photo))) {
+                unlink(public_path($user->profile_photo));
+            }
+            $file = $request->file('profile_photo');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('build/profile_photos'), $fileName);
+            $user->profile_photo = 'build/profile_photos/' . $fileName;
+        }
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+        return redirect()->back()->with('success', 'Profile updated successfully');
+    }
+
+   
     
 }

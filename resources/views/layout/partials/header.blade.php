@@ -84,7 +84,7 @@
       <a href="javascript:void(0);" class="dropdown-toggle nav-link select-store" data-bs-toggle="dropdown">
         <span class="user-info">
           <span class="user-letter">
-            <img src="{{ $company && $company->company_icon ? asset($company->company_icon) :asset('/build/img/store/store-01.png') }}" alt="Store Logo" class="img-fluid">
+            <img src="{{ $company && $company->company_icon ? asset($company->company_icon) : asset('/build/img/logo-small.jpeg')  }}" alt="Store Logo" class="img-fluid">
           </span>
           <span class="user-detail">
             <span class="user-name">{{ ($company && $company->company_name) ? $company->company_name : 'Company Name' }}</span>
@@ -141,7 +141,7 @@
       <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
         <span class="user-info">
           <span class="user-letter">
-            <img src="{{ asset(Auth::user()->profile_photo) ?? asset('/build/img/profiles/avator1.jpg') }}" alt="" class="img-fluid">
+            <img src="{{ asset(Auth::user()->profile_photo ?? '/build/img/logo-small.jpeg') }}" alt="" class="img-fluid">
           </span>
           <span class="user-detail">
             <span class="user-name">{{ Auth::user()->name }}</span>
@@ -153,7 +153,7 @@
         <div class="profilename">
           <div class="profileset">
             <span class="user-img">
-            <img src="{{ asset(Auth::user()->profile_photo) ?? asset('/build/img/profiles/avator1.jpg') }}" alt="">
+            <img src="{{ asset(Auth::user()->profile_photo ?? '/build/img/logo-small.jpeg') }}" alt="">
               <span class="status online"></span>
             </span>
             <div class="profilesets">
@@ -161,6 +161,9 @@
                 <span class="user-role">{{ Auth::user()->getRoleNames()->first() }}</span>
               </div>
           </div>
+          <hr class="m-0">
+          <a class="dropdown-item" href="{{ url('profile-settings') }}">
+            <i class="me-2" data-feather="user"></i>Profile </a>
           <hr class="m-0">
           <a class="dropdown-item" href="{{ url('general-settings') }}">
             <i class="me-2" data-feather="settings"></i>Settings </a>
