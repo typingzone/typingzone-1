@@ -128,6 +128,7 @@ Route::middleware(['check.auth'])->controller(OrderController::class)->group(fun
 
 Route::middleware(['check.auth'])->controller(PdfController::class)->group(function () {
     Route::get('invoice/download/{order_id}', 'downloadInvoice')->name('invoice.download');
+    Route::post('/quotation/download', 'downloadQuotation')->name('download-quote-pdf');
 });
 
 Route::middleware(['check.auth'])->controller(ReminderController::class)->group(function () {

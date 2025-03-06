@@ -12,6 +12,37 @@
                 @endslot
             @endcomponent
 
+            <style>
+#quotationTableBody tr td {
+    vertical-align: middle;
+}
+.discount-input {
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 0.5rem;
+    text-align: center;
+}
+.btn-remove {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #dc3545;
+    color: white;
+    border: none;
+    transition: all 0.2s;
+}
+#downloadPdfBtn {
+    transition: all 0.2s;
+}
+#downloadPdfBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+</style>
             <div class="card">
                 <div class="card-body">
                     <table class="table table-sm datanew table-striped">

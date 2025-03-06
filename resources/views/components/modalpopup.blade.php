@@ -659,40 +659,45 @@
 
     
 
-<div class="modal fade" id="show-quotation-modal" tabindex="-1">
+    <div class="modal fade" id="show-quotation-modal" tabindex="-1">
     <div class="modal-dialog modal-xl">
         <div class="modal-content shadow-lg border-0">
             <div class="modal-header border-0">
                 <h5 class="modal-title d-flex align-items-center gap-2">
                     <i data-feather="file-text" class="feather-18"></i>
-                    Create Quotation
+                    Create Professional Quotation
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            
             <div class="modal-body p-4">
-                <div class="row g-4">
+                <div class="row g-4 mb-4">
                     <div class="col-md-6">
-                    <label for="customerName">Customer Name</label>
-                        <input type="text" class="form-control" id="customerName" placeholder="Enter customer name">
+                        <h6 class="mb-3">Customer Information</h6>
+                        <div class="mb-3">
+                            <label for="customerName">Customer Name *</label>
+                            <input type="text" class="form-control" id="customerName" placeholder="Enter customer name" required>
+                        </div>
                     </div>
-                    
                     <div class="col-md-6">
-                        <label>Select Service</label>
-                        <select id="serviceDropdown" class="mySelect3 form-control">
-                            <option></option>
-                            @php $servicesList = \App\Models\Service::all(); @endphp
-                            @foreach($servicesList as $service)
-                                <option value="{{ $service->id }}" data-govt-cost="{{ $service->govt_cost }}" data-service-cost="{{ $service->service_cost }}">
-                                    {{ $service->service_name }}
-                                </option>
-                            @endforeach
-                        </select>
+                        <h6 class="mb-3">Service Selection</h6>
+                        <div class="mb-3">
+                            <label>Select Service *</label>
+                            <select id="serviceDropdown" class="mySelect3 form-control">
+                                <option></option>
+                                @php $servicesList = \App\Models\Service::all(); @endphp
+                                @foreach($servicesList as $service)
+                                    <option value="{{ $service->id }}" data-govt-cost="{{ $service->govt_cost }}" data-service-cost="{{ $service->service_cost }}">
+                                        {{ $service->service_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <small class="text-muted">Select multiple services by choosing one at a time</small>
+                        </div>
                     </div>
                 </div>
-
+                
                 <div class="table-responsive mt-4">
-                    <table class="table table-hover border">
+                    <table class="table table-striped border table-sm">
                         <thead>
                             <tr class="bg-light">
                                 <th class="px-4 py-3">Service</th>
@@ -713,53 +718,22 @@
                         </tfoot>
                     </table>
                 </div>
-
+                
+                <div class="alert alert-info mt-4">
+                    <i data-feather="info" class="me-2"></i>
+                    The generated PDF will include your company logo, details, terms & conditions, and a professional layout.
+                </div>
+                
                 <div class="text-end mt-4">
-                    <button class="btn btn-primary btn-lg px-4 d-inline-flex align-items-center gap-2" id="downloadPdfBtn">
+                    <button type="button" class="btn btn-primary btn-lg px-4 d-inline-flex align-items-center gap-2" id="downloadPdfBtn">
                         <i data-feather="download-cloud"></i>
-                        Download PDF
+                        Generate & Download PDF
                     </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<style>
-#quotationTableBody tr td {
-    padding: 1rem;
-    vertical-align: middle;
-}
-.discount-input {
-    border: 1px solid #dee2e6;
-    border-radius: 4px;
-    padding: 0.5rem;
-    text-align: center;
-}
-.btn-remove {
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #dc3545;
-    color: white;
-    border: none;
-    transition: all 0.2s;
-}
-.modal-content {
-    border-radius: 12px;
-}
-#downloadPdfBtn {
-    transition: all 0.2s;
-}
-#downloadPdfBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-</style>
 @endif
 
 

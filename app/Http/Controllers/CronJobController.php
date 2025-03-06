@@ -51,9 +51,7 @@ class CronJobController extends Controller
     {
         $reminder = Reminder::where('reminder_type', 'Notes Reminders')->where('status', 1)->first();
         if ($reminder) {
-            $notes = Note::whereDate('reminder_date', now()->toDateString())
-                            ->with('user')
-                            ->get();
+            $notes = Note::whereDate('reminder_date', now()->toDateString())->with('user')->get();
             if ($notes->isEmpty()) {
                 return response()->json(['status' => 'error', 'message' => 'No notes with today\'s reminder date found.']);
             }
@@ -180,31 +178,27 @@ class CronJobController extends Controller
     public function receiveTodayTransactionsHistory()
     {
         try {
-            $transactions = Transaction::with(['order', 'user', 'service'])
-                ->whereDate('created_at', now()->toDateString())
-                ->get();
-
+            $reminder = Reminder::where('reminder_type', 'Receive Daily Transactions')->where('status', 1)->first();
+            if (!$reminder) {
+                return response()->json(['message' => 'Daily transaction reminder is disabled']);
+            }
+            $transactions = Transaction::with(['order', 'user', 'service'])->whereDate('created_at', now()->toDateString())->get();
             if ($transactions->isEmpty()) {
                 return response()->json(['message' => 'No transactions found for today']);
             }
-
             $export = new DailyTransactionExport($transactions);
             $filePath = $export->handle();
-            
             if ($filePath) {
                 $company = Company::first();
                 $companyEmail = $company->email;
                 $companyLogo = $company->company_logo;
                 $companyName = $company->company_name;
                 Mail::to($companyEmail)->send(new TodayTransactionsHistory($companyLogo, $companyName, $transactions, $filePath));
-                
                 if (file_exists($filePath)) {
                     unlink($filePath);
                 }
-                
                 return response()->json(['message' => 'Transaction report sent successfully']);
             }
-
             return response()->json(['error' => 'Failed to generate excel file'], 500);
         } catch (\Exception $e) {
             Log::error($e->getMessage());

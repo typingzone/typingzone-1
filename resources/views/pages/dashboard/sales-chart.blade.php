@@ -14,12 +14,11 @@
                     use App\Models\Transaction;
                     use Carbon\Carbon;
 
-                    $transactions = Transaction::selectRaw('strftime("%Y", created_at) as year, strftime("%W", created_at) as week, SUM(total_cost) as total')
+                    $transactions = Transaction::selectRaw('YEAR(created_at) as year, WEEK(created_at) as week, SUM(total_cost) as total')
                         ->groupBy('year', 'week')
                         ->orderBy('year', 'asc')  
                         ->orderBy('week', 'asc')  
                         ->get();
-
 
                     $labels = [];
                     $salesData = [];

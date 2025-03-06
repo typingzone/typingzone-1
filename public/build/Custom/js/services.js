@@ -1,7 +1,7 @@
 
 $(document).ready(function () {
 
-    $('.mySelect3').select2({
+    $('.mySelect333').select2({
         placeholder: 'Search Services',
         allowClear: true,
         theme: "classic",
@@ -106,9 +106,6 @@ $(document).ready(function () {
     });
 });
 
-
-
-
 const QuotationSystem = {
     init() {
         this.selectedServices = new Set()
@@ -124,52 +121,37 @@ const QuotationSystem = {
     initSelect2() {
         $('.mySelect3').select2({
             dropdownParent: $('#show-quotation-modal'),
-            width: '100%'
+            width: '100%',
+            placeholder: "Select a service"
         })
     },
 
     handleServiceSelection() {
         const $selected = $('#serviceDropdown option:selected')
         const serviceId = $selected.val()
-        
-        if (!serviceId || this.selectedServices.has(serviceId)) {
-            return
-        }
-
+        if (!serviceId || this.selectedServices.has(serviceId)) return
         const serviceName = $selected.text()
         const govtCost = parseFloat($selected.data('govt-cost'))
         const serviceCost = parseFloat($selected.data('service-cost'))
-        
         this.selectedServices.add(serviceId)
         this.addServiceRow(serviceId, serviceName, govtCost, serviceCost)
     },
 
     addServiceRow(serviceId, serviceName, govtCost, serviceCost) {
-        const defaultDiscount = 5
-        const total = this.calculateTotal(govtCost, serviceCost, defaultDiscount)
-        
+        const total = this.calculateTotal(govtCost, serviceCost, 5)
         const row = `
             <tr id="service-${serviceId}">
                 <td class="align-middle">${serviceName}</td>
                 <td class="align-middle text-end">${govtCost.toFixed(2)}</td>
                 <td class="align-middle text-end">${serviceCost.toFixed(2)}</td>
                 <td class="align-middle" style="width: 150px">
-                    <input type="number" 
-                           class="form-control form-control-sm discount-input" 
-                           value="${defaultDiscount}"
-                           min="0" 
-                           max="100"
-                           data-govt-cost="${govtCost}"
-                           data-service-cost="${serviceCost}">
+                    <input type="number" class="form-control form-control-sm discount-input" value="5" min="0" max="100" data-govt-cost="${govtCost}" data-service-cost="${serviceCost}" data-service-id="${serviceId}" data-service-name="${serviceName}">
                 </td>
                 <td class="align-middle text-end total-cell">${total.toFixed(2)}</td>
                 <td class="align-middle text-center">
-                    <button class="btn btn-danger btn-sm delete-row">
-                        <i data-feather="x"></i>
-                    </button>
+                    <button class="btn btn-danger btn-sm delete-row"><i data-feather="x"></i></button>
                 </td>
             </tr>`
-
         $('#quotationTableBody').append(row)
         this.bindRowEvents(serviceId)
         this.updateGrandTotal()
@@ -178,18 +160,15 @@ const QuotationSystem = {
 
     bindRowEvents(serviceId) {
         const $row = $(`#service-${serviceId}`)
-        
         $row.find('.discount-input').on('input', (e) => {
             const $input = $(e.target)
             const govtCost = parseFloat($input.data('govt-cost'))
             const serviceCost = parseFloat($input.data('service-cost'))
             const discount = parseFloat($input.val()) || 0
-            
             const total = this.calculateTotal(govtCost, serviceCost, discount)
             $row.find('.total-cell').text(total.toFixed(2))
             this.updateGrandTotal()
         })
-
         $row.find('.delete-row').on('click', () => {
             this.selectedServices.delete(serviceId)
             $row.remove()
@@ -198,38 +177,69 @@ const QuotationSystem = {
     },
 
     calculateTotal(govtCost, serviceCost, discount) {
-        const discountAmount = (serviceCost * discount) / 100
-        return govtCost + serviceCost - discountAmount
+        return govtCost + serviceCost - (serviceCost * discount) / 100
     },
 
     updateGrandTotal() {
-        const total = [...$('.total-cell')]
-            .reduce((sum, cell) => sum + parseFloat($(cell).text()), 0)
+        const total = [...$('.total-cell')].reduce((sum, cell) => sum + parseFloat($(cell).text()), 0)
         $('#grandTotal').text(total.toFixed(2))
+    },
+    
+    collectServicesData() {
+        const services = []
+        $('.discount-input').each(function() {
+            const $input = $(this)
+            const govtCost = parseFloat($input.data('govt-cost'))
+            const serviceCost = parseFloat($input.data('service-cost'))
+            const serviceName = $input.data('service-name')
+            const discount = parseFloat($input.val()) || 0
+            const total = QuotationSystem.calculateTotal(govtCost, serviceCost, discount)
+            services.push({
+                name: serviceName,
+                govt_cost: govtCost,
+                service_cost: serviceCost,
+                discount: discount,
+                total: total
+            })
+        })
+        return services
     },
 
     handlePdfDownload() {
         const customerName = $('#customerName').val()
-        if (!customerName.trim()) {
+        if (!customerName.trim() || this.selectedServices.size === 0) {
             Swal.fire({
-                title: 'Error',
-                text: 'Please enter customer name',
+                title: 'Error', 
+                text: !customerName.trim() ? 'Please enter customer name' : 'Please select at least one service', 
                 icon: 'error'
             })
             return
         }
-
-        if (this.selectedServices.size === 0) {
-            Swal.fire({
-                title: 'Error',
-                text: 'Please select at least one service',
-                icon: 'error'
-            })
-            return
-        }
-
-        window.location.href = `/quotation/download?customer=${encodeURIComponent(customerName)}`
+        
+        // Collect all services data
+        const servicesData = JSON.stringify(this.collectServicesData())
+        
+        // Create form for POST request
+        const form = $('<form></form>')
+            .attr('method', 'POST')
+            .attr('action', '/quotation/download')
+            .css('display', 'none')
+            
+        // Add CSRF token
+        form.append($('<input>').attr({
+            type: 'hidden',
+            name: '_token',
+            value: $('meta[name="csrf-token"]').attr('content')
+        }))
+        
+        // Add customer data
+        form.append($('<input>').attr({type: 'hidden', name: 'customer', value: customerName}))
+        // Add services data
+        form.append($('<input>').attr({type: 'hidden', name: 'services_data', value: servicesData}))
+        
+        // Submit the form
+        $('body').append(form)
+        form.submit()
     }
 }
-
 $(document).ready(() => QuotationSystem.init())

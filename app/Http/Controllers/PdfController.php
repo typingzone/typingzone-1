@@ -22,6 +22,35 @@ class PdfController extends Controller
     }
 
     
-
+    public function downloadQuotation(Request $request)
+    {
+        $company = Company::first();
+        $customerName = $request->get('customer');
+        $servicesData = json_decode($request->get('services_data'), true);
+        if (empty($servicesData)) {
+            $services = [
+                ['name' => 'Service A', 'govt_cost' => 100, 'service_cost' => 200, 'discount' => 5, 'total' => 285],
+            ];
+        } else {
+            $services = $servicesData;
+        }
+        $grandTotal = collect($services)->sum('total');
+        $taxRate = config('app.tax_rate', 0); 
+        $pdf = PDF::loadView('pages.orders.quotation', compact(
+            'customerName', 
+            'services', 
+            'grandTotal',
+            'company',
+            'taxRate'
+        ));
+        $pdf->setPaper('a4');
+        $pdf->setOptions([
+            'isHtml5ParserEnabled' => true,
+            'isPhpEnabled' => true,
+        ]);
+        $filename = 'Quotation-' . date('Ymd') . '-' . $customerName . '.pdf';
+        return $pdf->download($filename);
+    }
+    
 
 }
