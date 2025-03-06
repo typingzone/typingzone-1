@@ -35,6 +35,7 @@ class PdfController extends Controller
             $services = $servicesData;
         }
         $grandTotal = collect($services)->sum('total');
+        // dd($company->company_logo);
         $taxRate = config('app.tax_rate', 0); 
         $pdf = PDF::loadView('pages.orders.quotation', compact(
             'customerName', 

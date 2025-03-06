@@ -682,7 +682,7 @@
                         <h6 class="mb-3">Service Selection</h6>
                         <div class="mb-3">
                             <label>Select Service *</label>
-                            <select id="serviceDropdown" class="mySelect3 form-control">
+                            <select id="serviceDropdown" class="mySelect333 form-control">
                                 <option></option>
                                 @php $servicesList = \App\Models\Service::all(); @endphp
                                 @foreach($servicesList as $service)

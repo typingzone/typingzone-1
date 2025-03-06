@@ -27,7 +27,6 @@ class CompanyController extends Controller
         try {
             $this->companyService->updateCompanyProfile($request);
             return response()->json(['success' => true]);
-
         } catch (\Exception $e) {
             Log::error('Error in updating company settings: ' . $e->getMessage());
             return response()->json(['success' => false, 'message' => 'Something went wrong.']);

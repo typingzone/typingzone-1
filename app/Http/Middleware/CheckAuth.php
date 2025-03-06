@@ -14,7 +14,7 @@ class CheckAuth
         if (!Auth::check()) {
             return redirect()->route('login'); 
         }
-        if ($request->route()->getName() === 'general-settings') {
+        if ($request->route()->getName() === 'general-settings' || $request->route()->getName() === 'updated-company-profile') {
             return $next($request);
         }
         $company = Company::first();

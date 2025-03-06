@@ -101,7 +101,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="{{ $company && $company->company_logo ? asset($company->company_logo) : asset('/build/img/logo.png') }}" alt="Company Logo" class="logo">
+        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path($company->company_logo ?? '/build/img/logo.png'))) }}" alt="Company Logo" class="logo">
             <div class="company-info">
                 <div class="company-name">{{ $company->company_name }}</div>
                 <div class="company-address"><br>
