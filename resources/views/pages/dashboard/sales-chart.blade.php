@@ -10,36 +10,14 @@
         type: 'line',
         data: {
             labels: [
-                @php
-                    use App\Models\Transaction;
-                    use Carbon\Carbon;
-
-                    $transactions = Transaction::selectRaw('YEAR(created_at) as year, WEEK(created_at) as week, SUM(total_cost) as total')
-                        ->groupBy('year', 'week')
-                        ->orderBy('year', 'asc')  
-                        ->orderBy('week', 'asc')  
-                        ->get();
-
-                    $labels = [];
-                    $salesData = [];
-
-                    foreach ($transactions as $transaction) {
-                        $startOfWeek = Carbon::now()->setISODate($transaction->year, $transaction->week)->startOfWeek()->format('d M Y');
-                        $endOfWeek = Carbon::now()->setISODate($transaction->year, $transaction->week)->endOfWeek()->format('d M Y');
-                        $labels[] = "$startOfWeek - $endOfWeek";
-                        $salesData[] = $transaction->total;
-                    }
-
-                    echo '"' . implode('", "', $labels) . '"';
-                @endphp
+                '01 Jan 2024 - 07 Jan 2024',
+                '08 Jan 2024 - 14 Jan 2024',
+                '15 Jan 2024 - 21 Jan 2024',
+                '22 Jan 2024 - 28 Jan 2024'
             ],
             datasets: [{
                 label: 'Weekly Sales',
-                data: [
-                    @php
-                        echo implode(', ', $salesData);
-                    @endphp
-                ],
+                data: [500, 700, 800, 650],
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderWidth: 2,
