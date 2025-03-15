@@ -160,9 +160,7 @@ $(document).ready(function() {
                         showConfirmButton: false
                     });
                     $('#add-transaction-modal').modal('hide');
-                    setTimeout(function() {
-                        location.reload();
-                    }, 2000);
+                    location.reload();
                 }
             },
             error: function(xhr) {
