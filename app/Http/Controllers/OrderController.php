@@ -19,7 +19,7 @@ class OrderController extends Controller
 {
     public function showOrders()
     {
-        $orders = Order::with(['user', 'assignedTo'])->orderBy('created_at', 'desc')->get();
+        $orders = Order::with(['user', 'assignedTo'])->orderByRaw("FIELD(status, 'pending', 'completed') ASC")->orderBy('created_at', 'desc')->get();
         foreach ($orders as $order) {
             $serviceIds = is_string($order->services) ? explode(',', $order->services) : json_decode($order->services, true);
             $order->service_names = Service::whereIn('id', $serviceIds)->pluck('service_name')->toArray();
@@ -209,5 +209,12 @@ class OrderController extends Controller
         return response()->json($customers);
     }
 
-    
+    public function markAsComplete($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->status = 'Completed';
+        $order->save();
+        return response()->json(['success' => true, 'message' => 'Order marked as complete']);
+    }
+
 }

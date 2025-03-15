@@ -35,7 +35,7 @@
                             @foreach($transactions as $index => $transaction)
                                 <tr id="transaction-row-{{ $transaction->id }}">
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $transaction->order->customer_name ?? 'N/A' }}</td>
+                                    <td><a href="{{ route('customer-profile', ['id' => $transaction->order->id]) }}">{{ $transaction->order->customer_name ?? 'N/A' }}</a></td>
                                     <td>
                                         {{ $transaction->service->service_name }}
                                         @if($transaction->description)

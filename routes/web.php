@@ -124,6 +124,7 @@ Route::middleware(['check.auth'])->controller(OrderController::class)->group(fun
     Route::get('/export-archived-orders/{tableName}', 'exportArchivedOrders')->name('export.archived.orders');
     Route::post('delete-archived-orders-table', 'deleteArchivedOrdersTable')->name('delete-archived-orders-table');
     Route::get('/search-customers', 'searchCustomers')->name('search-customers');
+    Route::post('/orders/complete/{id}', 'markAsComplete')->name('orders.complete');
 });
 
 Route::middleware(['check.auth'])->controller(PdfController::class)->group(function () {

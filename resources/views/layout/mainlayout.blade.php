@@ -59,7 +59,6 @@
         @include('layout.partials.sidebar')
         @include('layout.partials.collapsed-sidebar')
         @include('layout.partials.horizontal-sidebar')
-        @include('layout.partials.pusher-script')
     @endif
 @endif
 @yield('content')

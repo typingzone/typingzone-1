@@ -106,7 +106,7 @@ class TransactionController extends Controller
         $transaction = Transaction::findOrFail($id);
         $transaction->status = $request->status;
         $transaction->save();
-        $this->pusherService->sendTransactionStatusNotification($transaction);
+        // $this->pusherService->sendTransactionStatusNotification($transaction);
         return response()->json(['status' => $request->status]);
     }
 

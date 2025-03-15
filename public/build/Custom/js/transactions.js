@@ -160,9 +160,9 @@ $(document).ready(function() {
                         showConfirmButton: false
                     });
                     $('#add-transaction-modal').modal('hide');
-                    // setTimeout(function() {
-                    //     location.reload();
-                    // }, 2000);
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000);
                 }
             },
             error: function(xhr) {
@@ -186,7 +186,6 @@ $(document).ready(function() {
 
 $(document).on('click', '.delete-transaction', function() {
     var transactionId = $(this).data('id');
-    
     Swal.fire({
         title: 'Are you sure?',
         text: 'You won\'t be able to revert this!',
@@ -207,7 +206,6 @@ $(document).on('click', '.delete-transaction', function() {
                     Swal.showLoading();
                 }
             });
-
             $.ajax({
                 url: '/transactions/' + transactionId,
                 type: 'DELETE',

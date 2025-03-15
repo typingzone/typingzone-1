@@ -10,14 +10,17 @@
         type: 'line',
         data: {
             labels: [
-                '01 Jan 2024 - 07 Jan 2024',
-                '08 Jan 2024 - 14 Jan 2024',
-                '15 Jan 2024 - 21 Jan 2024',
-                '22 Jan 2024 - 28 Jan 2024'
+                '01 Jan 2025',
+                '08 Jan 2025',
+                '15 Jan 2025',
+                '18 Mar 2025',
+                '08 Apr 2025',
+                '15 Apr 2025',
+                '13 May 2025'
             ],
             datasets: [{
                 label: 'Weekly Sales',
-                data: [500, 700, 800, 650],
+                data: [600, 800, 750, 900, 1000, 1100, 950],
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderWidth: 2,

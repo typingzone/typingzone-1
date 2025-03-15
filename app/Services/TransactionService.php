@@ -39,7 +39,7 @@ class TransactionService
             'description' => $request->description,
             'receipt' => $filePath ?? null,
         ]);
-        $this->pusherService->sendTransactionNotification($transaction);
+        // $this->pusherService->sendTransactionNotification($transaction);
    }
     
 

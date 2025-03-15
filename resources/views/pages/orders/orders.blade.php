@@ -31,7 +31,7 @@
                             @foreach($orders as $order)
                             <tr data-row-id="{{ $order->id }}">
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $order->customer_name }}</td>
+                                <td><a href="{{ route('customer-profile', ['id' => $order->id]) }}">{{ $order->customer_name ?? 'N/A' }}</a></td>
                                 <td>{{ $order->phone_number }} / {{ $order->email }}</td>
                                 <td>
                                     <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-html="true" title="<ul>

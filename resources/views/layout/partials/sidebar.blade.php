@@ -41,9 +41,9 @@
                                 @can('Transactions view')
                                 <li><a href="{{ route('transactions') }}" class="{{ Request::routeIs('transactions') ? 'active' : '' }}">Transactions</a></li>
                                 @endcan
-                                @can('Archived Transactions view')
+                                <!-- @can('Archived Transactions view')
                                 <li><a href="{{ route('archived-transactions') }}" class="{{ Request::routeIs('archived-transactions') ? 'active' : '' }}">Archived Transactions</a></li>
-                                @endcan
+                                @endcan -->
                             </ul>
                         </li>
                         @endcanany
@@ -56,9 +56,9 @@
                                 @can('Orders view')
                                 <li><a href="{{ route('orders') }}" class="{{ Request::routeIs('orders') ? 'active' : '' }}">Orders</a></li>
                                 @endcan
-                                @can('Archived Orders view')
+                                <!-- @can('Archived Orders view')
                                 <li><a href="{{ route('archived-orders') }}" class="{{ Request::routeIs('archived-orders') ? 'active' : '' }}">Archived Orders</a></li>
-                                @endcan
+                                @endcan -->
                             </ul>
                         </li>
                         @endcanany
