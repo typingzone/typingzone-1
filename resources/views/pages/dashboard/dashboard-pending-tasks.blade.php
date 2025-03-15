@@ -4,7 +4,7 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Customer</th>
+                    <th>Customers</th>
                     <th>Services</th>
                     <th>Status</th>
                 </tr>
