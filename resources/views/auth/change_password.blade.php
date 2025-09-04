@@ -9,6 +9,7 @@
                     <a href="{{ url('index') }}" class="login-logo logo-white">
                         <img src="{{ URL::asset('/build/img/logo-white.png') }}" alt="">
                     </a>
+                    
                 </div>
                 <form id="changePasswordForm">
                     <div class="login-userset">
